@@ -8,6 +8,8 @@
 module.exports = {
 	
 	'new' : function(req,res){
+		console.log(req.session);
+
 		
 		// render the view
 		res.view();
@@ -40,7 +42,18 @@ module.exports = {
 			// redirect to the show action
 			// res.json(user);
 
-			res.redirect('/user/show/'+user.id);
+			//Log user in
+			req.session.authenticated = true;
+			req.session.User = user;
+
+			// Change user status to online
+			user.online = true;
+			user.save(function(err,user){
+				if(err) return next(err);
+
+				res.redirect('/user/show/'+user.id);
+
+			});
 
 		});
 	},
@@ -62,9 +75,6 @@ module.exports = {
 	},
 
 	index : function(req,res,next){
-
-		console.log(new Date());
-		console.log(req.session.authenticated);
 
 		// get an array of all users in the User collection(e.g table)
 		User.find(function foundUsers(err, users){

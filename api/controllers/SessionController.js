@@ -10,8 +10,7 @@ var bcrypt = require('bcrypt');
 module.exports = {
 
 	'new' : function(req,res,next){
-
-
+		
 		// sets time for authenticated session to expireafter 60 seconds
 		// var oldDateObj = new Date();
 		// var newDateObj = new Date(oldDateObj.getTime() + 60000);
@@ -80,8 +79,24 @@ module.exports = {
 				req.session.authenticated = true;
 				req.session.User = user;
 
-				//redirect to their profile page (e.g. views/user/show.ejs)
-				res.redirect('/user/show/'+ user.id);
+				// Change user status to online
+				user.online = true;
+				user.save(function(err,user){
+					if(err) return next(err);
+
+					// If the user is also an admin redirect to the user list (e.g /views/user/index.ejs)
+					// This is used in conjunction with config/policies.js file
+					if(req.session.User.admin){
+						res.redirect('/user');
+						return;
+					}
+
+					//redirect to their profile page (e.g. views/user/show.ejs)
+					res.redirect('/user/show/'+ user.id);
+
+				});
+
+				
 
 			});
 
@@ -90,12 +105,26 @@ module.exports = {
 
 	destroy : function(req,res,next){
 
-		//Wipe out the session (log out)
-		req.session.destroy();
+		var userId = req.session.User.id;
 
-		//Redirect the browser to the sign in page
-		res.redirect('/session/new/');
+		User.findOne(userId, function foundUser(err,user){
 
+
+			User.update(userId,{
+				online : false
+			}, function(err){
+				if (err) return next(err);
+
+				//Wipe out the session (log out)
+				req.session.destroy();
+
+				//Redirect the browser to the sign in page
+				res.redirect('/session/new/');
+			});
+
+
+		});
+		
 	}
 
 };
