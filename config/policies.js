@@ -31,6 +31,7 @@ module.exports.policies = {
   user : {
     'new' : 'flash',
     'create' : 'flash',
+    'subscribe' : 'flash',
     'show' : 'profileCheck',
     'edit' : 'profileCheck',
     'update' : 'profileCheck',

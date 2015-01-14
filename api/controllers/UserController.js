@@ -8,7 +8,7 @@
 module.exports = {
 	
 	'new' : function(req,res){
-		console.log(req.session);
+		// console.log(req.session);
 
 		
 		// render the view
@@ -19,9 +19,20 @@ module.exports = {
 
 	create : function(req,res,next){
 
+
+		// so that admin can not be passed into the form by editing the dom
+		var userObject = {
+			name : req.param('name'),
+			title : req.param('title'),
+			email : req.param('email'),
+			password : req.param('password'),
+			confirmation : req.param('confirmation'),
+		};
+		
+
 		// Create a User with the params sent from
 		// the sign-up form --> new.ejs
-		User.create(req.params.all(),function userCreated(err,user){
+		User.create(userObject,function userCreated(err,user){
 
 			//If there's an error
 			// if(err) return next(err);
@@ -109,7 +120,24 @@ module.exports = {
 	// process  the info from edit view
 	update : function(req,res,next){
 
-		User.update(req.param('id'),req.params.all(),function userUpdated(err){
+		if (req.session.User.admin) {
+			var userObject = {
+				name : req.param('name'),
+				title : req.param('title'),
+				email : req.param('email'),
+				admin : req.param('admin')
+			};
+		} else{
+			var userObject = {
+				name : req.param('name'),
+				title : req.param('title'),
+				email : req.param('email')
+			};
+		}
+
+
+
+		User.update(req.param('id'),userObject,function userUpdated(err){
 			
 			if(err){
 				return res.redirect('/user/show/' + req.param('id'));
@@ -136,6 +164,32 @@ module.exports = {
 			
 
 		});
+
+	},
+
+	subscribe : function(req,res){
+
+		// if (req.isSocket) {
+		// 	User.watch(req);
+		// 	console.log(sails.sockets.id(req));
+		// };
+
+		User.find(function foundUsers(err,users){
+
+			// console.log(users);
+
+			// subscribe to user models class room
+			// User.subscribe(req.socket);
+			User.watch(req.socket);
+
+			// subscribe to user models instance room
+			User.subscribe(req.socket,users);
+
+			res.send(200);
+
+		});
+
+		
 
 	}
 

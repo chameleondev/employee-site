@@ -58,8 +58,8 @@ module.exports = {
 				return;
 			}
 
-			console.log(req.param('password'));
-			console.log(user);
+			// console.log(req.param('password'));
+			// console.log(user);
 
 			// compare password from the form params to the encrypted password of the user found.
 			bcrypt.compare(req.param('password'), user.encryptedPassword, function(err,valid){
@@ -79,10 +79,44 @@ module.exports = {
 				req.session.authenticated = true;
 				req.session.User = user;
 
-				// Change user status to online
-				user.online = true;
-				user.save(function(err,user){
-					if(err) return next(err);
+				// // Change user status to online
+				// user.online = true;
+
+				// user.save(function(err,user){
+				// 	if(err) return next(err);
+
+				// 	console.log(user);
+
+				// 	// Inform other sockets (e.g connected sockets are subscribed) that this user us now logged in
+				// 	User.publishUpdate(user.id,{
+				// 		loggedIn : true,
+				// 		id : user.id
+				// 	});
+
+				// 	// If the user is also an admin redirect to the user list (e.g /views/user/index.ejs)
+				// 	// This is used in conjunction with config/policies.js file
+				// 	if(req.session.User.admin){
+				// 		res.redirect('/user');
+				// 		return;
+				// 	}
+
+				// 	//redirect to their profile page (e.g. views/user/show.ejs)
+				// 	res.redirect('/user/show/'+ user.id);
+
+				// });
+
+				// update can be used instead of save - prefferred for multiple instances
+				User.update(req.session.User.id,{
+					online : true
+				}, function(err,updated){
+					if (err) return next(err);
+
+					User.publishUpdate(user.id,{
+						loggedIn : true,
+						id : user.id
+					});
+
+					console.log(user);
 
 					// If the user is also an admin redirect to the user list (e.g /views/user/index.ejs)
 					// This is used in conjunction with config/policies.js file
@@ -95,7 +129,6 @@ module.exports = {
 					res.redirect('/user/show/'+ user.id);
 
 				});
-
 				
 
 			});
@@ -109,7 +142,7 @@ module.exports = {
 
 		User.findOne(userId, function foundUser(err,user){
 
-
+			// update can be used instead of save - prefferred for multiple instances
 			User.update(userId,{
 				online : false
 			}, function(err){

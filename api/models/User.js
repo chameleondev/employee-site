@@ -54,7 +54,7 @@ module.exports = {
   },
 
   beforeValidation : function(values,next){
-    console.log(values);
+    // console.log(values);
     if (typeof values.admin !== 'undefined') {
       if (values.admin === 'unchecked') {
         values.admin = false;
