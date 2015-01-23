@@ -1,6 +1,7 @@
 var app = angular.module('WorkRequestForm',['angularFileUpload','naif.base64']);
 
-app.controller('FormCtrl',function($scope,$timeout,FileUploader){
+
+app.controller('FormCtrl',['$scope','$timeout','FileUploader',function($scope,$timeout,FileUploader){
 
     window.scope = $scope;
 
@@ -140,7 +141,7 @@ app.controller('FormCtrl',function($scope,$timeout,FileUploader){
     console.info('uploader', uploader);
 
 
-});
+}]);
 
 
 app.directive('datePicker', function() {
