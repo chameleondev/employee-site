@@ -28,6 +28,7 @@ var jsFilesToInject = [
 
   //load in specific order
   'js/dependencies/jquery-1.11.2.min.js',
+  'js/dependencies/angular.min.js',
 
   // Dependencies like jQuery, or Angular are brought in here
   'js/dependencies/**/*.js',

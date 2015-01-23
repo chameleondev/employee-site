@@ -148,6 +148,11 @@ module.exports = {
 			}, function(err){
 				if (err) return next(err);
 
+				User.publishUpdate(user.id,{
+					loggedIn : false,
+					id : user.id
+				});
+
 				//Wipe out the session (log out)
 				req.session.destroy();
 

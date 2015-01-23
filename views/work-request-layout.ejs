@@ -1,7 +1,8 @@
 <!DOCTYPE html>
-<html>
+<html lang="en" ng-app="WorkRequestForm">
   <head>
-    <title>New Sails App</title>
+    <meta charset="UTF-8">
+    <title>Work Request Form</title>
 
     <!-- Viewport mobile tag for sensible mobile support -->
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
@@ -35,79 +36,13 @@
     <!--STYLES END-->
   </head>
 
-  <body>
+  <body data-spy="scroll" data-target="nav.sidebar" ng-controller="FormCtrl" uploader="uploader" nv-file-drop>
     
-    <div class="navbar navbar-inverse navbar-fixed-top">
-      
-      <div class="container">
-
-        <div class="nav-header">
-            
-          <button class="navbar-toggle" data-toggle="collapse" data-target="navbar-collapse">
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-          </button>
-          <a href="/" class="nav-brand">activityOverload</a>
-
-        </div>
-
-        <div class="navbar-collapse collapse">
-          <ul class="nav navbar-nav">
-            <% if(session.authenticated){ %>
-              <li class="active"><a href="/user/show/<%= session.User.id %>"><%= session.User.name %></a></li>
-            <% } %>
-            <% if(session.authenticated && session.User.admin){ %>
-              <li><a href="/user">User Administration</a></li>
-              <li><a href="#">Placeholder2</a></li>
-            <% } %>
-          </ul>
-
-          <div class="navbar-right">
-            <% if(session.authenticated){ %>
-              <a href="/session/destroy" class="btn btn-default navbar-btn navbar-right">sign-out</a>
-            <% } %>
-          </div>
-
-          <% if(!session.authenticated){ %>
-              <form action="/session/create" class="navbar-form navbar-right">
-                <div class="form-group">
-                  <input type="text" placeholder="Email" name="email" class="form-control">
-                </div>
-                <div class="form-group">
-                  <input type="password" placeholder="Password" name="password" class="form-control">
-                </div>
-                <button type="submit" class="btn btn-success">Sign in</button>
-                <input type="hidden" name="_csrf" value="<= _csrf %>">
-              </form>
-          <% } %>
-        </div>
-               
-      </div>
-
-    </div>
     
-    <div class="main-body">
+    <div class="main-body container work-request-form">
     <%- body %>
     </div>
     
-    <div class="container">
-        
-      <hr>
-
-        <footer class="footer pull-right">
-          
-          <div>
-            
-            <a href="http://sailsjs.com">sails.js</a>
-
-            <div>titorial with some help of youtube</div>
-
-          </div>
-
-        </footer>
-
-    </div>
 
     <!--
         Client-side Templates
@@ -169,5 +104,11 @@
     <script src="/js/app.js"></script>
     <script src="/js/work-request-app.js"></script>
     <!--SCRIPTS END-->
+
+    <script>
+      $('.sidebar').on('affix.bs.affix',function(){
+        $('.sidebar').css('width',$('.sidebar').width());
+      });
+    </script>
   </body>
 </html>

@@ -1,0 +1,270 @@
+@darkOrange : #f5ae16;
+@Orange : #fada94;
+@lightOrange : #fcebc5;
+@grey : #cccccc;
+
+@font-face {
+  font-family: 'EtelkaLight';
+  src: url('/fonts/EtelkaLight.eot'); /* IE9 Compat Modes */
+  src: url('/fonts/EtelkaLight.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
+       url('/fonts/EtelkaLight.woff') format('woff'), /* Modern Browsers */
+       url('/fonts/EtelkaLight.ttf')  format('truetype'), /* Safari, Android, iOS */
+       url('/fonts/EtelkaLight.svg#svgEtelkaLight') format('svg'); /* Legacy iOS */
+}
+
+body{
+	font-family: 'EtelkaLight' !important;
+	font-size: 16px !important;
+}
+
+.absolute-center {
+  margin: auto;
+  position: fixed;
+  top: 0; left: 0; bottom: 0; right: 0;
+}
+
+
+.message-box{
+	height: 250px;
+	width: 400px;
+	// background: yellow;
+	z-index: 100;
+	padding: 20px;
+	text-align: center;
+
+
+	.confirm,.invalid,.success{
+		margin: 60px 0;
+	}
+
+	.progress{
+		margin: 90px 0;
+	}
+
+}
+
+.work-request-form{
+
+	margin-bottom: 50px;
+
+
+	.title{
+		text-transform: uppercase;
+
+		.title-icon{
+			height: 40px;
+			width: 40px;
+			background: url(../images/title-icons.png);
+			display: inline-block;
+			position: relative;
+			top: 6px;
+			background-size: 40px;		
+		}
+
+		.title1-icon{
+			background-position: 0 0;
+		}
+
+		.title2-icon{
+			background-position:0 -48px;
+		}
+
+		.title3-icon{
+			background-position: 0 -97px;
+		}
+
+		.title4-icon{
+			background-position: 0 -148px;
+		}
+
+		.title5-icon{
+			background-position: 0 -195px;
+		}
+	}
+
+	.form-section{
+		border-bottom: solid @darkOrange 4px;
+		margin-bottom: 40px;
+		padding-bottom: 50px;
+		padding-top: 40px;
+
+		.main-title{
+			font-size: 46px;
+		}
+
+		.section-title{
+			font-size: 35px;
+			margin-bottom: 20px;
+		}
+
+		.sub-title{
+			font-size: 22px;
+			color: @Orange;
+		}
+
+		label{
+			font-weight: normal;
+			position: relative;
+		}
+		
+		label.checkbox-inline,label.radio-inline{
+			margin:0 15px;
+		}
+
+		hr{
+			margin: 30px 0;
+		}
+
+		input[type='checkbox'],input[type='radio']{
+			visibility: hidden;
+		}
+
+		input.invalid{
+			border: red solid 1px;
+		}
+
+		input[type='file']{
+			width: 100%;
+		}
+
+		.date-selection:hover{
+			cursor: pointer;
+		}
+
+		.input-group-addon{
+			position: relative;
+			top: 0px;
+		}
+
+		.radio-icon{
+			height: 28px;
+			width: 28px;
+			background: url(../images/icons.png);
+			position: absolute;
+			left: -15px;
+			bottom: -2px;
+			background-position: -35px -37px;
+
+			.checked-radio-icon{
+				height: 28px;
+				width: 28px;
+				background: url(../images/icons.png);
+				background-position: -71px -37px;
+				visibility: hidden;
+			}
+
+			.checked-radio-icon.active{
+				visibility: visible;
+			}
+		}
+
+		.radio-icon.active{
+			background-position: 0px -37px;
+		}
+
+		.checkbox-icon{
+			height: 28px;
+			width: 28px;
+			background: url(../images/icons.png);
+			position: absolute;
+			left: -13px;
+			bottom: -2px;
+			background-position: -36px 0px;
+
+			.checked-checkbox-icon{
+				height: 28px;
+				width: 28px;
+				background: url(../images/icons.png);
+				background-position: 28px 0px;
+				visibility: hidden;
+			}
+
+			.checked-checkbox-icon.active{
+				visibility: visible;
+			}
+		}
+
+		.checkbox-icon.active{
+			background-position: 0 0;
+		}
+
+
+		.delivery-list{
+			list-style: none;
+			padding-top: 10px;
+		}
+
+		.file-upload-section{
+			input{
+				width: 110px;
+				margin-bottom: 10px;
+			}
+		}
+
+		.drop-zone{
+			min-height: 100px;
+			border: dashed #808080 3px;
+			text-align: center;
+			padding: 20px;
+
+			h3{
+				margin: 0;
+			}
+
+			table{
+				margin-top: 10px;
+			}
+		}
+
+		.drop-zone.nv-file-over{
+			border-color: @Orange;
+		}
+	}
+
+	.submit-btn{
+		height: 70px;
+		margin-top: 80px;
+		background-color: @darkOrange;
+		font-size: 40px;
+		border-radius: 0;
+	}
+
+	.sidebar{
+		top: 20px;
+		margin-top: 60px;
+
+		a{
+			color: black;
+		}
+
+		.nav {
+			.nav{
+				display: none;
+			}
+		}
+
+		.nav >li{
+			
+			a{
+				display: block;
+			}
+		}
+
+		li.active{
+
+			.nav{
+				display: block;
+			}
+			
+		}
+
+		li.active > a{
+			border-left: solid 2px @darkOrange;
+		}
+	}
+
+	.sidebar > .nav > li > a{
+		background: @Orange;
+	}
+
+}
