@@ -103,6 +103,10 @@ module.exports = {
 				to: [{
 					name: 'Michaela Hyndman',
 					email: 'michaela.hyndman@chameleon-uk.com'
+				},{
+					name: 'Dillon Lee',
+					email: 'dillon.lee@chameleon-uk.com',
+					type: 'bcc'
 				}],
 				from_name: 'Request Form',
 				from_email: 'admin@chameleon-web.com',
