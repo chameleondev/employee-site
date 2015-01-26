@@ -5,6 +5,8 @@ app.controller('FormCtrl',['$scope','$timeout','FileUploader',function($scope,$t
 
     window.scope = $scope;
 
+    var totalSize = 0;
+
 	$scope.form = {};
 
 	$scope.form.extensions = [];
@@ -23,14 +25,18 @@ app.controller('FormCtrl',['$scope','$timeout','FileUploader',function($scope,$t
 		$scope.form[model].splice(index,1);
 	};
 
-	$scope.alert = function(){
-		alert('hello');
-	};
+	$scope.removeItem = function(index,item){
+        uploader.removeFromQueue(index);
+
+        console.log(item.file.size);
+
+        totalSize-= item.file.size;
+    };
 
 	$scope.submit = function(){
         $scope.openPopup = true;
 
-         if ($scope.request_form.$valid) {
+         if ($scope.request_form.$valid && $scope.totalFileSize() < 25 ) {
             $scope.confirmStatus = 2;
         } else{
             $scope.confirmStatus = 1;
@@ -40,6 +46,10 @@ app.controller('FormCtrl',['$scope','$timeout','FileUploader',function($scope,$t
     $scope.confirm = function(){
         $scope.confirmStatus = 3;
         uploader.uploadAll();
+    };
+
+    $scope.totalFileSize = function(){
+        return (totalSize / 1024) / 1024;
     };
 
     $scope.close = function(){
@@ -66,9 +76,15 @@ app.controller('FormCtrl',['$scope','$timeout','FileUploader',function($scope,$t
     uploader.onWhenAddingFileFailed = function(item /*{File|FileLikeObject}*/, filter, options) {
         console.info('onWhenAddingFileFailed', item, filter, options);
     };
-    // uploader.onAfterAddingFile = function(fileItem) {
-    //     console.info('onAfterAddingFile', fileItem);
-    // };
+    uploader.onAfterAddingFile = function(fileItem) {
+        console.info('onAfterAddingFile', fileItem);
+
+        console.log('size :',fileItem.file.size);
+
+        totalSize+= fileItem.file.size;
+
+
+    };
     // uploader.onAfterAddingAll = function(addedFileItems) {
     //     console.info('onAfterAddingAll', addedFileItems);
     // };
@@ -79,6 +95,8 @@ app.controller('FormCtrl',['$scope','$timeout','FileUploader',function($scope,$t
             jobCode : $scope.form.jobCode
         });
         console.log(item);
+
+
     };
     // uploader.onProgressItem = function(fileItem, progress) {
     //     console.info('onProgressItem', fileItem, progress);

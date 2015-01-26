@@ -796,7 +796,7 @@
 					Attachments
 				</h2>
 
-				<h3 class="title sub-title" id="referenceMaterialsTitle">Refernce Materials</h3>
+				<h3 class="title sub-title" id="referenceMaterialsTitle">Reference Materials</h3>
 
 				<div class="form-group">
 					<div class="col-md-12">
@@ -815,8 +815,11 @@
 					<div class="col-md-12 file-upload-section">
 						<label for="exampleInputEmail1">Reference Materials / Marked up files</label>
 						<input type="file" id="file-uploads" name="file_uploads" ng-model="form.fileUploads" multiple nv-file-select uploader="uploader"/>
-						<div class="drop-zone" uploader="uploader" nv-file-over>
+						<div class="drop-zone" uploader="uploader" nv-file-over ng-class="{'bg-danger' : totalFileSize()>25}">
 							<h3>Drop files here <i class="glyphicon glyphicon-upload"></i></h3>
+
+							<p class="pull-left">Total size: {{totalFileSize() | number:2}}mb </p>
+							<p ng-show="totalFileSize()>25" class="text-danger pull-right">File size must not exceed 25mb</p>
 
 							  <!-- <ul>
 					            <li ng-repeat="item in uploader.queue">
@@ -829,7 +832,7 @@
 							  <tr ng-repeat="item in uploader.queue">
 							  	<td><i class="glyphicon glyphicon-file"></i></td>
 							  	<td>Name: {{item.file.name}} </td>
-							  	<td><button ng-click="item.remove()" class="btn btn-danger">Delete</button></td>
+							  	<td><button ng-click="removeItem($index,item)" class="btn btn-danger">Delete</button></td>
 							  </tr>
 							</table>
 						</div>
