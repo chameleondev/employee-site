@@ -13,6 +13,7 @@ app.controller('FormCtrl',['$scope','$timeout','FileUploader',function($scope,$t
 	$scope.form.dimensions = [];
 	$scope.form.orientations = [];
     $scope.form.encodedUploads = [];
+    $scope.form.fileNames = [];
 
 	$scope.extAdd = function(model,selected){
 		console.log(model,selected);
@@ -31,6 +32,9 @@ app.controller('FormCtrl',['$scope','$timeout','FileUploader',function($scope,$t
         console.log(item.file.size);
 
         totalSize-= item.file.size;
+
+        $scope.form.fileNames.splice(index,1);
+        $scope.form.encodedUploads.splice(index,1);
     };
 
 	$scope.submit = function(){
@@ -48,6 +52,10 @@ app.controller('FormCtrl',['$scope','$timeout','FileUploader',function($scope,$t
         uploader.uploadAll();
     };
 
+    $scope.refresh = function(){
+        location.replace('/WorkRequest');
+    };
+
     $scope.totalFileSize = function(){
         return (totalSize / 1024) / 1024;
     };
@@ -58,8 +66,10 @@ app.controller('FormCtrl',['$scope','$timeout','FileUploader',function($scope,$t
     };
 
 	var uploader = $scope.uploader = new FileUploader({
-        url: 'http://www.chameleon-web.com/web-form-uploads/upload.php',
-        formData : []
+        url: '/WorkRequest/upload',
+        alias: 'file_uploads',
+        // headers: { 'Content-Type': undefined },
+        formData : [$scope.form]
     });
 
     // FILTERS
@@ -75,13 +85,29 @@ app.controller('FormCtrl',['$scope','$timeout','FileUploader',function($scope,$t
 
     uploader.onWhenAddingFileFailed = function(item /*{File|FileLikeObject}*/, filter, options) {
         console.info('onWhenAddingFileFailed', item, filter, options);
+        // uploader.removeFromQueue(item);
     };
     uploader.onAfterAddingFile = function(fileItem) {
         console.info('onAfterAddingFile', fileItem);
 
         console.log('size :',fileItem.file.size);
 
+        var reader = new FileReader();
+
+        var encoded = reader.readAsDataURL(fileItem._file);
+
+        reader.onload = function(){
+            var str = reader.result.split(',');
+
+            $scope.form.encodedUploads.push({
+                type : fileItem.file.type,
+                name : fileItem.file.name,
+                content : str[1]
+            });
+        };
+
         totalSize+= fileItem.file.size;
+        $scope.form.fileNames.push(fileItem.file.name);
 
 
     };
@@ -91,9 +117,9 @@ app.controller('FormCtrl',['$scope','$timeout','FileUploader',function($scope,$t
     uploader.onBeforeUploadItem = function(item) {
         console.info('onBeforeUploadItem', item);
 
-        item.formData.push({
-            jobCode : $scope.form.jobCode
-        });
+        // item.formData.push({
+        //     jobCode : $scope.form.jobCode
+        // });
         console.log(item);
 
 
@@ -123,11 +149,7 @@ app.controller('FormCtrl',['$scope','$timeout','FileUploader',function($scope,$t
         // console.log('file type: '+ fileItem.file.type);
         // console.log('base64 encoded: '+ response.encodedFile);
 
-        $scope.form.encodedUploads.push({
-            type : fileItem.file.type,
-            name : fileItem.file.name,
-            content : response.encodedFile
-        });
+        
     };
 
 
@@ -135,25 +157,30 @@ app.controller('FormCtrl',['$scope','$timeout','FileUploader',function($scope,$t
         console.info('onCompleteAll');
 
         $.ajax({
-            url : 'WorkRequest/create',
+            url : '/WorkRequest/create',
             type : 'POST',
             data : $.param($scope.form),
             headers : { 'Content-Type': 'application/x-www-form-urlencoded' }  //set the headers so angular passing info as form data (not request payload)
         }).done(function(msg){
 
             $timeout(function(){
-                $scope.confirmStatus = 4;
                 $scope.form = {};
+                $scope.confirmStatus = 4;
                 uploader.clearQueue();
+                console.log(msg);
+
             });
            
-            console.log(msg);
-
         }).fail(function(jqXHR, textStatus){
-            $scope.confirmStatus = 5;
-            $scope.errorMessage = textStatus.message;
-            console.log( "Request failed: " + textStatus );
+
+            $timeout(function(){
+                $scope.confirmStatus = 5;
+                $scope.errorMessage = textStatus.message;
+                console.log( "Request failed: " + textStatus );
+            });
+            
         });
+        
     };
 
     console.info('uploader', uploader);

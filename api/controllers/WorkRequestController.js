@@ -16,9 +16,76 @@ module.exports = {
 		res.view();
 	},
 
+	upload : function(req,res,next){
+
+
+		// var multiparty = require('multiparty');
+
+		var fs = require('fs'),
+			file,
+			bitmap,
+			encoded
+		;
+
+
+		// console.log(req.body.jobCode); // to view the formdata
+		// console.log(req.body.fileNames);
+
+		// console.log('uploads',req.file('file_uploads'));
+
+		// console.log(req.headers['content-type']);
+
+		// req.file('file_uploads').upload({
+		// 	adapter: require('skipper-disk')
+		// },function (err, uploadedFiles) {
+		// 	if (err) return res.send(500, err);
+
+		// 	file = uploadedFiles[0].fd;
+
+		// 	bitmap = fs.readFileSync(file);
+
+		// 	encoded = new Buffer(bitmap).toString('base64');
+
+		// 	return res.json({
+		// 		message: uploadedFiles.length + ' file(s) uploaded successfully!',
+		// 		files: uploadedFiles,
+		// 		encodedFile : encoded
+		// 	});
+		// });
+
+
+		req.file('file_uploads').upload({
+			// ...any other options here...
+			// maxBytes : 5242880,
+			adapter: require('skipper-s3'),
+			key: 'AKIAJ63MTVBKUNOLKLMQ',
+			secret: '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',
+			bucket: 'work-request-uploads'
+		},function (err, uploadedFiles){
+
+			if (err) return res.send(500, err);
+
+			// file = uploadedFiles[0].fd;
+
+			// bitmap = fs.readFileSync(file);
+
+			// encoded = new Buffer(bitmap).toString('base64');
+
+			return res.json({
+				message: uploadedFiles.length + ' file(s) uploaded successfully!',
+				files: uploadedFiles
+			});
+
+		});
+
+	},
+
 	create : function(req,res,next){
 
-		var msg = '<b>Type of job</b>: '+req.param('jobCode')+'<br/>';
+		
+		
+
+		var msg = '<b>Job Code</b>: '+req.param('jobCode')+'<br/>';
 
 		if(req.param('client')) msg+= '<b>Client:</b> '+req.param('client')+'<br/>';
 		if(req.param('product')) msg+= '<b>Product:</b> '+req.param('product')+'<br/>';
@@ -125,7 +192,7 @@ module.exports = {
 
 			//everything's good, lets see what mandrill said
 			else{
-				console.log(response);
+				// console.log(req.param('encodedUploads'));
 				res.send(response);
 				return;
 			}

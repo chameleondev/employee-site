@@ -1,30 +1,32 @@
 <div class="message-box absolute-center bg-info" ng-if="openPopup">
 	
 
-	<div class="invalid status" ng-show="confirmStatus === 1">
+	<div class="invalid status" ng-if="confirmStatus === 1">
 		<h1>Incomplete form</h1>
 		<button class="btn btn-danger" ng-click="close()">Close</button>
 	</div>
 	
 	
-	<div class="confirm status" ng-show="confirmStatus === 2">
+	<div class="confirm status" ng-if="confirmStatus === 2">
 		<h1>Are you sure?</h1>
 		<button class="btn btn-success" ng-click="confirm()">Yes</button>
 		<button class="btn btn-danger" ng-click="close()">No</button>
 	</div>
 
-	<div class="progress status" ng-show="confirmStatus === 3">
-	  <div class="progress-bar progress-bar-info progress-bar-striped active" role="progressbar" aria-valuenow="{{uploadProgress}}" aria-valuemin="0" aria-valuemax="100" style="width: {{uploadProgress}}%">
+	<div class="progress status" ng-if="confirmStatus === 3">
+		<!-- <h1 ng-show="uploadProgress > 100">Uploading {{uploadProgress}}%</h1>
+		<h1 ng-show="uploadProgress === 100">Sending Email</h1> -->
+	  <div class="progress-bar progress-bar-info progress-bar-striped active" role="progressbar" aria-valuenow="{{uploadProgress}}" aria-valuemin="0" aria-valuemax="100" ng-style="{width : uploadProgress +'%'}">
 	    <span class="sr-only">{{uploadProgress}}% Complete</span>
 	  </div>
 	</div>
 
-	<h1 class="success status" ng-show="confirmStatus === 4">
+	<h1 class="success status" ng-if="confirmStatus === 4">
 		Form submitted! <i class="glyphicon glyphicon-ok"></i>
-		<button class="btn btn-danger" ng-click="close()">Close</button>
+		<button class="btn btn-danger" ng-click="refresh()">Close</button>
 	</h1>
 
-	<h1 class="failed status" ng-show="confirmStatus === 5">
+	<h1 class="failed status" ng-if="confirmStatus === 5">
 		Error! Please try again <i class="glyphicon glyphicon-ok"></i>
 		<p>{{errorMessage}}</p>
 		<button class="btn btn-danger" ng-click="close()">Close</button>
@@ -32,7 +34,7 @@
 
 </div>
 
-<form name="request_form" class="request-form" ng-submit="submit()" novalidate >
+<form name="request_form" class="request-form" ng-submit="submit()" novalidate enctype="multipart/form-data">
 
 	<div class="form-section">
 		<h1 class="title main-title">Creative Work Request</h1>

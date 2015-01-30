@@ -11,6 +11,16 @@
 
 module.exports.http = {
 
+   bodyParser: (function () {
+    var opts = {limit:'50mb'};
+    var fn;
+ 
+    // Default to built-in bodyParser:
+    fn = require('skipper');
+    return fn(opts);
+ 
+  })
+
   /****************************************************************************
   *                                                                           *
   * Express middleware to use for every Sails request. To add custom          *
@@ -72,6 +82,8 @@ module.exports.http = {
     // bodyParser: require('skipper')
 
   // },
+
+
 
   /***************************************************************************
   *                                                                          *
