@@ -58,8 +58,8 @@ module.exports = {
 			// ...any other options here...
 			// maxBytes : 5242880,
 			adapter: require('skipper-s3'),
-			key: 'AKIAJ63MTVBKUNOLKLMQ',
-			secret: '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',
+			key: process.env.AWS_KEY || sails.config.aws.key,
+			secret: process.env.AWS_SECRET || sails.config.aws.secret,
 			bucket: 'work-request-uploads'
 		},function (err, uploadedFiles){
 
