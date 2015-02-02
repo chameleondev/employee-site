@@ -13,7 +13,6 @@ app.controller('FormCtrl',['$scope','$timeout','FileUploader',function($scope,$t
 	$scope.form.dimensions = [];
 	$scope.form.orientations = [];
     $scope.form.encodedUploads = [];
-    $scope.form.fileNames = [];
 
 	$scope.extAdd = function(model,selected){
 		console.log(model,selected);
@@ -33,7 +32,6 @@ app.controller('FormCtrl',['$scope','$timeout','FileUploader',function($scope,$t
 
         totalSize-= item.file.size;
 
-        $scope.form.fileNames.splice(index,1);
         $scope.form.encodedUploads.splice(index,1);
     };
 
@@ -49,7 +47,9 @@ app.controller('FormCtrl',['$scope','$timeout','FileUploader',function($scope,$t
 
     $scope.confirm = function(){
         $scope.confirmStatus = 3;
-        uploader.uploadAll();
+
+        uploader.queue.length > 0 ? uploader.uploadAll() : sendEmail();
+        
     };
 
     $scope.refresh = function(){
@@ -63,6 +63,33 @@ app.controller('FormCtrl',['$scope','$timeout','FileUploader',function($scope,$t
     $scope.close = function(){
         $scope.openPopup = false;
         $scope.confirmStatus = 0;
+    };
+
+    var sendEmail = function(){
+        $.ajax({
+            url : '/WorkRequest/create',
+            type : 'POST',
+            data : $.param($scope.form),
+            headers : { 'Content-Type': 'application/x-www-form-urlencoded' }  //set the headers so angular passing info as form data (not request payload)
+        }).done(function(msg){
+
+            $timeout(function(){
+                $scope.form = {};
+                $scope.confirmStatus = 4;
+                uploader.clearQueue();
+                console.log(msg);
+
+            });
+           
+        }).fail(function(jqXHR, textStatus){
+
+            $timeout(function(){
+                $scope.confirmStatus = 5;
+                $scope.errorMessage = textStatus.message;
+                console.log( "Request failed: " + textStatus );
+            });
+            
+        });
     };
 
 	var uploader = $scope.uploader = new FileUploader({
@@ -107,8 +134,7 @@ app.controller('FormCtrl',['$scope','$timeout','FileUploader',function($scope,$t
         };
 
         totalSize+= fileItem.file.size;
-        $scope.form.fileNames.push(fileItem.file.name);
-
+        
 
     };
     // uploader.onAfterAddingAll = function(addedFileItems) {
@@ -155,32 +181,7 @@ app.controller('FormCtrl',['$scope','$timeout','FileUploader',function($scope,$t
 
     uploader.onCompleteAll = function() {
         console.info('onCompleteAll');
-
-        $.ajax({
-            url : '/WorkRequest/create',
-            type : 'POST',
-            data : $.param($scope.form),
-            headers : { 'Content-Type': 'application/x-www-form-urlencoded' }  //set the headers so angular passing info as form data (not request payload)
-        }).done(function(msg){
-
-            $timeout(function(){
-                $scope.form = {};
-                $scope.confirmStatus = 4;
-                uploader.clearQueue();
-                console.log(msg);
-
-            });
-           
-        }).fail(function(jqXHR, textStatus){
-
-            $timeout(function(){
-                $scope.confirmStatus = 5;
-                $scope.errorMessage = textStatus.message;
-                console.log( "Request failed: " + textStatus );
-            });
-            
-        });
-        
+        sendEmail();
     };
 
     console.info('uploader', uploader);

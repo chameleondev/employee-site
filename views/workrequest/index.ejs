@@ -1,38 +1,47 @@
-<div class="message-box absolute-center bg-info" ng-if="openPopup">
+<div class="popup-outer" ng-if="openPopup">
+	<div class="message-box absolute-center bg-info">
 	
 
-	<div class="invalid status" ng-if="confirmStatus === 1">
-		<h1>Incomplete form</h1>
-		<button class="btn btn-danger" ng-click="close()">Close</button>
+		<div class="invalid status" ng-if="confirmStatus === 1">
+			<h1>Incomplete form</h1>
+			<button class="btn btn-danger" ng-click="close()">Close</button>
+		</div>
+		
+		
+		<div class="confirm status" ng-if="confirmStatus === 2">
+			<h1>Select 'yes' to continue</h1>
+			<button class="btn btn-success" ng-click="confirm()">Yes</button>
+			<button class="btn btn-danger" ng-click="close()">No</button>
+		</div>
+
+		<div class="status progressStatus" ng-if="confirmStatus === 3">
+			<h1>Submitting request...</h1>
+
+			<div class="progress">
+			  <div class="progress-bar progress-bar-info progress-bar-striped active" role="progressbar" aria-valuenow="{{uploadProgress}}" aria-valuemin="0" aria-valuemax="100" ng-style="{width : uploadProgress +'%'}">
+			    <span class="sr-only">{{uploadProgress}}% Complete</span>
+			  </div>
+			</div>
+
+		</div>
+
+		
+
+		<h1 class="success status" ng-if="confirmStatus === 4">
+			Form submitted! <i class="glyphicon glyphicon-ok"></i>
+			<button class="btn btn-danger" ng-click="refresh()">Close</button>
+		</h1>
+
+		<h1 class="failed status" ng-if="confirmStatus === 5">
+			Error! Please try again <i class="glyphicon glyphicon-ok"></i>
+			<p>{{errorMessage}}</p>
+			<button class="btn btn-danger" ng-click="close()">Close</button>
+		</h1>
+
 	</div>
-	
-	
-	<div class="confirm status" ng-if="confirmStatus === 2">
-		<h1>Are you sure?</h1>
-		<button class="btn btn-success" ng-click="confirm()">Yes</button>
-		<button class="btn btn-danger" ng-click="close()">No</button>
-	</div>
-
-	<div class="progress status" ng-if="confirmStatus === 3">
-		<!-- <h1 ng-show="uploadProgress > 100">Uploading {{uploadProgress}}%</h1>
-		<h1 ng-show="uploadProgress === 100">Sending Email</h1> -->
-	  <div class="progress-bar progress-bar-info progress-bar-striped active" role="progressbar" aria-valuenow="{{uploadProgress}}" aria-valuemin="0" aria-valuemax="100" ng-style="{width : uploadProgress +'%'}">
-	    <span class="sr-only">{{uploadProgress}}% Complete</span>
-	  </div>
-	</div>
-
-	<h1 class="success status" ng-if="confirmStatus === 4">
-		Form submitted! <i class="glyphicon glyphicon-ok"></i>
-		<button class="btn btn-danger" ng-click="refresh()">Close</button>
-	</h1>
-
-	<h1 class="failed status" ng-if="confirmStatus === 5">
-		Error! Please try again <i class="glyphicon glyphicon-ok"></i>
-		<p>{{errorMessage}}</p>
-		<button class="btn btn-danger" ng-click="close()">Close</button>
-	</h1>
-
 </div>
+
+
 
 <form name="request_form" class="request-form" ng-submit="submit()" novalidate enctype="multipart/form-data">
 
@@ -52,7 +61,7 @@
 				</h2>
 
 				<div class="form-group">
-					<label for="jobCode" class="col-sm-2 control-label" id="formJobCode">Job Code</label>
+					<label for="job-code" class="col-sm-2 control-label" id="formJobCode">Job Code</label>
 					<div class="col-sm-4">
 						<input type="text" 
 						class="form-control" 
@@ -65,7 +74,7 @@
 						>
 					</div>
 
-					<label class="radio-inline">
+					<label for="new-job" class="radio-inline">
 						<div class="radio-icon" ng-class="{'active' : request_form.job_type.$valid}">
 							<div class="checked-radio-icon" ng-class="{'active': form.jobType == 'New Job'}"></div>
 						</div>
@@ -78,7 +87,7 @@
 						ng-required="!(form.jobType === 'Existing Job')"> New Job
 					</label>
 
-					<label class="radio-inline">
+					<label for="existing-job" class="radio-inline">
 						<div class="radio-icon" ng-class="{'active' : request_form.job_type.$valid}">
 							<div class="checked-radio-icon" ng-class="{'active': form.jobType == 'Existing Job'}"></div>
 						</div>
@@ -99,7 +108,7 @@
 				<div class="form-group">
 					
 					<div class="col-md-6">
-						<label for="exampleInputEmail1">Client</label>
+						<label for="client">Client</label>
 	    				<input 
 	    				type="text" 
 	    				class="form-control" 
@@ -110,7 +119,7 @@
 					</div>
 
 					<div class="col-md-6">
-						<label for="exampleInputEmail1">Product</label>
+						<label for="product">Product</label>
 	    				<input 
 	    				type="text" 
 	    				class="form-control" 
@@ -125,7 +134,7 @@
 				<div class="form-group">
 
 					<div class="col-md-12">
-						<label for="exampleInputEmail1">Project Title</label>
+						<label for="project-title">Project Title</label>
 	    				<input 
 	    				type="text" 
 	    				class="form-control" 
@@ -140,7 +149,7 @@
 				<div class="form-group">
 
 					<div class="col-md-12">
-						<label for="exampleInputEmail1">Account Person</label>
+						<label for="account-person-fname">Account Person</label>
 					</div>
 					
 					<div class="col-md-12">
@@ -552,7 +561,7 @@
 
 				<div class="form-group">
 
-					<label for="exampleInputEmail1" class="col-md-2 control-label">Logos to be included</label>
+					<label for="logos-included" class="col-md-2 control-label">Logos to be included</label>
 					<div class="col-md-10">
 						<input 
 						type="text" 
@@ -568,7 +577,7 @@
 				<div class="form-group">
 
 					<div class="col-md-12">
-						<label for="exampleInputEmail1">Visual style, look and feel, branding specifications</label>
+						<label for="look-and-feel">Visual style, look and feel, branding specifications</label>
 	    				<textarea 
 	    				rows="5" 
 	    				class="form-control" 
@@ -583,7 +592,7 @@
 				<div class="form-group">
 
 					<div class="col-md-12">
-						<label for="exampleInputEmail1">Scientific background</label>
+						<label for="scientific-background">Scientific background</label>
 	    				<textarea 
 	    				rows="5" 
 	    				class="form-control" 
@@ -606,7 +615,7 @@
 				<div class="form-group">
 					
 					<div class="col-md-3">
-						<label for="exampleInputEmail1">Extension</label>
+						<label for="extension">Extension</label>
 						<select 
 						class="form-control" 
 						ng-change="extAdd('extensions','selectedExtension')"
@@ -704,7 +713,7 @@
 				<h3 class="title sub-title" id="deliveryDateTitle">Delivery Date</h3>
 
 				<div class="form-group">
-					<label for="inputEmail3" class="col-sm-2 control-label">First draft by</label>
+					<label for="first-draft-by" class="col-sm-2 control-label">First draft by</label>
 					<div class="col-sm-4">
 						<div class="input-group">
 							<input 
@@ -720,7 +729,7 @@
 						</div>
 					</div>	
 
-					<label for="inputEmail3" class="col-sm-2 control-label">Time</label>
+					<label for="first-draft-by-time" class="col-sm-2 control-label">Time</label>
 					<div class="col-sm-4">
 						<select 
 						class="form-control"
@@ -739,7 +748,7 @@
 				</div>
 
 				<div class="form-group">
-					<label for="inputEmail3" class="col-sm-2 control-label">Final delivery date</label>
+					<label for="final-delivery-date" class="col-sm-2 control-label">Final delivery date</label>
 					<div class="col-sm-4">
 						<div class="input-group">
 							<input 
@@ -755,7 +764,7 @@
 						</div>
 					</div>
 
-					<label for="inputEmail3" class="col-sm-2 control-label">Time</label>
+					<label for="final-delivery-date-time" class="col-sm-2 control-label">Time</label>
 					<div class="col-sm-4">
 						<select 
 						class="form-control"
@@ -802,7 +811,7 @@
 
 				<div class="form-group">
 					<div class="col-md-12">
-						<label for="exampleInputEmail1">Server Location</label>
+						<label for="server-loc">Server Location</label>
 	    				<input 
 	    				type="text" 
 	    				class="form-control"
@@ -815,8 +824,14 @@
 
 				<div class="form-group">
 					<div class="col-md-12 file-upload-section">
-						<label for="exampleInputEmail1">Reference Materials / Marked up files</label>
-						<input type="file" id="file-uploads" name="file_uploads" ng-model="form.fileUploads" multiple nv-file-select uploader="uploader"/>
+						<label>Reference Materials / Marked up files</label>
+						
+						<div>
+							<label for="file-uploads" class="btn btn-default"> Choose Files
+								<input type="file" id="file-uploads" name="file_uploads" ng-model="form.fileUploads" multiple nv-file-select uploader="uploader"/>
+							</label>
+						</div><br>
+						
 						<div class="drop-zone" uploader="uploader" nv-file-over ng-class="{'bg-danger' : totalFileSize()>25}">
 							<h3>Drop files here <i class="glyphicon glyphicon-upload"></i></h3>
 

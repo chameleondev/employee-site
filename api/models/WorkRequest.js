@@ -9,6 +9,12 @@ module.exports = {
 
   attributes: {
 
+		// jobCode : {
+		// 	type : 'string',
+		// 	required : true
+		// }
+
+		
   }
 };
 

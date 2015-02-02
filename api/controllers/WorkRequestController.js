@@ -60,7 +60,10 @@ module.exports = {
 			adapter: require('skipper-s3'),
 			key: process.env.AWS_KEY || sails.config.aws.key,
 			secret: process.env.AWS_SECRET || sails.config.aws.secret,
-			bucket: 'work-request-uploads'
+			bucket: 'work-request-uploads',
+			saveAs: function (__newFileStream, cb) {
+				cb(null, req.body.jobCode+'_'+__newFileStream.filename);
+			}
 		},function (err, uploadedFiles){
 
 			if (err) return res.send(500, err);
