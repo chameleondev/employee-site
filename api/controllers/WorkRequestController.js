@@ -5,15 +5,29 @@
  * @help        :: See http://links.sailsjs.org/docs/controllers
  */
 
-var mandrill = require('node-mandrill')('JtgzSVSSdHsYMMWmwY0IEQ');
 
 module.exports = {
 
 	index : function(req,res,next){
 
+		return res.redirect('WorkRequest/form');
+
+	},
+
+	form : function(req,res,next){
+
+		res.locals.layout = 'work-request-layout.ejs';
+
+
+		return res.view();
+	},
+
+	list : function(req,res,next){
+
 		res.locals.layout = 'work-request-layout';
 
-		res.view();
+
+		return res.view();
 	},
 
 	upload : function(req,res,next){
@@ -27,31 +41,6 @@ module.exports = {
 			encoded
 		;
 
-
-		// console.log(req.body.jobCode); // to view the formdata
-		// console.log(req.body.fileNames);
-
-		// console.log('uploads',req.file('file_uploads'));
-
-		// console.log(req.headers['content-type']);
-
-		// req.file('file_uploads').upload({
-		// 	adapter: require('skipper-disk')
-		// },function (err, uploadedFiles) {
-		// 	if (err) return res.send(500, err);
-
-		// 	file = uploadedFiles[0].fd;
-
-		// 	bitmap = fs.readFileSync(file);
-
-		// 	encoded = new Buffer(bitmap).toString('base64');
-
-		// 	return res.json({
-		// 		message: uploadedFiles.length + ' file(s) uploaded successfully!',
-		// 		files: uploadedFiles,
-		// 		encodedFile : encoded
-		// 	});
-		// });
 
 
 		req.file('file_uploads').upload({
@@ -85,121 +74,68 @@ module.exports = {
 
 	create : function(req,res,next){
 
-		
-		
+		console.log(req.param('firstDraftBy').toString());
 
-		var msg = '<b>Job Code</b>: '+req.param('jobCode')+'<br/>';
-
-		if(req.param('client')) msg+= '<b>Client:</b> '+req.param('client')+'<br/>';
-		if(req.param('product')) msg+= '<b>Product:</b> '+req.param('product')+'<br/>';
-		if(req.param('projectTitle')) msg+= '<b>Project Title:</b> '+req.param('projectTitle')+'<br/>';
-		if(req.param('accountPersonFname')) msg+= '<b>Account Person:</b> '+req.param('accountPersonFname')+'<br/>';
-		if(req.param('budget')) msg+= '<b>Budget:</b> '+req.param('budget')+'<br/>';
-
-		msg+= '<b>Type Of Project:</b> ';
-		if(req.param('desProj')) msg+= req.param('desProj')+' | ';
-		if(req.param('digProj')) msg+= req.param('digProj')+' | ';
-		if(req.param('typeProj')) msg+= req.param('typeProj')+' | ';
-		msg+='<br/>';
-
-		if(req.param('taskDesc')) msg+= '<b>Task Description:</b> '+req.param('taskDesc')+'<br/>';
-
-		msg+= '<b>Hours For Task:</b> ';
-		if(req.param('needEstHours')) {
-			msg+= req.param('needEstHours')+'<br/>';
-		} else {
-			if(req.param('desHours')) msg+='Des - '+req.param('desHours')+' | ';
-			if(req.param('sdesHours')) msg+='sDes - '+req.param('sdesHours')+' | ';
-			if(req.param('studioHours')) msg+='Studio - '+req.param('studioHours')+' | ';
-			if(req.param('cdHours')) msg+='CD - '+req.param('cdHours')+' | ';
-			if(req.param('gdHours')) msg+='GD - '+req.param('gdHours')+' | ';
-		}
-		msg+='<br/>';
-
-		msg+= '<b>How Will The Work Be Used Or Presented:</b> ';
-		if(req.param('pitch')) msg+= req.param('pitch')+' | ';
-		if(req.param('rfp')) msg+= req.param('rfp')+' | ';
-		if(req.param('creativeTheme')) msg+= req.param('creativeTheme')+' | ';
-		if(req.param('ppt')) msg+= req.param('ppt')+' | ';
-		if(req.param('pdf')) msg+= req.param('pdf')+' | ';
-		if(req.param('digitalTool')) msg+= req.param('digitalTool')+' | ';
-		if(req.param('presentedOther')) msg+= req.param('presentedOther')+' | ';
-		msg+='<br/>';
-
-		msg+= '<b>Branding:</b> ';
-		if(req.param('branded')) msg+= req.param('branded')+' | ';
-		if(req.param('unbranded')) msg+= req.param('unbranded')+' | ';
-		if(req.param('softBranded')) msg+= req.param('softBranded')+' | ';
-		if(req.param('brandedOther')) msg+= req.param('brandedOther')+' | ';
-		msg+='<br/>';
-
-		if(req.param('logosIncluded')) msg+= '<b>Logos To Be Included:</b> '+req.param('logosIncluded')+'<br/>';
-		if(req.param('lookAndFeel')) msg+= '<b>Visual style,look and feel, branding specifications:</b> '+req.param('lookAndFeel')+'<br/>';
-		if(req.param('scientificBackground')) msg+= '<b>Scientific Background:</b> '+req.param('scientificBackground')+'<br/>';
-
-		if (req.param('extensions')) {
-			msg+= '<b>Extensions:</b> ';
-			for (var i = 0; i < req.param('extensions').length; i++) {
-				msg+= req.param('extensions')[i]+' | ';
-			}
-			msg+='<br/>';
-		}
-
-		if (req.param('dimensions')) {
-			msg+= '<b>Dimensions:</b> ';
-			for (var i = 0; i < req.param('dimensions').length; i++) {
-				msg+= req.param('dimensions')[i]+' | ';
-			}
-			msg+='<br/>';
-		}
-
-		if (req.param('orientations')) {
-			msg+= '<b>Orientations:</b> ';
-			for (var i = 0; i < req.param('orientations').length; i++) {
-				msg+= req.param('orientations')[i]+' | ';
-			}
-			msg+='<br/>';
-		}
-
-		if(req.param('pages')) msg+= '<b>Pages:</b> '+req.param('pages')+'<br/>';
-		if(req.param('firstDraftBy') || req.param('firstDraftByTime')) msg+= '<b>First draft by:</b> '+req.param('firstDraftBy')+' '+ req.param('firstDraftByTime')+'<br/>';
-		if(req.param('finalDeliveryDate') || req.param('finalDeliveryDateTime')) msg+= '<b>Final delivery date:</b> '+req.param('finalDeliveryDate')+' '+ req.param('finalDeliveryDateTime')+'<br/>';
-		if(req.param('asap')) msg+= 'ASAP <br />';
+		var userObject = {
+			jobCode : req.param('jobCode'),
+			client : req.param('client'),
+			product : req.param('product'),
+			projectTitle : req.param('projectTitle'),
+			accountPersonFname : req.param('accountPersonFname'),
+			budget : req.param('budget'),
+			desProj : req.param('desProj'),
+			digProj : req.param('digProj'),
+			typeProj : req.param('typeProj'),
+			taskDesc : req.param('taskDesc'),
+			needEstHours : req.param('needEstHours'),
+			desHours : req.param('desHours'),
+			sdesHours : req.param('sdesHours'),
+			cdHours : req.param('cdHours'),
+			gdHours : req.param('gdHours'),
+			pitch : req.param('pitch'),
+			rfp : req.param('rfp'),
+			creativeTheme : req.param('creativeTheme'),
+			ppt : req.param('ppt'),
+			pdf : req.param('pdf'),
+			digitalTool : req.param('digitalTool'),
+			presentedOther : req.param('presentedOther'),
+			branded : req.param('branded'),
+			unbranded : req.param('unbranded'),
+			softBranded : req.param('softBranded'),
+			brandedOther : req.param('brandedOther'),
+			logosIncluded : req.param('logosIncluded'),
+			lookAndFeel : req.param('lookAndFeel'),
+			scientificBackground : req.param('scientificBackground'),
+			extensions : req.param('extensions'),
+			dimensions : req.param('dimensions'),
+			orientations : req.param('orientations'),
+			pages : req.param('pages'),
+			firstDraftBy : req.param('firstDraftBy').toString(),
+			firstDraftByTime : req.param('firstDraftByTime'),
+			finalDeliveryDate : req.param('finalDeliveryDate').toString(),
+			finalDeliveryDateTime : req.param('finalDeliveryDateTime'),
+			asap : req.param('asap'),
+			uploadPaths : req.param('uploadPaths')
+		};
 
 
+		WorkRequest.create(userObject,function requestCreated(err,request){
 
-		mandrill('/messages/send', {
-			message: {
-				to: [{
-					name: 'Michaela Hyndman',
-					email: 'michaela.hyndman@chameleon-uk.com'
-				},{
-					name: 'Dillon Lee',
-					email: 'dillon.lee@chameleon-uk.com',
-					type: 'bcc'
-				}],
-				from_name: 'Request Form',
-				from_email: 'admin@chameleon-web.com',
-				html: msg,
-				subject: 'New job No: '+ req.param('jobCode'),
-				text: "text fallback goes here-- in case some recipients (let\'s say the Chipettes)  can\'t receive HTML emails",
-				attachments : req.param('encodedUploads')
-			}
-		}, function(error, response){
-			//uh oh, there was an error
-			if (error) {
-				console.log( JSON.stringify(error) );
-				res.send(error);
-				return;
-			}
+			//If there's an error
+			if(err) return next(err);
 
-			//everything's good, lets see what mandrill said
-			else{
-				// console.log(req.param('encodedUploads'));
-				res.send(response);
-				return;
-			}
+			// After successfully creating the request
+			// redirect to the show action
+			// res.json(user);
+
+			// send email 
+			SendEmail.send(req,res);
+
 		});
+
+
+
+		
 
 	}
 

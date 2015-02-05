@@ -13,6 +13,7 @@ app.controller('FormCtrl',['$scope','$timeout','FileUploader',function($scope,$t
 	$scope.form.dimensions = [];
 	$scope.form.orientations = [];
     $scope.form.encodedUploads = [];
+    $scope.form.uploadPaths = [];
 
 	$scope.extAdd = function(model,selected){
 		console.log(model,selected);
@@ -53,7 +54,7 @@ app.controller('FormCtrl',['$scope','$timeout','FileUploader',function($scope,$t
     };
 
     $scope.refresh = function(){
-        location.replace('/WorkRequest');
+        location.replace('/WorkRequest/form');
     };
 
     $scope.totalFileSize = function(){
@@ -168,7 +169,9 @@ app.controller('FormCtrl',['$scope','$timeout','FileUploader',function($scope,$t
         console.info('onCancelItem', fileItem, response, status, headers);
     };
     uploader.onCompleteItem = function(fileItem, response, status, headers) {
-        console.info('onCompleteItem', fileItem, response, status, headers);
+        console.info('onCompleteItem', fileItem, response, status, headers,response.files[0].extra.Location);
+
+        $scope.form.uploadPaths.push(response.files[0].extra.Location);
 
         // console.log('file name: '+ fileItem.file.name);
         // console.log('file size: '+ fileItem.file.size);
@@ -195,7 +198,15 @@ app.directive('datePicker', function() {
         restrict: 'A',
         link: function(scope, element, attrs) {
 
-			element.datepicker({format : 'dd-mm-yyyy',})
+            var nowTemp = new Date();
+            var now = new Date(nowTemp.getFullYear(), nowTemp.getMonth(), nowTemp.getDate(), 0, 0, 0, 0);
+
+			element.datepicker({
+                format : 'dd-mm-yyyy',
+                onRender: function(date) {
+                    return date.valueOf() < now.valueOf() ? 'disabled' : '';
+                }
+            })
 				.on('changeDate',function(ev){
 
 
