@@ -54,7 +54,7 @@ app.controller('FormCtrl',['$scope','$timeout','FileUploader',function($scope,$t
     };
 
     $scope.refresh = function(){
-        location.reload();
+        location.replace('/WorkRequest/form');
     };
 
     $scope.totalFileSize = function(){
