@@ -97,7 +97,7 @@
 						name="job_type"
 						ng-model="form.jobType"
 						value="Existing Job"
-						ng-required="!(form.jobType === 'New Job')"> Existing Job
+						ng-required="!(form.jobType === 'New Job')"> Previously Submitted Job
 					</label>
 				</div>
 
@@ -105,7 +105,7 @@
 
 				<h3 class="title sub-title" id="formProjectInfo">Project Info</h3>
 
-				<div class="form-group">
+				<div class="form-group" ng-show="form.jobType === 'New Job'">
 					
 					<div class="col-md-6">
 						<label for="client">Client</label>
@@ -131,7 +131,7 @@
 
 				</div>
 
-				<div class="form-group">
+				<div class="form-group" ng-show="form.jobType === 'New Job'">
 
 					<div class="col-md-12">
 						<label for="project-title">Project Title</label>
@@ -146,7 +146,7 @@
 					
 				</div>
 
-				<div class="form-group">
+				<div class="form-group" ng-show="form.jobType === 'New Job'">
 
 					<div class="col-md-12">
 						<label for="account-person-fname">Account Lead</label>
@@ -167,9 +167,58 @@
 
 				</div>
 
+				<div class="form-group">
+
+					<div class="col-md-6">
+						<label for="form-user">Form Submitted By (if not account lead)</label>
+	    				<input 
+	    				type="text" 
+	    				class="form-control" 
+	    				id="form-user"
+	    				name="form_user"
+	    				ng-model="form.formUser" 
+	    				placeholder="Full Name"
+	    				>
+					</div>
+
+					<div class="col-md-6">
+						<label for="office">Office</label>
+	    				<select 
+	    				class="form-control" 
+	    				id="office"
+	    				name="office"
+	    				ng-model="form.office" 
+	    				ng-class="{'invalid' : request_form.office.$invalid}"
+	    				>
+							<option value="London">London</option>
+							<option value="Manchester">Manchester</option>
+							<option value="US">US</option>
+							<option value="Global">Global</option>
+	    				</select>
+					</div>
+
+				</div>
+				
+
+				<div ng-show="form.jobType === 'New Job'">
+				<div class="form-group">
+
+					<div class="col-md-12">
+						<label for="general-desc">General Project Description</label>
+	    				<textarea 
+	    				rows="5" 
+	    				class="form-control" 
+	    				id="general-desc"
+	    				name="general_desc"
+	    				ng-model="form.generalDesc"  
+	    				placeholder="e.g Xarelto Brand Plan Presentation"></textarea>
+					</div>
+					
+				</div>
+
 				<hr>
 
-				<h3 class="title sub-title" id="formBudgetStatus">Budget Status</h3>
+				<h3 class="title sub-title" id="formBudgetStatus">Project Status</h3>
 
 			  	<div class="form-group">
 			  		<div class="col-md-12">
@@ -259,6 +308,7 @@
 
 			  		</div>
 			  	</div>
+			  	</div>
 				
 			</div>	<!-- form-section -->
 
@@ -272,7 +322,7 @@
 				<div class="form-group">
 
 					<div class="col-md-12">
-						<label id="taskDescTitle">Task Description</label>
+						<label id="taskDescTitle">Task Specific Description</label>
 	    				<textarea 
 	    				rows="5" 
 	    				class="form-control" 
@@ -286,7 +336,7 @@
 
 				<hr>
 
-				<h3 class="title sub-title" id="hoursForTaskTitle">Hours For This Task</h3>
+				<h3 class="title sub-title" id="hoursForTaskTitle">Hours For This Task Only (Not entire project)</h3>
 
 				<div class="form-group">
 					<label for="inputEmail3" class="col-sm-1 control-label">Des</label>
@@ -366,6 +416,103 @@
 				
 			</div>	<!-- form-section -->
 
+			<div class="form-section">
+
+				<h2 class="title section-title" id="formSection4">
+					<span class="title-icon title4-icon"></span>
+					Delivery
+				</h2>
+
+				<h3 class="title sub-title" id="deliveryDateTitle">Delivery Date</h3>
+
+				<div class="form-group">
+					<label for="first-draft-by" class="col-sm-2 control-label">First draft by</label>
+					<div class="col-sm-4">
+						<div class="input-group">
+							<input 
+							type="text" 
+							class="form-control date-selection" 
+							id="first-draft-by"
+		    				name="first-draft-by"
+		    				ng-model="form.firstDraftBy"  
+							placeholder="DD/MM/YYYY"
+							date-picker
+							readonly>
+							<span class="input-group-addon glyphicon glyphicon-calendar"></span>
+						</div>
+					</div>	
+
+					<label for="first-draft-by-time" class="col-sm-2 control-label">Time</label>
+					<div class="col-sm-4">
+						<select 
+						class="form-control"
+						id="first-draft-by-time"
+	    				name="first-draft-by_time"
+	    				ng-model="form.firstDraftByTime"
+						>
+						  <option>9AM GMT</option>
+						  <option>12PM GMT</option>
+						  <option>EOB GMT</option>
+						  <option>9AM EST</option>
+						  <option>12PM EST</option>
+						  <option>EOB EST</option>
+						</select>
+					</div>	
+				</div>
+
+				<div class="form-group">
+					<label for="final-delivery-date" class="col-sm-2 control-label">Final delivery date</label>
+					<div class="col-sm-4">
+						<div class="input-group">
+							<input 
+							type="text" 
+							class="form-control date-selection" 
+							id="final-delivery-date"
+		    				name="final_delivery_date"
+		    				ng-model="form.finalDeliveryDate"  
+							placeholder="DD/MM/YYYY"
+							date-picker
+							readonly>
+							<span class="input-group-addon glyphicon glyphicon-calendar"></span>
+						</div>
+					</div>
+
+					<label for="final-delivery-date-time" class="col-sm-2 control-label">Time</label>
+					<div class="col-sm-4">
+						<select 
+						class="form-control"
+						id="final-delivery-date-time"
+	    				name="final_delivery_date_time"
+	    				ng-model="form.finalDeliveryDateTime">
+						  <option>9AM GMT</option>
+						  <option>12PM GMT</option>
+						  <option>EOB GMT</option>
+						  <option>9AM EST</option>
+						  <option>12PM EST</option>
+						  <option>EOB EST</option>
+						</select>
+					</div>	
+				</div>
+
+				<div class="form-group">
+					<div class="col-md-12">
+						<label class="checkbox-inline">
+							<div class="checkbox-icon" ng-class="{'active' : request_form.asap.$valid}">
+								<div class="checked-checkbox-icon" ng-class="{'active': form.asap}"></div>
+							</div>
+							<input 
+							type="checkbox" 
+							id="asap"
+		    				name="asap"
+		    				ng-model="form.asap"  
+							ng-true-value="'ASAP'"> ASAP (Please speak to creative lead before selecting)
+						</label>
+					</div>
+				</div>
+
+				
+			</div>	<!-- form-section -->
+
 
 			<div class="form-section">
 
@@ -406,101 +553,169 @@
 
 				<hr>
 
-				<h3 class="title sub-title" id="workPresentedTitle">How will the work be used or presented?</h3>
+				<h3 class="title sub-title" id="typeOfWorkTitle">Type Of Work</h3>
 
 				<div class="form-group">
 					<div class="col-md-12">
 						<label class="checkbox-inline">
-							<div class="checkbox-icon" ng-class="{'active' : request_form.pitch.$valid}">
-								<div class="checked-checkbox-icon" ng-class="{'active': form.pitch}"></div>
+							<div class="checkbox-icon" ng-class="{'active' : request_form.mockup.$valid}">
+								<div class="checked-checkbox-icon" ng-class="{'active': form.mockup}"></div>
 							</div>
 							<input 
 							type="checkbox" 
-							id="pitch"
-		    				name="pitch"
-		    				ng-model="form.pitch"
-		    				ng-true-value="'Pitch'" 
-							> Pitch
+							id="mockup"
+		    				name="mockup"
+		    				ng-model="form.mockup"
+		    				ng-true-value="'Mockup'" 
+							> Mockup
 						</label>
 
 						<label class="checkbox-inline">
-							<div class="checkbox-icon" ng-class="{'active' : request_form.rfp.$valid}">
-								<div class="checked-checkbox-icon" ng-class="{'active': form.rfp}"></div>
+							<div class="checkbox-icon" ng-class="{'active' : request_form.creative_design_con.$valid}">
+								<div class="checked-checkbox-icon" ng-class="{'active': form.creativeDesignCon}"></div>
 							</div>
 							<input 
 							type="checkbox" 
-							id="rfp"
-		    				name="rfp"
-		    				ng-model="form.rfp" 
-		    				ng-true-value="'RFP'"
-							> RFP
+							id="creative-design-con"
+		    				name="creative_design_con"
+		    				ng-model="form.creativeDesignCon" 
+		    				ng-true-value="'Creative Design Concept'"
+							> Creative Design Concept
 						</label>
 
 						<label class="checkbox-inline">
-							<div class="checkbox-icon" ng-class="{'active' : request_form.creative_theme.$valid}">
-								<div class="checked-checkbox-icon" ng-class="{'active': form.creativeTheme}"></div>
+							<div class="checkbox-icon" ng-class="{'active' : request_form.video.$valid}">
+								<div class="checked-checkbox-icon" ng-class="{'active': form.video}"></div>
 							</div>
 							<input 
 							type="checkbox" 
-							id="creative-theme"
-		    				name="creative_theme"
-		    				ng-model="form.creativeTheme" 
-							ng-true-value="'Creative Theme'"> Creative Theme
+							id="video"
+		    				name="video"
+		    				ng-model="form.video" 
+							ng-true-value="'Video'"> Video
 						</label>
 
 						<label class="checkbox-inline">
-							<div class="checkbox-icon" ng-class="{'active' : request_form.ppt.$valid}">
-								<div class="checked-checkbox-icon" ng-class="{'active': form.ppt}"></div>
+							<div class="checkbox-icon" ng-class="{'active' : request_form.digital_app_des.$valid}">
+								<div class="checked-checkbox-icon" ng-class="{'active': form.digitalAppDes}"></div>
 							</div>
 							<input 
 							type="checkbox" 
-							id="ppt"
-		    				name="ppt"
-		    				ng-model="form.ppt" 
-							ng-true-value="'PPT'"> PPT
+							id="digital-app-des"
+		    				name="digital_app_des"
+		    				ng-model="form.digitalAppDes" 
+							ng-true-value="'Digital Application Design'"> Digital Application Design
 						</label>
 
 						<label class="checkbox-inline">
-							<div class="checkbox-icon" ng-class="{'active' : request_form.pdf.$valid}">
-								<div class="checked-checkbox-icon" ng-class="{'active': form.pdf}"></div>
+							<div class="checkbox-icon" ng-class="{'active' : request_form.logo.$valid}">
+								<div class="checked-checkbox-icon" ng-class="{'active': form.logo}"></div>
 							</div>
 							<input 
 							type="checkbox" 
-							id="pdf"
-		    				name="pdf"
-		    				ng-model="form.pdf"
-							ng-true-value="'PDF'"> PDF
+							id="logo"
+		    				name="logo"
+		    				ng-model="form.logo"
+							ng-true-value="'Logo'"> Logo
 						</label>
 					</div>
 				</div>
+
+				<div class="form-group form-inline">
+					<div class="col-md-12">
+						<label class="checkbox-inline">
+							<div class="checkbox-icon" ng-class="{'active' : request_form.figure_redaws.$valid}">
+								<div class="checked-checkbox-icon" ng-class="{'active': form.figureRedraws}"></div>
+							</div>
+							<input 
+							type="checkbox" 
+							id="figure-redaws"
+		    				name="figure_redaws"
+		    				ng-model="form.figureRedraws" 
+							ng-true-value="'Figure Redraws'"> Figure Redraws
+						</label>
+
+						<label class="checkbox-inline">
+							<div class="checkbox-icon" ng-class="{'active' : request_form.layout.$valid}">
+								<div class="checked-checkbox-icon" ng-class="{'active': form.layout}"></div>
+							</div>
+							<input 
+							type="checkbox" 
+							id="layout"
+		    				name="layout"
+		    				ng-model="form.layout" 
+							ng-true-value="'Layout'"> Layout
+						</label>
+
+						<input 
+						type="text" 
+						placeholder="Other"
+						class="form-control" 
+						style="margin-top:17px"
+						name="presented_other"
+						id="presented-other"
+						ng-model="form.presentedOther">
+					</div>
+				</div>
+
+				<hr>
+
+				<h3 class="title sub-title" id="whereUsedTitle">Where will it be used</h3>
 
 				<div class="form-group">
 					<div class="col-md-12">
 						<label class="checkbox-inline">
-							<div class="checkbox-icon" ng-class="{'active' : request_form.digital_tool.$valid}">
-								<div class="checked-checkbox-icon" ng-class="{'active': form.digitalTool}"></div>
+							<div class="checkbox-icon" ng-class="{'active' : request_form.where_used_ppt.$valid}">
+								<div class="checked-checkbox-icon" ng-class="{'active': form.whereUsedPpt}"></div>
 							</div>
 							<input 
 							type="checkbox" 
-							id="digital-tool"
-		    				name="digital_tool"
-		    				ng-model="form.digitalTool" 
-							ng-true-value="'Digital Tool'"> Digital Tool
+							id="where-used-ppt"
+		    				name="where_used_ppt"
+		    				ng-model="form.whereUsedPpt"
+		    				ng-true-value="'PPT'" 
+							> PPT
 						</label>
 
 						<label class="checkbox-inline">
-							<div class="checkbox-icon" ng-class="{'active' : request_form.presented_other.$valid}">
-								<div class="checked-checkbox-icon" ng-class="{'active': form.presentedOther}"></div>
+							<div class="checkbox-icon" ng-class="{'active' : request_form.where_used_word.$valid}">
+								<div class="checked-checkbox-icon" ng-class="{'active': form.whereUsedWord}"></div>
 							</div>
 							<input 
 							type="checkbox" 
-							id="presented-other"
-		    				name="presented_other"
-		    				ng-model="form.presentedOther" 
-							ng-true-value="'Other'"> Other
+							id="where-used-word"
+		    				name="where_used_word"
+		    				ng-model="form.whereUsedWord" 
+		    				ng-true-value="'Word'"
+							> Word
+						</label>
+
+						<label class="checkbox-inline">
+							<div class="checkbox-icon" ng-class="{'active' : request_form.where_used_dig_app.$valid}">
+								<div class="checked-checkbox-icon" ng-class="{'active': form.whereUsedDigApp}"></div>
+							</div>
+							<input 
+							type="checkbox" 
+							id="where-used-dig-app"
+		    				name="where_used_dig_app"
+		    				ng-model="form.whereUsedDigApp" 
+							ng-true-value="'Digital Application'"> Digital Application
+						</label>
+
+						<label class="checkbox-inline">
+							<div class="checkbox-icon" ng-class="{'active' : request_form.where_used_print.$valid}">
+								<div class="checked-checkbox-icon" ng-class="{'active': form.whereUsedPrint}"></div>
+							</div>
+							<input 
+							type="checkbox" 
+							id="where-used-print"
+		    				name="where_used_print"
+		    				ng-model="form.whereUsedPrint"
+							ng-true-value="'Print'"> Print
 						</label>
 					</div>
 				</div>
+
 
 				<hr>
 
@@ -622,11 +837,10 @@
 						id="extension"
 	    				name="extension"
 	    				ng-model="selectedExtension">
-						  <option>PSD</option>
-						  <option>JPG</option>
-						  <option>PNG</option>
-						  <option>EPS</option>
+						  <option>Image for PPT</option>
+						  <option>Vector File</option>
 						  <option>PDF</option>
+						  <option>Hi-res image for print</option>
 						</select>
 						<ul class="delivery-list">
 							<li ng-repeat="ext in form.extensions track by $index">
@@ -703,102 +917,7 @@
 
 			</div>	<!-- form-section -->
 
-			<div class="form-section">
-
-				<h2 class="title section-title" id="formSection4">
-					<span class="title-icon title4-icon"></span>
-					Delivery
-				</h2>
-
-				<h3 class="title sub-title" id="deliveryDateTitle">Delivery Date</h3>
-
-				<div class="form-group">
-					<label for="first-draft-by" class="col-sm-2 control-label">First draft by</label>
-					<div class="col-sm-4">
-						<div class="input-group">
-							<input 
-							type="text" 
-							class="form-control date-selection" 
-							id="first-draft-by"
-		    				name="first-draft-by"
-		    				ng-model="form.firstDraftBy"  
-							placeholder="DD/MM/YYYY"
-							date-picker
-							readonly>
-							<span class="input-group-addon glyphicon glyphicon-calendar"></span>
-						</div>
-					</div>	
-
-					<label for="first-draft-by-time" class="col-sm-2 control-label">Time</label>
-					<div class="col-sm-4">
-						<select 
-						class="form-control"
-						id="first-draft-by-time"
-	    				name="first-draft-by_time"
-	    				ng-model="form.firstDraftByTime"
-						>
-						  <option>EOB UK</option>
-						  <option>SOB UK</option>
-						  <option>EOB US</option>
-						  <option>SOB US</option>
-						  <option>12PM</option>
-						  <option>3PM</option>
-						</select>
-					</div>	
-				</div>
-
-				<div class="form-group">
-					<label for="final-delivery-date" class="col-sm-2 control-label">Final delivery date</label>
-					<div class="col-sm-4">
-						<div class="input-group">
-							<input 
-							type="text" 
-							class="form-control date-selection" 
-							id="final-delivery-date"
-		    				name="final_delivery_date"
-		    				ng-model="form.finalDeliveryDate"  
-							placeholder="DD/MM/YYYY"
-							date-picker
-							readonly>
-							<span class="input-group-addon glyphicon glyphicon-calendar"></span>
-						</div>
-					</div>
-
-					<label for="final-delivery-date-time" class="col-sm-2 control-label">Time</label>
-					<div class="col-sm-4">
-						<select 
-						class="form-control"
-						id="final-delivery-date-time"
-	    				name="final_delivery_date_time"
-	    				ng-model="form.finalDeliveryDateTime">
-						  <option>EOB UK</option>
-						  <option>SOB UK</option>
-						  <option>EOB US</option>
-						  <option>SOB US</option>
-						  <option>12PM</option>
-						  <option>3PM</option>
-						</select>
-					</div>	
-				</div>
-
-				<div class="form-group">
-					<div class="col-md-12">
-						<label class="checkbox-inline">
-							<div class="checkbox-icon" ng-class="{'active' : request_form.asap.$valid}">
-								<div class="checked-checkbox-icon" ng-class="{'active': form.asap}"></div>
-							</div>
-							<input 
-							type="checkbox" 
-							id="asap"
-		    				name="asap"
-		    				ng-model="form.asap"  
-							ng-true-value="'ASAP'"> ASAP (Please speak to creative lead before selecting)
-						</label>
-					</div>
-				</div>
-
-				
-			</div>	<!-- form-section -->
+			
 
 			<div class="form-section">
 
@@ -876,7 +995,7 @@
 									<a href="#formProjectInfo">Project Info</a>
 								</li>
 								<li>
-									<a href="#formBudgetStatus">Budget Status</a>
+									<a href="#formBudgetStatus">Project Status</a>
 								</li>
 								<li>
 									<a href="#formTypeOfProject">Type of Project</a>
@@ -895,27 +1014,30 @@
 							</ul>
 						</li>
 						<li>
+							<a href="#formSection4" class="title">Delivery</a>
+							<ul class="nav">
+								<li>
+									<a href="#deliveryDateTitle">Delivery Date</a>
+								</li>
+							</ul>
+						</li>
+						<li>
 							<a href="#formSection3" class="title">Instructions</a>
 							<ul class="nav">
 								<li>
 									<a href="#typeOfBriefTitle">Type of brief</a>
 								</li>
 								<li>
-									<a href="#workPresentedTitle">How will the work be used or presented?</a>
+									<a href="#typeOfWorkTitle">Type of Work</a>
+								</li>
+								<li>
+									<a href="#whereUsedTitle">Where will it be used?</a>
 								</li>
 								<li>
 									<a href="#brandingTitle">Branding</a>
 								</li>
 								<li>
 									<a href="#deliveryFormatTitle">Delivery Format</a>
-								</li>
-							</ul>
-						</li>
-						<li>
-							<a href="#formSection4" class="title">Delivery</a>
-							<ul class="nav">
-								<li>
-									<a href="#deliveryDateTitle">Delivery Date</a>
 								</li>
 							</ul>
 						</li>

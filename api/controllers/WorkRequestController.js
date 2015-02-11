@@ -74,7 +74,7 @@ module.exports = {
 
 	create : function(req,res,next){
 
-		console.log(req.param('firstDraftBy').toString());
+		
 
 		var userObject = {
 			jobCode : req.param('jobCode'),
@@ -82,6 +82,9 @@ module.exports = {
 			product : req.param('product'),
 			projectTitle : req.param('projectTitle'),
 			accountPersonFname : req.param('accountPersonFname'),
+			formUser : req.param('formUser'),
+			office : req.param('office'),
+			generalDesc : req.param('generalDesc'),
 			budget : req.param('budget'),
 			desProj : req.param('desProj'),
 			digProj : req.param('digProj'),
@@ -92,13 +95,18 @@ module.exports = {
 			sdesHours : req.param('sdesHours'),
 			cdHours : req.param('cdHours'),
 			gdHours : req.param('gdHours'),
-			pitch : req.param('pitch'),
-			rfp : req.param('rfp'),
-			creativeTheme : req.param('creativeTheme'),
-			ppt : req.param('ppt'),
-			pdf : req.param('pdf'),
-			digitalTool : req.param('digitalTool'),
+			mockup : req.param('mockup'),
+			creativeDesignCon : req.param('creativeDesignCon'),
+			video : req.param('video'),
+			digitalAppDes : req.param('digitalAppDes'),
+			logo : req.param('logo'),
+			figureRedraws : req.param('figureRedraws'),
+			layout : req.param('layout'),
 			presentedOther : req.param('presentedOther'),
+			whereUsedPpt : req.param('whereUsedPpt'),
+			whereUsedWord : req.param('whereUsedWord'),
+			whereUsedDigApp : req.param('whereUsedDigApp'),
+			whereUsedPrint : req.param('whereUsedPrint'),
 			branded : req.param('branded'),
 			unbranded : req.param('unbranded'),
 			softBranded : req.param('softBranded'),
@@ -110,9 +118,9 @@ module.exports = {
 			dimensions : req.param('dimensions'),
 			orientations : req.param('orientations'),
 			pages : req.param('pages'),
-			firstDraftBy : req.param('firstDraftBy').toString(),
+			firstDraftBy : req.param('firstDraftBy'),
 			firstDraftByTime : req.param('firstDraftByTime'),
-			finalDeliveryDate : req.param('finalDeliveryDate').toString(),
+			finalDeliveryDate : req.param('finalDeliveryDate'),
 			finalDeliveryDateTime : req.param('finalDeliveryDateTime'),
 			asap : req.param('asap'),
 			uploadPaths : req.param('uploadPaths')

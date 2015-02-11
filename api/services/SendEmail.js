@@ -12,6 +12,9 @@ module.exports = {
 		if(req.param('product')) msg+= '<b>Product:</b> '+req.param('product')+'<br/>';
 		if(req.param('projectTitle')) msg+= '<b>Project Title:</b> '+req.param('projectTitle')+'<br/>';
 		if(req.param('accountPersonFname')) msg+= '<b>Account Person:</b> '+req.param('accountPersonFname')+'<br/>';
+		if(req.param('formUser')) msg+= '<b>Form Submitted by:</b> '+req.param('formUser')+'<br/>';
+		if(req.param('office')) msg+= '<b>Office:</b> '+req.param('office')+'<br/>';
+		if(req.param('generalDesc')) msg+= '<b>General Description:</b> '+req.param('generalDesc')+'<br/>';
 		if(req.param('budget')) msg+= '<b>Budget:</b> '+req.param('budget')+'<br/>';
 
 		msg+= '<b>Type Of Project:</b> ';
@@ -26,22 +29,31 @@ module.exports = {
 		if(req.param('needEstHours')) {
 			msg+= req.param('needEstHours')+'<br/>';
 		} else {
-			if(req.param('desHours')) msg+='Des - '+req.param('desHours')+' | ';
-			if(req.param('sdesHours')) msg+='sDes - '+req.param('sdesHours')+' | ';
-			if(req.param('studioHours')) msg+='Studio - '+req.param('studioHours')+' | ';
-			if(req.param('cdHours')) msg+='CD - '+req.param('cdHours')+' | ';
-			if(req.param('gdHours')) msg+='GD - '+req.param('gdHours')+' | ';
+			if(req.param('desHours')) msg+='Des : '+req.param('desHours')+' | ';
+			if(req.param('sdesHours')) msg+='sDes : '+req.param('sdesHours')+' | ';
+			if(req.param('studioHours')) msg+='Studio : '+req.param('studioHours')+' | ';
+			if(req.param('cdHours')) msg+='CD : '+req.param('cdHours')+' | ';
+			if(req.param('gdHours')) msg+='GD : '+req.param('gdHours')+' | ';
 		}
 		msg+='<br/>';
 
-		msg+= '<b>How Will The Work Be Used Or Presented:</b> ';
-		if(req.param('pitch')) msg+= req.param('pitch')+' | ';
-		if(req.param('rfp')) msg+= req.param('rfp')+' | ';
+		msg+= '<b>Type Of Work:</b> ';
+		if(req.param('mockup')) msg+= req.param('mockup')+' | ';
+		if(req.param('creativeDesignCon')) msg+= req.param('creativeDesignCon')+' | ';
 		if(req.param('creativeTheme')) msg+= req.param('creativeTheme')+' | ';
-		if(req.param('ppt')) msg+= req.param('ppt')+' | ';
-		if(req.param('pdf')) msg+= req.param('pdf')+' | ';
-		if(req.param('digitalTool')) msg+= req.param('digitalTool')+' | ';
-		if(req.param('presentedOther')) msg+= req.param('presentedOther')+' | ';
+		if(req.param('video')) msg+= req.param('video')+' | ';
+		if(req.param('digitalAppDes')) msg+= req.param('digitalAppDes')+' | ';
+		if(req.param('logo')) msg+= req.param('logo')+' | ';
+		if(req.param('figureRedraws')) msg+= req.param('figureRedraws')+' | ';
+		if(req.param('layout')) msg+= req.param('layout')+' | ';
+		if(req.param('presentedOther')) msg+= 'Other : ' + req.param('presentedOther')+' | ';
+		msg+='<br/>';
+
+		msg+= '<b>Where Will It Be Used:</b> ';
+		if(req.param('whereUsedPpt')) msg+= req.param('whereUsedPpt')+' | ';
+		if(req.param('whereUsedWord')) msg+= req.param('whereUsedWord')+' | ';
+		if(req.param('whereUsedDigApp')) msg+= req.param('whereUsedDigApp')+' | ';
+		if(req.param('whereUsedPrint')) msg+= req.param('whereUsedPrint')+' | ';
 		msg+='<br/>';
 
 		msg+= '<b>Branding:</b> ';
