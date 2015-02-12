@@ -170,7 +170,7 @@
 				<div class="form-group">
 
 					<div class="col-md-6">
-						<label for="form-user">Form Submitted By (if not account lead)</label>
+						<label for="form-user">Person submitting this request(if not Account Lead)</label>
 	    				<input 
 	    				type="text" 
 	    				class="form-control" 
@@ -181,7 +181,7 @@
 	    				>
 					</div>
 
-					<div class="col-md-6">
+					<div class="col-md-3">
 						<label for="office">Office</label>
 	    				<select 
 	    				class="form-control" 
@@ -312,7 +312,7 @@
 				
 			</div>	<!-- form-section -->
 
-			<div class="form-section">
+			<div class="form-section instructions">
 
 				<h2 class="title section-title" id="formSection2">
 					<span class="title-icon title2-icon"></span>
@@ -336,7 +336,7 @@
 
 				<hr>
 
-				<h3 class="title sub-title" id="hoursForTaskTitle">Hours For This Task Only (Not entire project)</h3>
+				<h3 class="title sub-title" id="hoursForTaskTitle">Hours For This Task Only (<span>Not entire project</span>)</h3>
 
 				<div class="form-group">
 					<label for="inputEmail3" class="col-sm-1 control-label">Des</label>
@@ -347,7 +347,8 @@
 						id="des-hours"
 	    				name="des_hours"
 	    				ng-model="form.desHours"  
-						placeholder="">
+						placeholder=""
+						ng-class="{'active' : request_form.need_est_hours.$invalid}">
 					</div>
 
 					<label for="inputEmail3" class="col-sm-1 control-label">sDes</label>
@@ -358,7 +359,8 @@
 						id="sdes-hours"
 	    				name="sdes_hours"
 	    				ng-model="form.sdesHours" 
-						placeholder="">
+						placeholder=""
+						ng-class="{'active' : request_form.need_est_hours.$invalid}">
 					</div>
 
 					<label for="inputEmail3" class="col-sm-1 control-label">Studio</label>
@@ -369,7 +371,8 @@
 						id="studio-hours"
 	    				name="studio_hours"
 	    				ng-model="form.studioHours" 
-						placeholder="">
+						placeholder=""
+						ng-class="{'active' : request_form.need_est_hours.$invalid}">
 					</div>
 
 					<label for="inputEmail3" class="col-sm-1 control-label">CD</label>
@@ -380,7 +383,8 @@
 						id="cd-hours"
 	    				name="cd_hours"
 	    				ng-model="form.cdHours" 
-						placeholder="">
+						placeholder=""
+						ng-class="{'active' : request_form.need_est_hours.$invalid}">
 					</div>
 
 					<label for="inputEmail3" class="col-sm-1 control-label">GD</label>
@@ -391,7 +395,8 @@
 						id="gd-hours"
 	    				name="gd_hours"
 	    				ng-model="form.gdHours" 
-						placeholder="">
+						placeholder=""
+						ng-class="{'active' : request_form.need_est_hours.$invalid}">
 					</div>
 				</div>
 
@@ -505,7 +510,7 @@
 							id="asap"
 		    				name="asap"
 		    				ng-model="form.asap"  
-							ng-true-value="'ASAP'"> ASAP (Please speak to creative lead before selecting)
+							ng-true-value="'ASAP'"> ASAP (Please speak to Creative Lead before selecting)
 						</label>
 					</div>
 				</div>
@@ -650,8 +655,7 @@
 						<input 
 						type="text" 
 						placeholder="Other"
-						class="form-control" 
-						style="margin-top:17px"
+						class="form-control otherType" 
 						name="presented_other"
 						id="presented-other"
 						ng-model="form.presentedOther">
@@ -776,8 +780,9 @@
 
 				<div class="form-group">
 
-					<label for="logos-included" class="col-md-2 control-label">Logos to be included</label>
-					<div class="col-md-10">
+					
+					<div class="col-md-12">
+						<label for="logos-included" class=" control-label">Logos to be included</label>
 						<input 
 						type="text" 
 						class="form-control" 
@@ -830,7 +835,7 @@
 				<div class="form-group">
 					
 					<div class="col-md-3">
-						<label for="extension">Extension</label>
+						<label for="extension">Type of File</label>
 						<select 
 						class="form-control" 
 						ng-change="extAdd('extensions','selectedExtension')"

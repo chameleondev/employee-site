@@ -66,6 +66,10 @@ body{
 	.title{
 		text-transform: uppercase;
 
+		span{
+			text-transform: lowercase;
+		}
+
 		.title-icon{
 			height: 40px;
 			width: 40px;
@@ -115,6 +119,11 @@ body{
 		.sub-title{
 			font-size: 22px;
 			color: @Orange;
+		}
+
+		.otherType{
+			margin-top:17px;
+			width: 60%;
 		}
 
 		label{
@@ -234,6 +243,10 @@ body{
 		.drop-zone.nv-file-over{
 			border-color: @Orange;
 		}
+	}
+
+	.instructions input.active{
+		border: 1px solid red;
 	}
 
 	.submit-btn{
