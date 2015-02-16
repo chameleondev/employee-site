@@ -170,7 +170,7 @@
 				<div class="form-group">
 
 					<div class="col-md-6">
-						<label for="form-user">Person submitting this request(if not Account Lead)</label>
+						<label for="form-user">Person submitting this request (if not Account Lead)</label>
 	    				<input 
 	    				type="text" 
 	    				class="form-control" 
@@ -330,6 +330,55 @@
 	    				name="task_desc"
 	    				ng-model="form.taskDesc"  
 	    				placeholder="e.g Xarelto Brand Plan Presentation"></textarea>
+					</div>
+					
+				</div>
+
+				<div class="form-group">
+
+					<div class="col-md-12">
+						<label id="taskDescTitle" style="margin-right:10px;">Is this part of a set with multiple pieces</label>
+
+	    				<label for="yes-multiple" class="radio-inline">
+							<div class="radio-icon" ng-class="{'active' : request_form.multiple_pieces.$valid}">
+								<div class="checked-radio-icon" ng-class="{'active': form.multiplePieces == 'Multiple pieces'}"></div>
+							</div>
+							<input 
+							type="radio"
+							id="yes-multiple" 
+							name="multiple_pieces"
+							ng-model="form.multiplePieces" 
+							value="Multiple pieces "
+							ng-required="!(form.multiplePieces === 'Single piece')"> Yes
+						</label>
+
+						<label for="no-multiple" class="radio-inline">
+							<div class="radio-icon" ng-class="{'active' : request_form.multiple_pieces.$valid}">
+								<div class="checked-radio-icon" ng-class="{'active': form.multiplePieces == 'Single piece'}"></div>
+							</div>
+							<input 
+							type="radio" 
+							id="no-multiple" 
+							name="multiple_pieces"
+							ng-model="form.multiplePieces"
+							value="Single piece"
+							ng-required="!(form.multiplePieces === 'Multiple pieces')"> No
+						</label>
+					</div>
+					
+				</div>
+
+				<div class="form-group" ng-show="form.multiplePieces === 'Multiple pieces'">
+
+					<div class="col-md-12">
+						<label id="explain-piece">Please Explain</label>
+	    				<textarea 
+	    				rows="5" 
+	    				class="form-control" 
+	    				id="explain-piece"
+	    				name="explain_piece"
+	    				ng-model="form.explainPiece"  
+	    				placeholder=""></textarea>
 					</div>
 					
 				</div>

@@ -90,6 +90,8 @@ module.exports = {
 			digProj : req.param('digProj'),
 			typeProj : req.param('typeProj'),
 			taskDesc : req.param('taskDesc'),
+			multiplePieces : req.param('multiplePieces'),
+			explainPiece : req.param('explainPiece'),
 			needEstHours : req.param('needEstHours'),
 			desHours : req.param('desHours'),
 			sdesHours : req.param('sdesHours'),
