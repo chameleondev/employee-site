@@ -52,10 +52,10 @@ module.exports = {
 		msg+='<br/>';
 
 		msg+= '<b>Where Will It Be Used:</b> ';
-		if(!(req.param('whereUsedPpt')=== 'false')) msg+= req.param('whereUsedPpt')+' | ';
-		if(!(req.param('whereUsedWord')=== 'false')) msg+= req.param('whereUsedWord')+' | ';
-		if(!(req.param('whereUsedDigApp')=== 'false')) msg+= req.param('whereUsedDigApp')+' | ';
-		if(!(req.param('whereUsedPrint')=== 'false')) msg+= req.param('whereUsedPrint')+' | ';
+		if(req.param('whereUsedPpt')!== 'false') msg+= req.param('whereUsedPpt')+' | ';
+		if(req.param('whereUsedWord')!== 'false') msg+= req.param('whereUsedWord')+' | ';
+		if(req.param('whereUsedDigApp')!== 'false') msg+= req.param('whereUsedDigApp')+' | ';
+		if(req.param('whereUsedPrint')!== 'false') msg+= req.param('whereUsedPrint')+' | ';
 		msg+='<br/>';
 
 		msg+= '<b>Branding:</b> ';
