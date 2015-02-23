@@ -18,17 +18,17 @@ module.exports = {
 		if(req.param('budget')) msg+= '<b>Budget:</b> '+req.param('budget')+'<br/>';
 
 		msg+= '<b>Type Of Project:</b> ';
-		if(req.param('desProj')) msg+= req.param('desProj')+' | ';
-		if(req.param('digProj')) msg+= req.param('digProj')+' | ';
-		if(req.param('typeProj')) msg+= req.param('typeProj')+' | ';
+		if(req.param('desProj') ==='Design Project') msg+= req.param('desProj')+' | ';
+		if(req.param('digProj') ==='Digital Project') msg+= req.param('digProj')+' | ';
+		if(req.param('typeProj') ==='Typesetting Project') msg+= req.param('typeProj')+' | ';
 		msg+='<br/>';
 
 		if(req.param('taskDesc')) msg+= '<b>Task Description:</b> '+req.param('taskDesc')+'<br/>';
-		if(req.param('multiplePieces')) msg+= '<b>Pieces:</b> '+req.param('multiplePieces')+'<br/>';
+		if(req.param('multiplePieces') ==='Multiple Pieces') msg+= '<b>Pieces:</b> '+req.param('multiplePieces')+'<br/>';
 		if(req.param('explainPiece')) msg+= '<b>Explain Piece:</b> '+req.param('explainPiece')+'<br/>';
 
 		msg+= '<b>Hours For Task:</b> ';
-		if(req.param('needEstHours')) {
+		if(req.param('needEstHours')==='Need an estimate') {
 			msg+= req.param('needEstHours')+'<br/>';
 		} else {
 			if(req.param('desHours')) msg+='Des : '+req.param('desHours')+' | ';
@@ -40,14 +40,14 @@ module.exports = {
 		msg+='<br/>';
 
 		msg+= '<b>Type Of Work:</b> ';
-		if(req.param('mockup')) msg+= req.param('mockup')+' | ';
-		if(req.param('creativeDesignCon')) msg+= req.param('creativeDesignCon')+' | ';
+		if(req.param('mockup')==='Mockup') msg+= req.param('mockup')+' | ';
+		if(req.param('creativeDesignCon')==='Creative/Design Concept') msg+= req.param('creativeDesignCon')+' | ';
 		if(req.param('creativeTheme')) msg+= req.param('creativeTheme')+' | ';
-		if(req.param('video')) msg+= req.param('video')+' | ';
-		if(req.param('digitalAppDes')) msg+= req.param('digitalAppDes')+' | ';
-		if(req.param('logo')) msg+= req.param('logo')+' | ';
-		if(req.param('figureRedraws')) msg+= req.param('figureRedraws')+' | ';
-		if(req.param('layout')) msg+= req.param('layout')+' | ';
+		if(req.param('video')==='Video') msg+= req.param('video')+' | ';
+		if(req.param('digitalAppDes')==='Digital Application Design') msg+= req.param('digitalAppDes')+' | ';
+		if(req.param('logo')==='Logo') msg+= req.param('logo')+' | ';
+		if(req.param('figureRedraws')==='Figure Redraws') msg+= req.param('figureRedraws')+' | ';
+		if(req.param('layout')==='Layout') msg+= req.param('layout')+' | ';
 		if(req.param('presentedOther')) msg+= 'Other : ' + req.param('presentedOther')+' | ';
 		msg+='<br/>';
 
@@ -59,9 +59,8 @@ module.exports = {
 		msg+='<br/>';
 
 		msg+= '<b>Branding:</b> ';
-		if(req.param('branded')) msg+= req.param('branded')+' | ';
-		if(req.param('unbranded')) msg+= req.param('unbranded')+' | ';
-		if(req.param('softBranded')) msg+= req.param('softBranded')+' | ';
+		if(req.param('branded')==='Branded') msg+= req.param('branded')+' | ';
+		if(req.param('unbranded')==='Unbranded') msg+= req.param('unbranded')+' | ';
 		if(req.param('brandedOther')) msg+= req.param('brandedOther')+' | ';
 		msg+='<br/>';
 
