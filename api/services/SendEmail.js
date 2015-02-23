@@ -52,10 +52,10 @@ module.exports = {
 		msg+='<br/>';
 
 		msg+= '<b>Where Will It Be Used:</b> ';
-		if(req.param('whereUsedPpt')) msg+= req.param('whereUsedPpt')+' | ';
-		if(req.param('whereUsedWord')) msg+= req.param('whereUsedWord')+' | ';
-		if(req.param('whereUsedDigApp')) msg+= req.param('whereUsedDigApp')+' | ';
-		if(req.param('whereUsedPrint')) msg+= req.param('whereUsedPrint')+' | ';
+		if(!(req.param('whereUsedPpt')=== 'false')) msg+= req.param('whereUsedPpt')+' | ';
+		if(!(req.param('whereUsedWord')=== 'false')) msg+= req.param('whereUsedWord')+' | ';
+		if(!(req.param('whereUsedDigApp')=== 'false')) msg+= req.param('whereUsedDigApp')+' | ';
+		if(!(req.param('whereUsedPrint')=== 'false')) msg+= req.param('whereUsedPrint')+' | ';
 		msg+='<br/>';
 
 		msg+= '<b>Branding:</b> ';
@@ -70,7 +70,7 @@ module.exports = {
 		if(req.param('scientificBackground')) msg+= '<b>Scientific Background:</b> '+req.param('scientificBackground')+'<br/>';
 
 		if (req.param('extensions')) {
-			msg+= '<b>Extensions:</b> ';
+			msg+= '<b>File Format:</b> ';
 			for (var i = 0; i < req.param('extensions').length; i++) {
 				msg+= req.param('extensions')[i]+' | ';
 			}
@@ -98,17 +98,74 @@ module.exports = {
 		if(req.param('finalDeliveryDate') || req.param('finalDeliveryDateTime')) msg+= '<b>Final delivery date:</b> '+req.param('finalDeliveryDate').toString()+' '+ req.param('finalDeliveryDateTime')+'<br/>';
 		if(req.param('asap')) msg+= 'ASAP <br />';
 
+		var recipients = [{
+			name: 'Dillon Lee',
+			email: 'dillon.lee@chameleon-uk.com',
+			type: 'bcc'
+		}];
+
+		if (req.param('office') === 'US') {
+			recipients.push({
+				name: 'Brendan Wallace',
+				email: 'bwallace@hcg-int.com',
+				type: 'cc'
+			});
+		} else {
+			recipients.push({
+				name: 'Editorial',
+				email: 'Editorial_Cha@chameleon-uk.com',
+				type: 'cc'
+			});
+		}
+
+		if (req.param('desProj') === 'Design Project') {
+			recipients.push({
+				name: 'Michaela Hyndman',
+				email: 'michaela.hyndman@chameleon-uk.com'
+			},{
+				name: 'Mark Stevens',
+				email: 'mark.stevens@chameleon-uk.com'
+			},{
+				name: 'Sandra Herrera',
+				email: 'sandra.herrera@chameleon-uk.com'
+			});
+		}
+
+
+		if (req.param('typeProj') === 'Typesetting Project') {
+			recipients.push({
+				name: 'Michaela Hyndman',
+				email: 'michaela.hyndman@chameleon-uk.com'
+			},{
+				name: 'Mark Stevens',
+				email: 'mark.stevens@chameleon-uk.com'
+			},{
+				name: 'Janet Nelson',
+				email: 'janet.nelson@chameleon-uk.com'
+			});
+		}
+
+
+		if (req.param('digProj') === 'Digital Project') {
+			recipients.push({
+				name: 'Michaela Hyndman',
+				email: 'michaela.hyndman@chameleon-uk.com'
+			},{
+				name: 'Kat Smith',
+				email: 'kat.smith@chameleon-uk.com'
+			},{
+				name: 'Daniel Petroff',
+				email: 'daniel.petroff@chameleon-uk.com'
+			});
+		}
+
+
+
+
 
 		mandrill('/messages/send', {
 			message: {
-				to: [{
-					name: 'Michaela Hyndman',
-					email: 'michaela.hyndman@chameleon-uk.com'
-				},{
-					name: 'Dillon Lee',
-					email: 'dillon.lee@chameleon-uk.com',
-					type: 'bcc'
-				}],
+				to: recipients,
 				from_name: 'Request Form',
 				from_email: 'admin@chameleon-web.com',
 				html: msg,

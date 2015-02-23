@@ -189,6 +189,7 @@
 	    				name="office"
 	    				ng-model="form.office" 
 	    				ng-class="{'invalid' : request_form.office.$invalid}"
+	    				required
 	    				>
 							<option value="London">London</option>
 							<option value="Manchester">Manchester</option>
@@ -225,14 +226,14 @@
 
 			  			<label class="radio-inline">
 			  				<div class="radio-icon" ng-class="{'active' : request_form.budget.$valid}">
-								<div class="checked-radio-icon" ng-class="{'active': form.budget == 'Budget in paprika'}"></div>
+								<div class="checked-radio-icon" ng-class="{'active': form.budget == 'Budget in Paprika'}"></div>
 							</div>
 							<input 
 							type="radio" 
 							id="bud-pap"
 		    				name="budget"
 		    				ng-model="form.budget" 
-							value="Budget in paprika"> Budget in Paprika
+							value="Budget in Paprika"> Budget in Paprika
 						</label>
 
 				  		<label class="radio-inline">
@@ -261,9 +262,10 @@
 
 			  		</div>
 			  	</div>
+			  	
+			  	</div>
 
 			  	<hr>
-
 
 			  	<h3 class="title sub-title" id="formTypeOfProject">Type Of Project</h3>
 
@@ -279,7 +281,9 @@
 							id="des-proj"
 		    				name="des_proj"
 		    				ng-model="form.desProj" 
-							ng-true-value="'Design Project'"> Design Project
+							ng-true-value="'Design Project'"
+							ng-required="!(form.typeProj || form.digProj)"
+							> Design Project
 						</label>
 
 				  		<label class="checkbox-inline">
@@ -291,7 +295,9 @@
 							id="type-proj"
 		    				name="type_proj"
 		    				ng-model="form.typeProj"  
-							ng-true-value="'Typesetting Project'"> Typesetting Project
+							ng-true-value="'Typesetting Project'"
+							ng-required="!(form.desProj || form.digProj)"
+							> Typesetting Project
 						</label>
 
 						<label class="checkbox-inline">
@@ -303,11 +309,12 @@
 							id="dig-proj"
 		    				name="dig_proj"
 		    				ng-model="form.digProj"  
-							ng-true-value="'Digital Project'"> Digital Project
+							ng-true-value="'Digital Project'"
+							ng-required="!(form.typeProj || form.desProj)"
+							> Digital Project
 						</label>
 
 			  		</div>
-			  	</div>
 			  	</div>
 				
 			</div>	<!-- form-section -->
@@ -337,9 +344,23 @@
 				<div class="form-group">
 
 					<div class="col-md-12">
-						<label id="taskDescTitle" style="margin-right:10px;">Is this part of a set with multiple pieces</label>
+						<label id="taskDescTitle" style="margin-right:10px;">Are there any other creative deliverables for this project</label>
 
-	    				<label for="yes-multiple" class="radio-inline">
+						<label class="checkbox-inline">
+							<div class="checkbox-icon" ng-class="{'active' : request_form.multiple_pieces.$valid}">
+								<div class="checked-checkbox-icon" ng-class="{'active': form.multiplePieces}"></div>
+							</div>
+							<input 
+							type="checkbox" 
+							id="multiple-pieces"
+							name="multiple_pieces"
+		    				ng-model="form.multiplePieces" 
+							ng-true-value="'Multiple pieces'" 
+							> Yes
+						</label>
+
+
+	    				<!-- <label for="yes-multiple" class="radio-inline">
 							<div class="radio-icon" ng-class="{'active' : request_form.multiple_pieces.$valid}">
 								<div class="checked-radio-icon" ng-class="{'active': form.multiplePieces == 'Multiple pieces'}"></div>
 							</div>
@@ -363,7 +384,7 @@
 							ng-model="form.multiplePieces"
 							value="Single piece"
 							ng-required="!(form.multiplePieces === 'Multiple pieces')"> No
-						</label>
+						</label> -->
 					</div>
 					
 				</div>
@@ -559,7 +580,7 @@
 							id="asap"
 		    				name="asap"
 		    				ng-model="form.asap"  
-							ng-true-value="'ASAP'"> ASAP (Please speak to Creative Lead before selecting)
+							ng-true-value="'ASAP'"> ASAP (Please speak to Mark or Sandra before selecting)
 						</label>
 					</div>
 				</div>
@@ -633,8 +654,8 @@
 							id="creative-design-con"
 		    				name="creative_design_con"
 		    				ng-model="form.creativeDesignCon" 
-		    				ng-true-value="'Creative Design Concept'"
-							> Creative Design Concept
+		    				ng-true-value="'Creative/Design Concept'"
+							> Creative/Design Concept
 						</label>
 
 						<label class="checkbox-inline">
@@ -752,7 +773,8 @@
 							id="where-used-dig-app"
 		    				name="where_used_dig_app"
 		    				ng-model="form.whereUsedDigApp" 
-							ng-true-value="'Digital Application'"> Digital Application
+							ng-true-value="'Digital Application'"
+							> Digital Application
 						</label>
 
 						<label class="checkbox-inline">
@@ -764,7 +786,8 @@
 							id="where-used-print"
 		    				name="where_used_print"
 		    				ng-model="form.whereUsedPrint"
-							ng-true-value="'Print'"> Print
+							ng-true-value="'Print'"
+							> Print
 						</label>
 					</div>
 				</div>
@@ -775,7 +798,7 @@
 				<h3 class="title sub-title" id="brandingTitle">Branding</h3>
 
 				<div class="form-group">
-					<div class="col-md-12">
+					<div class="col-md-12 form-inline">
 						<label class="checkbox-inline">
 							<div class="checkbox-icon" ng-class="{'active' : request_form.branded.$valid}">
 								<div class="checked-checkbox-icon" ng-class="{'active': form.branded}"></div>
@@ -800,7 +823,7 @@
 							ng-true-value="'Unbranded'"> Unbranded
 						</label>
 
-						<label class="checkbox-inline">
+						<!-- <label class="checkbox-inline">
 							<div class="checkbox-icon" ng-class="{'active' : request_form.soft_branded.$valid}">
 								<div class="checked-checkbox-icon" ng-class="{'active': form.softBranded}"></div>
 							</div>
@@ -811,8 +834,8 @@
 		    				ng-model="form.softBranded" 
 							ng-true-value="'Soft Branded'"> Soft Branded
 						</label>
-
-						<label class="checkbox-inline">
+ -->
+						<!-- <label class="checkbox-inline">
 							<div class="checkbox-icon" ng-class="{'active' : request_form.branded_other.$valid}">
 								<div class="checked-checkbox-icon" ng-class="{'active': form.brandedOther}"></div>
 							</div>
@@ -822,7 +845,15 @@
 		    				name="branded_other"
 		    				ng-model="form.brandedOther" 
 							ng-true-value="'Other'"> Other
-						</label>
+						</label> -->
+
+						<input 
+						type="text" 
+						placeholder="Other"
+						class="form-control otherType" 
+						name="branded_other"
+						id="branded-other"
+						ng-model="form.brandedOther">
 
 					</div>
 				</div>
@@ -891,8 +922,8 @@
 						id="extension"
 	    				name="extension"
 	    				ng-model="selectedExtension">
-						  <option>Image for PPT</option>
-						  <option>Vector File</option>
+						  <option>Image for PPT (.jpg, .png)</option>
+						  <option>Vector File (.eps, .ai)</option>
 						  <option>PDF</option>
 						  <option>Hi-res image for print</option>
 						</select>
@@ -908,29 +939,35 @@
 						<label for="dimension">Dimensions</label>
 						<select 
 						class="form-control" 
-						ng-change="extAdd('dimensions','selectedDimension')"
 						id="dimension"
 	    				name="dimension"
+	    				ng-change="dimensionCheck()"
 	    				ng-model="selectedDimension">
-						  <option>US Letter</option>
-						  <option>US Tabloid</option>
 						  <option>A5 (UK)</option>
 						  <option>A5 (UK)</option>
 						  <option>A4 (UK)</option>
 						  <option>A3 (UK)</option>
 						  <option>A2 (UK)</option>
 						  <option>A1 (UK)</option>
+						  <option>US Letter</option>
+						  <option>US Tabloid</option>
 						  <option>Mobile</option>
 						  <option>Tablet</option>
-						  <option>Desktop</option>
+						  <!-- <option>Desktop</option> -->
 						  <option>Other</option>
 						</select>
-						<ul class="delivery-list">
+						<!-- <ul class="delivery-list">
 							<li ng-repeat="dimension in form.dimensions track by $index">
 								{{dimension}}
 								<button type="button" class="close" aria-label="Close" ng-click="extRemove('dimensions',$index)"><span aria-hidden="true">&times;</span></button>
 							</li>
-						</ul>
+						</ul> -->
+						<input 
+						type="text"
+						class="form-control other-dimension"
+						ng-model="form.otherDimension"
+						ng-show="selectedDimension === 'Other'"
+						>
 					</div>
 
 					<div class="col-md-3">
@@ -956,7 +993,7 @@
 					<div class="col-md-3">
 						<label for="pages">Pages</label>
 						<input 
-						type="number" 
+						type="text" 
 						class="form-control" 
 						id="pages"
 	    				name="pages"
@@ -1036,7 +1073,7 @@
 
 		</div>
 
-		<div class="col-md-3">
+		<div class="col-md-3 hidden-xs hidden-sm">
 				<nav class="sidebar" data-spy="affix" data-offset-top="210">
 					<ul class="nav">
 						<li>

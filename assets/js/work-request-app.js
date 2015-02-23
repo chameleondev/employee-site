@@ -36,6 +36,12 @@ app.controller('FormCtrl',['$scope','$timeout','FileUploader',function($scope,$t
         $scope.form.encodedUploads.splice(index,1);
     };
 
+    $scope.dimensionCheck = function(){
+        if ($scope.selectedDimension !== 'Other') {
+            delete $scope.form.otherDimension;
+        }
+    };
+
 	$scope.submit = function(){
         $scope.openPopup = true;
 
@@ -207,22 +213,25 @@ app.directive('datePicker', function() {
                     return date.valueOf() < now.valueOf() ? 'disabled' : '';
                 }
             })
-				.on('changeDate',function(ev){
+			.on('changeDate',function(ev){
+
+				// get the property of the form object
+				var val = element.attr('ng-model').slice(5);
 
 
-					// get the property of the form object
-					var val = element.attr('ng-model').slice(5);
+				// apply the changes to the scope
+				scope.$apply(function(){
+					// set the value of the property
+					scope.form[val] = ev.target.value;
+				});
 
+				element.datepicker('hide');
+			
+			});
 
-					// apply the changes to the scope
-					scope.$apply(function(){
-						// set the value of the property
-						scope.form[val] = ev.target.value;
-					});
-
-					element.datepicker('hide');
-				
-				})
+            element.next().on('click',function(e){
+                element.datepicker('show');
+            });
 
         }
     };
