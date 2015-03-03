@@ -409,31 +409,7 @@
 				<h3 class="title sub-title" id="hoursForTaskTitle">Hours For This Task Only (<span>Not entire project</span>)</h3>
 
 				<div class="form-group">
-					<label for="inputEmail3" class="col-sm-1 control-label">Des</label>
-					<div class="col-sm-1">
-						<input 
-						type="text" 
-						class="form-control" 
-						id="des-hours"
-	    				name="des_hours"
-	    				ng-model="form.desHours"  
-						placeholder=""
-						ng-class="{'active' : request_form.need_est_hours.$invalid}">
-					</div>
-
-					<label for="inputEmail3" class="col-sm-1 control-label">sDes</label>
-					<div class="col-sm-1">
-						<input 
-						type="text" 
-						class="form-control" 
-						id="sdes-hours"
-	    				name="sdes_hours"
-	    				ng-model="form.sdesHours" 
-						placeholder=""
-						ng-class="{'active' : request_form.need_est_hours.$invalid}">
-					</div>
-
-					<label for="inputEmail3" class="col-sm-1 control-label">Studio</label>
+					<label for="studio-hours" class="col-sm-1 control-label">Studio</label>
 					<div class="col-sm-1">
 						<input 
 						type="text" 
@@ -445,7 +421,59 @@
 						ng-class="{'active' : request_form.need_est_hours.$invalid}">
 					</div>
 
-					<label for="inputEmail3" class="col-sm-1 control-label">CD</label>
+					<label for="des-hours" class="col-sm-1 control-label">Des</label>
+					<div class="col-sm-1">
+						<input 
+						type="text" 
+						class="form-control" 
+						id="des-hours"
+	    				name="des_hours"
+	    				ng-model="form.desHours"  
+						placeholder=""
+						ng-class="{'active' : request_form.need_est_hours.$invalid}">
+					</div>
+
+					<label for="sdes-hours" class="col-sm-1 control-label">sDes</label>
+					<div class="col-sm-1">
+						<input 
+						type="text" 
+						class="form-control" 
+						id="sdes-hours"
+	    				name="sdes_hours"
+	    				ng-model="form.sdesHours" 
+						placeholder=""
+						ng-class="{'active' : request_form.need_est_hours.$invalid}">
+					</div>
+
+					<label for="dig-des" class="col-sm-1 control-label">Digital Des</label>
+					<div class="col-sm-1">
+						<input 
+						type="text" 
+						class="form-control" 
+						id="dig-des"
+	    				name="dig_des"
+	    				ng-model="form.digDes" 
+						placeholder=""
+						ng-class="{'active' : request_form.need_est_hours.$invalid}">
+					</div>
+
+				</div>
+
+				<div class="form-group">
+					
+					<label for="des-dir" class="col-sm-1 control-label">Design Dir</label>
+					<div class="col-sm-1">
+						<input 
+						type="text" 
+						class="form-control" 
+						id="des-dir"
+	    				name="des_dir"
+	    				ng-model="form.desDir" 
+						placeholder=""
+						ng-class="{'active' : request_form.need_est_hours.$invalid}">
+					</div>
+
+					<label for="cd-hours" class="col-sm-1 control-label">CD</label>
 					<div class="col-sm-1">
 						<input 
 						type="text" 
@@ -457,7 +485,7 @@
 						ng-class="{'active' : request_form.need_est_hours.$invalid}">
 					</div>
 
-					<label for="inputEmail3" class="col-sm-1 control-label">GD</label>
+					<label for="gd-hours" class="col-sm-1 control-label">GD</label>
 					<div class="col-sm-1">
 						<input 
 						type="text" 
@@ -468,6 +496,7 @@
 						placeholder=""
 						ng-class="{'active' : request_form.need_est_hours.$invalid}">
 					</div>
+
 				</div>
 
 				<div class="form-group">
@@ -482,7 +511,7 @@
 		    				name="need_est_hours"
 		    				ng-model="form.needEstHours" 
 							ng-true-value="'Need an estimate'"
-							ng-required="((form.desHours + form.sdesHours + form.studioHours + form.cdHours + form.gdHours) < 1) || !form.desHours && !form.sdesHours && !form.studioHours && !form.cdHours && !form.gdHours"> Need an Estimate
+							ng-required="((form.desHours + form.sdesHours + form.studioHours + form.cdHours + form.gdHours + form.digDes + form.desDir) < 1) || !form.desHours && !form.sdesHours && !form.studioHours && !form.cdHours && !form.gdHours && !form.digDes && !form.desDir"> Need an Estimate
 						</label>
 					</div>
 				</div>

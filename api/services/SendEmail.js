@@ -8,6 +8,7 @@ module.exports = {
 		
 		var msg = '<b>Job Code</b>: '+req.param('jobCode')+'<br/>';
 
+		if(req.param('jobType')) msg+= '<b>Job Type:</b> '+req.param('jobType')+'<br/>';
 		if(req.param('client')) msg+= '<b>Client:</b> '+req.param('client')+'<br/>';
 		if(req.param('product')) msg+= '<b>Product:</b> '+req.param('product')+'<br/>';
 		if(req.param('projectTitle')) msg+= '<b>Project Title:</b> '+req.param('projectTitle')+'<br/>';
@@ -36,6 +37,8 @@ module.exports = {
 			if(req.param('studioHours')) msg+='Studio : '+req.param('studioHours')+' | ';
 			if(req.param('cdHours')) msg+='CD : '+req.param('cdHours')+' | ';
 			if(req.param('gdHours')) msg+='GD : '+req.param('gdHours')+' | ';
+			if(req.param('digDes')) msg+='Digital Des : '+req.param('digDes')+' | ';
+			if(req.param('desDir')) msg+='Design Dir : '+req.param('desDir')+' | ';
 		}
 		msg+='<br/>';
 

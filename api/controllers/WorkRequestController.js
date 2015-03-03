@@ -78,6 +78,7 @@ module.exports = {
 
 		var userObject = {
 			jobCode : req.param('jobCode'),
+			jobType : req.param('jobType'),
 			client : req.param('client'),
 			product : req.param('product'),
 			projectTitle : req.param('projectTitle'),
@@ -97,6 +98,8 @@ module.exports = {
 			sdesHours : req.param('sdesHours'),
 			cdHours : req.param('cdHours'),
 			gdHours : req.param('gdHours'),
+			digDes : req.param('digDes'),
+			desDir : req.param('desDir'),
 			mockup : req.param('mockup'),
 			creativeDesignCon : req.param('creativeDesignCon'),
 			video : req.param('video'),
@@ -142,9 +145,6 @@ module.exports = {
 			SendEmail.send(req,res);
 
 		});
-
-
-
 		
 
 	}
