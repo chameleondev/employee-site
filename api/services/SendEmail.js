@@ -161,6 +161,13 @@ module.exports = {
 			});
 		}
 
+		if(req.param('email')){
+			recipients.push({
+				email : req.param('email'),
+				type: 'cc'
+			});
+		}
+
 
 
 

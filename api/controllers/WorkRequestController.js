@@ -85,6 +85,7 @@ module.exports = {
 			accountPersonFname : req.param('accountPersonFname'),
 			formUser : req.param('formUser'),
 			office : req.param('office'),
+			email : req.param('email'),
 			generalDesc : req.param('generalDesc'),
 			budget : req.param('budget'),
 			desProj : req.param('desProj'),

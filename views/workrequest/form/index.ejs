@@ -160,7 +160,7 @@
 	    				name="account_person_fname"
 	    				ng-model="form.accountPersonFname" 
 	    				placeholder="Full Name"
-	    				required
+	    				ng-required="form.jobType === 'New Job'"
 	    				ng-class="{'invalid' : request_form.account_person_fname.$invalid}"
 	    				>
 					</div>
@@ -196,6 +196,18 @@
 							<option value="US">US</option>
 							<option value="Global">Global</option>
 	    				</select>
+					</div>
+
+					<div class="col-md-3">
+						<label for="email">Email (to recieve copy)</label>
+	    				<input 
+	    				type="text" 
+	    				class="form-control" 
+	    				id="email"
+	    				name="email"
+	    				ng-model="form.email" 
+	    				placeholder="Email Address"
+	    				>
 					</div>
 
 				</div>
