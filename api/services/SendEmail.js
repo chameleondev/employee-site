@@ -101,6 +101,9 @@ module.exports = {
 		if(req.param('asap')) msg+= 'ASAP <br />';
 
 		var recipients = [{
+			name: 'Sandra Herrera',
+			email: 'sandra.herrera@chameleon-uk.com'
+			},{
 			name: 'Dillon Lee',
 			email: 'dillon.lee@chameleon-uk.com',
 			type: 'bcc'
@@ -127,9 +130,6 @@ module.exports = {
 			},{
 				name: 'Mark Stevens',
 				email: 'mark.stevens@chameleon-uk.com'
-			},{
-				name: 'Sandra Herrera',
-				email: 'sandra.herrera@chameleon-uk.com'
 			});
 		}
 
@@ -138,9 +138,6 @@ module.exports = {
 			recipients.push({
 				name: 'Michaela Hyndman',
 				email: 'michaela.hyndman@chameleon-uk.com'
-			},{
-				name: 'Mark Stevens',
-				email: 'mark.stevens@chameleon-uk.com'
 			},{
 				name: 'Janet Nelson',
 				email: 'janet.nelson@chameleon-uk.com'
@@ -152,6 +149,9 @@ module.exports = {
 			recipients.push({
 				name: 'Michaela Hyndman',
 				email: 'michaela.hyndman@chameleon-uk.com'
+			},{
+				name: 'Mark Stevens',
+				email: 'mark.stevens@chameleon-uk.com'
 			},{
 				name: 'Kat Smith',
 				email: 'kat.smith@chameleon-uk.com'
