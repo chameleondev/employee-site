@@ -47,7 +47,7 @@ module.exports = function(grunt) {
 			options: {
 				startTag: '<!--SCRIPTS-->',
 				endTag: '<!--SCRIPTS END-->',
-				fileTmpl: '<script src="%s"></script>',
+				fileTmpl: '<script src="%s?v='+Math.random()+'"></script>',
 				appRoot: '.tmp/public'
 			},
 			files: {
@@ -107,7 +107,7 @@ module.exports = function(grunt) {
 			options: {
 				startTag: '<!--STYLES-->',
 				endTag: '<!--STYLES END-->',
-				fileTmpl: '<link rel="stylesheet" href="%s">',
+				fileTmpl: '<link rel="stylesheet" href="%s?v='+Math.random()+'">',
 				appRoot: '.tmp/public'
 			},
 			files: {
