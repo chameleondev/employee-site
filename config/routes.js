@@ -37,6 +37,8 @@ module.exports.routes = {
   // }
 
   '/': '/WorkRequest/form',
+  
+  '/WorkRequest': '/WorkRequest/form',
 
   // '/new/*': '/WorkRequest',
 
