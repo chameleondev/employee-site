@@ -1,8 +1,8 @@
 <!DOCTYPE html>
-<html lang="en" ng-app="WorkRequestForm">
+<html lang="en">
   <head>
     <meta charset="UTF-8">
-    <title><%= res.locals.title %></title>
+    <title>Work Request List</title>
 
     <!-- Viewport mobile tag for sensible mobile support -->
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
@@ -36,10 +36,10 @@
     <!--STYLES END-->
   </head>
 
-  <body <%= res.locals.bodyAttrs %>>
+  <body>
     
     
-    <div class="main-body container <%= res.locals.class %>" ng-cloak>
+    <div class="main-body container ">
     <%- body %>
     </div>
     
@@ -97,19 +97,9 @@
     <script src="/js/dependencies/sails.io.js"></script>
     <script src="/js/dependencies/jquery-1.11.2.min.js"></script>
     <script src="/js/dependencies/angular.min.js"></script>
-    <script src="/js/dependencies/angular-base64-upload.min.js"></script>
-    <script src="/js/dependencies/angular-file-upload.min.js"></script>
     <script src="/js/dependencies/bootstrap-datepicker.js"></script>
     <script src="/js/dependencies/bootstrap.min.js"></script>
     <script src="/js/app.js"></script>
     <script src="/js/work-request-app.js"></script>
-    <script src="/js/work-request-listCtrl.js"></script>
-    <!--SCRIPTS END-->
-
-    <script>
-      $('.sidebar').on('affix.bs.affix',function(){
-        $('.sidebar').css('width',$('.sidebar').width());
-      });
-    </script>
   </body>
 </html>

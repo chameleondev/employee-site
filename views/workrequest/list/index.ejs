@@ -1,0 +1,24 @@
+<h1>Work Request List</h1>
+
+<input type="search" ng-model="requestFilter" placeholder="Search">
+
+
+<div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+
+  <div class="panel panel-default" ng-repeat="request in requests | filter:requestFilter track by $index">
+    <div class="panel-heading" role="tab" id="{{request.id}}">
+      <h4 class="panel-title">
+        <a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#body{{request.id}}" aria-expanded="false" aria-controls="body{{request.id}}">
+          <b>Job Code</b> : {{request.jobCode}}  <b>Submtted by</b> : {{request.formUser}}
+        </a>
+      </h4>
+    </div>
+    <div id="body{{request.id}}" class="panel-collapse collapse" role="tabpanel" aria-labelledby="{{request.id}}">
+      <div class="panel-body">
+        Job Type : {{request.jobType}}
+      </div>
+    </div>
+  </div>
+
+
+</div>

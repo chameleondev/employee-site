@@ -524,7 +524,7 @@
 		    				name="need_est_hours"
 		    				ng-model="form.needEstHours" 
 							ng-true-value="'Need an estimate'"
-							ng-required="((form.desHours + form.sdesHours + form.studioHours + form.cdHours + form.gdHours + form.digDes + form.desDir) < 1) || !form.desHours && !form.sdesHours && !form.studioHours && !form.cdHours && !form.gdHours && !form.digDes && !form.desDir"> Need an Estimate
+							ng-required="((form.desHours + form.sdesHours + form.studioHours + form.cdHours + form.gdHours + form.digDes + form.desDir) < 0.5) || !form.desHours && !form.sdesHours && !form.studioHours && !form.cdHours && !form.gdHours && !form.digDes && !form.desDir"> Need an Estimate
 						</label>
 					</div>
 				</div>
@@ -1088,7 +1088,7 @@
 							<h3>Drop files here <i class="glyphicon glyphicon-upload"></i></h3>
 
 							<p class="pull-left">Total size: {{totalFileSize() | number:2}}mb </p>
-							<p ng-show="totalFileSize()>25" class="text-danger pull-right">File size must not exceed 25mb</p>
+							<p ng-show="totalFileSize()>15" class="text-danger pull-right">File size must not exceed 15mb</p>
 
 							  <!-- <ul>
 					            <li ng-repeat="item in uploader.queue">

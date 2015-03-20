@@ -8,15 +8,18 @@
 
 module.exports = {
 
-	index : function(req,res,next){
+	// index : function(req,res,next){
 
-		return res.redirect('WorkRequest/form');
+	// 	// return res.redirect('WorkRequest/form');
 
-	},
+	// },
 
 	form : function(req,res,next){
 
-		res.locals.layout = 'work-request-layout.ejs';
+		res.locals.layout = 'work-request-layout';
+		res.locals.title = 'Work Request Form';
+		res.locals.bodyAttrs = "data-spy=scroll data-target=nav.sidebar ng-controller=FormCtrl uploader=uploader nv-file-drop";
+		res.locals.class = 'work-request-form';
 
 
 		return res.view();
@@ -25,10 +28,16 @@ module.exports = {
 	list : function(req,res,next){
 
 		res.locals.layout = 'work-request-layout';
-
+		res.locals.title = 'Work Request List';
+		res.locals.bodyAttrs = 'ng-controller=listCtrl';
+		res.locals.class = 'work-request-list';
 
 		return res.view();
 	},
+
+	// find : function(req,res,next){
+	// 	return res.send('hello me');
+	// },
 
 	upload : function(req,res,next){
 

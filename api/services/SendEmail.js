@@ -39,8 +39,9 @@ module.exports = {
 			if(req.param('gdHours')) msg+='GD : '+req.param('gdHours')+' | ';
 			if(req.param('digDes')) msg+='Digital Des : '+req.param('digDes')+' | ';
 			if(req.param('desDir')) msg+='Design Dir : '+req.param('desDir')+' | ';
+			msg+='<br/>';
 		}
-		msg+='<br/>';
+		
 
 		msg+= '<b>Type Of Work:</b> ';
 		if(req.param('mockup')==='Mockup') msg+= req.param('mockup')+' | ';
@@ -101,12 +102,15 @@ module.exports = {
 		if(req.param('asap')) msg+= 'ASAP <br />';
 
 		var recipients = [{
-			name: 'Sandra Herrera',
-			email: 'sandra.herrera@chameleon-uk.com'
+				name: 'Sandra Herrera',
+				email: 'sandra.herrera@chameleon-uk.com'
 			},{
-			name: 'Dillon Lee',
-			email: 'dillon.lee@chameleon-uk.com',
-			type: 'bcc'
+				name: 'Michaela Hyndman',
+				email: 'michaela.hyndman@chameleon-uk.com'
+			},{
+				name: 'Dillon Lee',
+				email: 'dillon.lee@chameleon-uk.com',
+				type: 'bcc'
 		}];
 
 		if (req.param('office') === 'US') {
@@ -123,36 +127,24 @@ module.exports = {
 			});
 		}
 
-		if (req.param('desProj') === 'Design Project') {
-			recipients.push({
-				name: 'Michaela Hyndman',
-				email: 'michaela.hyndman@chameleon-uk.com'
-			},{
-				name: 'Mark Stevens',
-				email: 'mark.stevens@chameleon-uk.com'
-			});
-		}
-
 
 		if (req.param('typeProj') === 'Typesetting Project') {
 			recipients.push({
-				name: 'Michaela Hyndman',
-				email: 'michaela.hyndman@chameleon-uk.com'
-			},{
 				name: 'Janet Nelson',
 				email: 'janet.nelson@chameleon-uk.com'
+			});
+		}
+
+		if (req.param('desProj') === 'Design Project' || req.param('digProj') === 'Digital Project') {
+			recipients.push({
+				name: 'Mark Stevens',
+				email: 'mark.stevens@chameleon-uk.com'
 			});
 		}
 
 
 		if (req.param('digProj') === 'Digital Project') {
 			recipients.push({
-				name: 'Michaela Hyndman',
-				email: 'michaela.hyndman@chameleon-uk.com'
-			},{
-				name: 'Mark Stevens',
-				email: 'mark.stevens@chameleon-uk.com'
-			},{
 				name: 'Kat Smith',
 				email: 'kat.smith@chameleon-uk.com'
 			},{
