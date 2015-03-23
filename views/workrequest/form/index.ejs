@@ -978,14 +978,13 @@
 					</div>
 
 					<div class="col-md-3">
-						<label for="dimension">Dimensions</label>
+						<label for="selected-dimension">Dimensions</label>
 						<select 
 						class="form-control" 
-						id="dimension"
-	    				name="dimension"
+						id="selected-dimension"
+	    				name="selected_dimension"
 	    				ng-change="dimensionCheck()"
-	    				ng-model="selectedDimension">
-						  <option>A5 (UK)</option>
+	    				ng-model="form.selectedDimension">
 						  <option>A5 (UK)</option>
 						  <option>A4 (UK)</option>
 						  <option>A3 (UK)</option>
@@ -1008,7 +1007,7 @@
 						type="text"
 						class="form-control other-dimension"
 						ng-model="form.otherDimension"
-						ng-show="selectedDimension === 'Other'"
+						ng-show="form.selectedDimension === 'Other'"
 						>
 					</div>
 

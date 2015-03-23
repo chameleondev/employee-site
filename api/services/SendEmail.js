@@ -80,13 +80,17 @@ module.exports = {
 			msg+='<br/>';
 		}
 
-		if (req.param('dimensions')) {
-			msg+= '<b>Dimensions:</b> ';
-			for (var i = 0; i < req.param('dimensions').length; i++) {
-				msg+= req.param('dimensions')[i]+' | ';
-			}
-			msg+='<br/>';
-		}
+		// if (req.param('dimensions')) {
+		// 	msg+= '<b>Dimensions:</b> ';
+		// 	for (var i = 0; i < req.param('dimensions').length; i++) {
+		// 		msg+= req.param('dimensions')[i]+' | ';
+		// 	}
+		// 	msg+='<br/>';
+		// }
+
+		if (req.param('selectedDimension')) msg+= '<b>Dimension:</b> '+req.param('selectedDimension')+'<br/>';
+
+
 
 		if (req.param('orientations')) {
 			msg+= '<b>Orientations:</b> ';

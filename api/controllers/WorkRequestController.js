@@ -130,7 +130,7 @@ module.exports = {
 			lookAndFeel : req.param('lookAndFeel'),
 			scientificBackground : req.param('scientificBackground'),
 			extensions : req.param('extensions'),
-			dimensions : req.param('dimensions'),
+			selectedDimension : req.param('selectedDimension'),
 			orientations : req.param('orientations'),
 			pages : req.param('pages'),
 			firstDraftBy : req.param('firstDraftBy'),
