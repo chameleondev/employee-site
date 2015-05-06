@@ -26,7 +26,7 @@ module.exports = {
 
 		if(req.param('taskDesc')) msg+= '<b>Task Description:</b> '+req.param('taskDesc')+'<br/>';
 		if(req.param('multiplePieces') ==='Multiple Pieces') msg+= '<b>Pieces:</b> '+req.param('multiplePieces')+'<br/>';
-		if(req.param('explainPiece')) msg+= '<b>Explain Piece:</b> '+req.param('explainPiece')+'<br/>';
+		if(req.param('explainPiece')) msg+= '<b>Other deliverables associated with this job:</b> '+req.param('explainPiece')+'<br/>';
 
 		msg+= '<b>Hours For Task:</b> ';
 		if(req.param('needEstHours')==='Need an estimate') {
