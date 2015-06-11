@@ -39,6 +39,7 @@ module.exports.routes = {
   '/': '/WorkRequest/form',
   
   '/WorkRequest': '/WorkRequest/form',
+  '/WorkRequest/form/list': '/WorkRequest/form/list?skip=5&limit=10',
 
   // '/new/*': '/WorkRequest',
 

@@ -5,7 +5,7 @@
 
 <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
 
-  <div class="panel panel-default" ng-repeat="request in requests | filter:requestFilter track by $index">
+<!--   <div class="panel panel-default" ng-repeat="request in requests | filter:requestFilter track by $index">
     <div class="panel-heading" role="tab" id="{{request.id}}">
       <h4 class="panel-title">
         <a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#body{{request.id}}" aria-expanded="false" aria-controls="body{{request.id}}">
@@ -18,7 +18,28 @@
         Job Type : {{request.jobType}}
       </div>
     </div>
-  </div>
+  </div> -->
+  <h1>
+    Total Jobs : <%= totalJobs %>
+  </h1>  
+  <ul>
+
+  <% for(var i = 0;jobs.length > i; i++){ %>
+
+    <li> <% i %> : <%= jobs[i].id %></li>
+
+  <% } %> 
+  </ul>
+
+  <a href="/WorkRequest/list/?page=<%= page - 1 %>">
+    <button>Previous <</button>
+  </a>
+  
+  <a href="/WorkRequest/list/?page=<%= page + 1 %>">
+    <button>Next ></button>
+  </a>
+  
+
 
 
 </div>

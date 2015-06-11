@@ -27,12 +27,37 @@ module.exports = {
 
 	list : function(req,res,next){
 
+		// var skip = 	req.param('skip') || 10;
+		var limit = req.param('limit') || 20;
+		var page = 	parseInt(req.param('page')) || 1;
+		
 		res.locals.layout = 'work-request-layout';
 		res.locals.title = 'Work Request List';
 		res.locals.bodyAttrs = 'ng-controller=listCtrl';
 		res.locals.class = 'work-request-list';
+		res.locals.page = page;
 
-		return res.view();
+		WorkRequest.count()
+		.exec(function(err, results){
+
+			res.locals.totalJobs = results;
+		});
+
+		WorkRequest.find()
+		// .limit(limit)
+		// .skip(skip)
+		.paginate({page: page, limit: limit})
+		.exec(function(err, results){
+
+			if (err) {
+				return next(err);
+			}
+
+			res.locals.jobs = results;
+
+			return res.view();
+		});
+
 	},
 
 	// find : function(req,res,next){
