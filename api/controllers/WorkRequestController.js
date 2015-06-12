@@ -27,36 +27,70 @@ module.exports = {
 
 	list : function(req,res,next){
 
-		// var skip = 	req.param('skip') || 10;
+		var skip = 	parseInt(req.param('skip')) || 0;
 		var limit = req.param('limit') || 20;
-		var page = 	parseInt(req.param('page')) || 1;
+		// var page = 	parseInt(req.param('page')) || 1;
+		var search = req.param('search') || null;
 		
 		res.locals.layout = 'work-request-layout';
 		res.locals.title = 'Work Request List';
 		res.locals.bodyAttrs = 'ng-controller=listCtrl';
 		res.locals.class = 'work-request-list';
-		res.locals.page = page;
+		// res.locals.page = page;
+		res.locals.skip = skip;
+		res.locals.search = req.param('search');
 
-		WorkRequest.count()
-		.exec(function(err, results){
+		if (search) {
 
-			res.locals.totalJobs = results;
-		});
+				WorkRequest.find()
+				.where({
+					or : [
+						{jobCode :{'contains' : search}},
+						{client :{'contains' : search}},
+					]
+				})
+				.exec(function(err, results){
 
-		WorkRequest.find()
-		// .limit(limit)
-		// .skip(skip)
-		.paginate({page: page, limit: limit})
-		.exec(function(err, results){
+					if (err) {
+						return next(err);
+					}
 
-			if (err) {
-				return next(err);
-			}
+					res.locals.totalJobs = results.length;
+					res.locals.totalPages =  Math.round(res.locals.totalJobs / 20);
+					res.locals.currentPage =  skip / limit + 1 ;
+					res.locals.jobs = results.slice(skip,skip+20);
+					
+					
+					return res.view();
+				});
 
-			res.locals.jobs = results;
+		} else {
 
-			return res.view();
-		});
+				WorkRequest.count()
+				.exec(function(err, results){
+
+					res.locals.totalJobs = results;
+					res.locals.totalPages =  Math.round(res.locals.totalJobs / limit);
+
+				});
+
+				WorkRequest.find()
+				.limit(limit)
+				.skip(skip)
+				.exec(function(err, results){
+
+					if (err) {
+						return next(err);
+					}
+
+					res.locals.currentPage =  skip / limit + 1;
+
+					res.locals.jobs = results;
+					
+					return res.view();
+				});
+		}
+
 
 	},
 
