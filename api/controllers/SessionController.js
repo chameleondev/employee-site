@@ -10,6 +10,8 @@ var bcrypt = require('bcrypt');
 module.exports = {
 
 	'new' : function(req,res,next){
+
+		res.locals.layout = 'session/session-layout';
 		
 		// sets time for authenticated session to expireafter 60 seconds
 		// var oldDateObj = new Date();

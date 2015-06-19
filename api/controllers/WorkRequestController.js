@@ -216,6 +216,27 @@ module.exports = {
 		});
 		
 
+	},
+
+	destroy : function(req,res,next){
+
+		WorkRequest.findOne(req.param('id'), function foundRequest(err,job){
+			console.log(req);
+			console.log(job);
+
+			if(err) return next(err);
+			if(!job) return next('Request doesn\'t exist.');
+
+			WorkRequest.destroy(req.param('id'),function jobDestroyed(err){
+				if(err) return next(err);
+
+				res.send(req.param('id')+' deleted successfully');
+			});
+
+			
+
+		});
+
 	}
 
 

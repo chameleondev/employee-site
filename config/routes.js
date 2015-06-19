@@ -43,7 +43,7 @@ module.exports.routes = {
 
   // '/new/*': '/WorkRequest',
 
-  '/session/*': '/WorkRequest'
+  // '/session/*': '/WorkRequest'
 
   /***************************************************************************
   *                                                                          *
