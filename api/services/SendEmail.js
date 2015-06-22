@@ -15,7 +15,7 @@ module.exports = {
 		if(req.param('accountPersonFname')) msg+= '<b>Account Person:</b> '+req.param('accountPersonFname')+'<br/>';
 		if(req.param('formUser')) msg+= '<b>Form Submitted by:</b> '+req.param('formUser')+'<br/>';
 		if(req.param('office')) msg+= '<b>Office:</b> '+req.param('office')+'<br/>';
-		if(req.param('generalDesc')) msg+= '<b>General Description:</b> '+req.param('generalDesc')+'<br/>';
+		// if(req.param('generalDesc')) msg+= '<b>General Description:</b> '+req.param('generalDesc')+'<br/>';
 		if(req.param('budget')) msg+= '<b>Budget:</b> '+req.param('budget')+'<br/>';
 
 		msg+= '<b>Type Of Project:</b> ';
@@ -52,6 +52,10 @@ module.exports = {
 		if(req.param('logo')==='Logo') msg+= req.param('logo')+' | ';
 		if(req.param('figureRedraws')==='Figure Redraws') msg+= req.param('figureRedraws')+' | ';
 		if(req.param('layout')==='Layout') msg+= req.param('layout')+' | ';
+		if(req.param('medicalIllustrations')==='Medical Illustrations') msg+= req.param('medicalIllustrations')+' | ';
+		if(req.param('medicalPresentations')==='Medical Presentations') msg+= req.param('medicalPresentations')+' | ';
+		if(req.param('infographics')==='Infographics') msg+= req.param('infographics')+' | ';
+		if(req.param('ibook')==='iBook') msg+= req.param('ibook')+' | ';
 		if(req.param('presentedOther')) msg+= 'Other : ' + req.param('presentedOther')+' | ';
 		msg+='<br/>';
 
@@ -104,6 +108,7 @@ module.exports = {
 		if(req.param('firstDraftBy') || req.param('firstDraftByTime')) msg+= '<b>First draft by:</b> '+req.param('firstDraftBy').toString()+' '+ req.param('firstDraftByTime')+'<br/>';
 		if(req.param('finalDeliveryDate') || req.param('finalDeliveryDateTime')) msg+= '<b>Final delivery date:</b> '+req.param('finalDeliveryDate').toString()+' '+ req.param('finalDeliveryDateTime')+'<br/>';
 		if(req.param('asap')) msg+= 'ASAP <br />';
+		if(req.param('serverLoc')) msg+= '<b>Server location:</b> '+req.param('serverLoc')+' <br />';
 
 		var recipients = [{
 				name: 'Sandra Herrera',

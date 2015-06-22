@@ -95,7 +95,7 @@ module.exports = {
 			formUser : req.param('formUser'),
 			office : req.param('office'),
 			email : req.param('email'),
-			generalDesc : req.param('generalDesc'),
+			// generalDesc : req.param('generalDesc'),
 			budget : req.param('budget'),
 			desProj : req.param('desProj'),
 			digProj : req.param('digProj'),
@@ -138,7 +138,12 @@ module.exports = {
 			finalDeliveryDate : req.param('finalDeliveryDate'),
 			finalDeliveryDateTime : req.param('finalDeliveryDateTime'),
 			asap : req.param('asap'),
-			uploadPaths : req.param('uploadPaths')
+			uploadPaths : req.param('uploadPaths'),
+			serverLoc : req.param('serverLoc'),
+			medicalIllustrations : req.param('medicalIllustrations'),
+			medicalPresentations : req.param('medicalPresentations'),
+			infographics : req.param('infographics'),
+			ibook : req.param('ibook')
 		};
 
 

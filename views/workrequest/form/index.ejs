@@ -84,7 +84,7 @@
 						name="job_type"
 						ng-model="form.jobType" 
 						value="New Job"
-						ng-required="!(form.jobType === 'Existing Job')"> New Job
+						ng-required="form.jobType !== 'Existing Job' || form.jobType !== 'Editorial Amends'"> New Job
 					</label>
 
 					<label for="existing-job" class="radio-inline">
@@ -97,15 +97,85 @@
 						name="job_type"
 						ng-model="form.jobType"
 						value="Existing Job"
-						ng-required="!(form.jobType === 'New Job')"> Previously Submitted Job
+						ng-required="form.jobType !== 'New Job' || form.jobType !=='Editorial Amends'"> Previously Submitted Job
 					</label>
+
+					
 				</div>
 
+				<div class="form-group">
+					<div class="col-sm-6 col-sm-offset-6 no-gutter">
+						
+						<label for="editorial-amends" class="radio-inline">
+						<div class="radio-icon" ng-class="{'active' : request_form.job_type.$valid}">
+							<div class="checked-radio-icon" ng-class="{'active': form.jobType == 'Editorial Amends'}"></div>
+						</div>
+						<input 
+						type="radio" 
+						id="editorial-amends" 
+						name="job_type"
+						ng-model="form.jobType"
+						value="Editorial Amends"
+						ng-required="form.jobType !== 'New Job' || form.jobType !=='Existing Job'"> Editorial Amends
+					</label>
+					</div>	
+				</div>
+
+				<div class="form-group">
+
+					<div class="col-md-6">
+						<label for="form-user">Person submitting this request (if not Account Lead)</label>
+	    				<input 
+	    				type="text" 
+	    				class="form-control" 
+	    				id="form-user"
+	    				name="form_user"
+	    				ng-model="form.formUser" 
+	    				placeholder="Full Name"
+	    				ng-required="form.jobType !== 'Editorial Amends'"
+	    				>
+					</div>
+
+					<div class="col-md-3">
+						<label for="office">Office</label>
+	    				<select 
+	    				class="form-control" 
+	    				id="office"
+	    				name="office"
+	    				ng-model="form.office" 
+	    				ng-class="{'invalid' : request_form.office.$invalid}"
+	    				ng-required="form.jobType !== 'Editorial Amends'"
+	    				>
+							<option value="London">London</option>
+							<option value="Manchester">Manchester</option>
+							<option value="US">US</option>
+							<option value="Global">Global</option>
+	    				</select>
+					</div>
+
+					<div class="col-md-3">
+						<label for="email">Email (to receive copy)</label>
+	    				<input 
+	    				type="email" 
+	    				class="form-control" 
+	    				id="email"
+	    				name="email"
+	    				ng-model="form.email" 
+	    				placeholder="Email Address"
+	    				ng-required="form.jobType !== 'Editorial Amends'"
+	    				>
+					</div>
+
+				</div>
+
+				<div ng-hide="form.jobType === 'Editorial Amends'">
+
+				<div class="form-group" ng-show="form.jobType === 'New Job'">
 				<hr>
+				
 
 				<h3 class="title sub-title" id="formProjectInfo">Project Info</h3>
 
-				<div class="form-group" ng-show="form.jobType === 'New Job'">
 					
 					<div class="col-md-6">
 						<label for="client">Client</label>
@@ -115,7 +185,8 @@
 	    				id="client"
 	    				name="client"
 	    				ng-model="form.client"
-	    				placeholder="e.g Bayer">
+	    				placeholder="e.g Bayer"
+	    				ng-required="form.jobType === 'New Job'">
 					</div>
 
 					<div class="col-md-6">
@@ -126,7 +197,8 @@
 	    				id="product"
 	    				name="product"
 	    				ng-model="form.product" 
-	    				placeholder="e.g Xarelto">
+	    				placeholder="e.g Xarelto"
+	    				ng-required="form.jobType === 'New Job'">
 					</div>
 
 				</div>
@@ -141,7 +213,8 @@
 	    				id="project-title"
 	    				name="project_title"
 	    				ng-model="form.projectTitle" 
-	    				placeholder="e.g Xarelto Brand Plan Presentation">
+	    				placeholder="e.g Xarelto Brand Plan Presentation"
+	    				ng-required="form.jobType === 'New Job'">
 					</div>
 					
 				</div>
@@ -167,55 +240,11 @@
 
 				</div>
 
-				<div class="form-group">
 
-					<div class="col-md-6">
-						<label for="form-user">Person submitting this request (if not Account Lead)</label>
-	    				<input 
-	    				type="text" 
-	    				class="form-control" 
-	    				id="form-user"
-	    				name="form_user"
-	    				ng-model="form.formUser" 
-	    				placeholder="Full Name"
-	    				>
-					</div>
-
-					<div class="col-md-3">
-						<label for="office">Office</label>
-	    				<select 
-	    				class="form-control" 
-	    				id="office"
-	    				name="office"
-	    				ng-model="form.office" 
-	    				ng-class="{'invalid' : request_form.office.$invalid}"
-	    				required
-	    				>
-							<option value="London">London</option>
-							<option value="Manchester">Manchester</option>
-							<option value="US">US</option>
-							<option value="Global">Global</option>
-	    				</select>
-					</div>
-
-					<div class="col-md-3">
-						<label for="email">Email (to receive copy)</label>
-	    				<input 
-	    				type="email" 
-	    				class="form-control" 
-	    				id="email"
-	    				name="email"
-	    				ng-model="form.email" 
-	    				placeholder="Email Address"
-	    				required
-	    				>
-					</div>
-
-				</div>
 				
 
 				<div ng-show="form.jobType === 'New Job'">
-				<div class="form-group">
+				<!-- <div class="form-group">
 
 					<div class="col-md-12">
 						<label for="general-desc">General Project Description</label>
@@ -228,7 +257,7 @@
 	    				placeholder="e.g Xarelto Brand Plan Presentation"></textarea>
 					</div>
 					
-				</div>
+				</div> -->
 
 				<hr>
 
@@ -280,6 +309,10 @@
 
 			  	<hr>
 
+			  	
+
+
+
 			  	<h3 class="title sub-title" id="formTypeOfProject">Type Of Project</h3>
 
 			  	<div class="form-group">
@@ -295,7 +328,7 @@
 		    				name="des_proj"
 		    				ng-model="form.desProj" 
 							ng-true-value="'Design Project'"
-							ng-required="!(form.typeProj || form.digProj)"
+							ng-required="!(form.typeProj || form.digProj) && form.jobType !== 'Editorial Amends'"
 							> Design Project
 						</label>
 
@@ -309,7 +342,7 @@
 		    				name="type_proj"
 		    				ng-model="form.typeProj"  
 							ng-true-value="'Typesetting Project'"
-							ng-required="!(form.desProj || form.digProj)"
+							ng-required="!(form.desProj || form.digProj) && form.jobType !== 'Editorial Amends'"
 							> Typesetting Project
 						</label>
 
@@ -323,16 +356,20 @@
 		    				name="dig_proj"
 		    				ng-model="form.digProj"  
 							ng-true-value="'Digital Project'"
-							ng-required="!(form.typeProj || form.desProj)"
+							ng-required="!(form.typeProj || form.desProj) && form.jobType !== 'Editorial Amends'"
 							> Digital Project
 						</label>
 
 			  		</div>
 			  	</div>
+
+			  	</div> <!-- ng-hide if editorial amends -->
 				
 			</div>	<!-- form-section -->
 
-			<div class="form-section instructions">
+		
+
+			<div class="form-section instructions" ng-hide="form.jobType === 'Editorial Amends'">
 
 				<h2 class="title section-title" id="formSection2">
 					<span class="title-icon title2-icon"></span>
@@ -524,7 +561,7 @@
 		    				name="need_est_hours"
 		    				ng-model="form.needEstHours" 
 							ng-true-value="'Need an estimate'"
-							ng-required="((form.desHours + form.sdesHours + form.studioHours + form.cdHours + form.gdHours + form.digDes + form.desDir) < 0.5) || !form.desHours && !form.sdesHours && !form.studioHours && !form.cdHours && !form.gdHours && !form.digDes && !form.desDir"> Need an Estimate
+							ng-required="((form.desHours + form.sdesHours + form.studioHours + form.cdHours + form.gdHours + form.digDes + form.desDir) < 0.5) || !form.desHours && !form.sdesHours && !form.studioHours && !form.cdHours && !form.gdHours && !form.digDes && !form.desDir && form.jobType !== 'Editorial Amends'"> Need an Estimate
 						</label>
 					</div>
 				</div>
@@ -542,7 +579,7 @@
 
 				<h3 class="title sub-title" id="deliveryDateTitle">Delivery Date</h3>
 
-				<div class="form-group">
+				<div class="form-group" ng-hide="form.jobType === 'Editorial Amends'">
 					<label for="first-draft-by" class="col-sm-2 control-label">First draft by</label>
 					<div class="col-sm-4">
 						<div class="input-group">
@@ -631,7 +668,7 @@
 			</div>	<!-- form-section -->
 
 
-			<div class="form-section">
+			<div class="form-section" ng-hide="form.jobType === 'Editorial Amends'">
 
 				<h2 class="title section-title" id="formSection3">
 					<span class="title-icon title3-icon"></span>
@@ -640,7 +677,7 @@
 
 				<h3 class="title sub-title" id="typeOfBriefTitle">Type of brief</h3>
 
-				<label class="checkbox-inline">
+				<label class="  checkbox-inline">
 					<div class="checkbox-icon" ng-class="{'active' : request_form.creative_brief.$valid || form.techSpec}">
 						<div class="checked-checkbox-icon" ng-class="{'active': form.creativeBrief}"></div>
 					</div>
@@ -650,7 +687,7 @@
 					name="creative_brief"
     				ng-model="form.creativeBrief" 
 					ng-true-value="'Creative Brief'" 
-					ng-required="!form.techSpec"> Creative Brief
+					ng-required="!form.techSpec && form.jobType !== 'Editorial Amends'"> Creative Brief
 				</label>
 
 				<label class="checkbox-inline">
@@ -663,7 +700,7 @@
 					name="tech_spec"
     				ng-model="form.techSpec" 
 					ng-true-value="'Technical Specification'"
-					ng-required="!form.creativeBrief"> Technical Specification
+					ng-required="!form.creativeBrief && form.jobType !== 'Editorial Amends'"> Technical Specification
 				</label>
 
 				<div ng-show="form.creativeBrief === 'Creative Brief'">
@@ -762,6 +799,54 @@
 		    				name="layout"
 		    				ng-model="form.layout" 
 							ng-true-value="'Layout'"> Layout
+						</label>
+
+						<label class="checkbox-inline">
+							<div class="checkbox-icon" ng-class="{'active' : request_form.medical_illustrations.$valid}">
+								<div class="checked-checkbox-icon" ng-class="{'active': form.medicalIllustrations}"></div>
+							</div>
+							<input 
+							type="checkbox" 
+							id="medical-illustrations"
+		    				name="medical_illustrations"
+		    				ng-model="form.medicalIllustrations" 
+							ng-true-value="'Medical Illustrations'"> Medical Illustrations
+						</label>
+
+						<label class="checkbox-inline">
+							<div class="checkbox-icon" ng-class="{'active' : request_form.medical_presentations.$valid}">
+								<div class="checked-checkbox-icon" ng-class="{'active': form.medicalPresentations}"></div>
+							</div>
+							<input 
+							type="checkbox" 
+							id="medical-presentations"
+		    				name="medical_presentations"
+		    				ng-model="form.medicalPresentations" 
+							ng-true-value="'Medical Presentations'"> Medical Presentations
+						</label>
+
+						<label class="checkbox-inline">
+							<div class="checkbox-icon" ng-class="{'active' : request_form.infographics.$valid}">
+								<div class="checked-checkbox-icon" ng-class="{'active': form.infographics}"></div>
+							</div>
+							<input 
+							type="checkbox" 
+							id="infographics"
+		    				name="infographics"
+		    				ng-model="form.infographics" 
+							ng-true-value="'Infographics'"> Infographics
+						</label>
+
+						<label class="checkbox-inline">
+							<div class="checkbox-icon" ng-class="{'active' : request_form.ibook.$valid}">
+								<div class="checked-checkbox-icon" ng-class="{'active': form.ibook}"></div>
+							</div>
+							<input 
+							type="checkbox" 
+							id="ibook"
+		    				name="ibook"
+		    				ng-model="form.ibook" 
+							ng-true-value="'iBook'"> iBook
 						</label>
 
 						<input 
