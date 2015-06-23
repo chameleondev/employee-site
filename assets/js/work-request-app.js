@@ -72,6 +72,58 @@ app.controller('FormCtrl',['$scope','$timeout','FileUploader',function($scope,$t
         $scope.confirmStatus = 0;
     };
 
+    $scope.typeOfWork = function(){
+        return  $scope.form.jobType !== 'Editorial Amends' &&
+                $scope.form.creativeBrief === 'Creative Brief' &&
+                ($scope.form.pitchMockup || 
+                $scope.form.creativeDesignCon || 
+                $scope.form.video ||
+                $scope.form.digitalAppDes ||
+                $scope.form.logo ||
+                $scope.form.figureRedraws ||
+                $scope.form.layout ||
+                $scope.form.medicalIllustrations ||
+                $scope.form.medicalPresentations ||
+                $scope.form.infographics ||
+                $scope.form.ibook ||
+                $scope.form.presentedOther)
+    };
+
+    $scope.$watch('form.deliverySelection', function(newval,oldVal){
+
+        newval === '24 Hours' ? $scope.form.twentyFourDate = twentyFourDate() 
+                : $scope.form.twentyFourDate = '';
+
+        $timeout(function(){
+            if(newval !== 'Normal'){
+                $scope.disablePicker = true;
+                $scope.form.firstDraftBy = '';
+                $scope.form.firstDraftByTime = '';
+                $scope.form.finalDeliveryDate = '';
+                $scope.form.finalDeliveryDateTime = '';
+            } else {
+                $scope.disablePicker = false;
+            }
+        });
+        
+
+    });
+
+    var twentyFourDate = function(){
+        var dateObj = new Date();
+        var day = dateObj.getDate() + 1;
+        var month = dateObj.getMonth() + 1;
+        if (month < 10) { month = '0' + month; }
+        var year = dateObj.getFullYear();
+
+        return day +'/'+ month +'/'+ year;
+    };
+
+
+    $scope.$watchGroup(['form.asap','form.twentyFour'],function(newval,oldVal){
+        console.log(newval,oldVal);
+    });
+
     var sendEmail = function(){
         $.ajax({
             url : '/WorkRequest/create',
@@ -230,7 +282,11 @@ app.directive('datePicker', function() {
 			});
 
             element.next().on('click',function(e){
-                element.datepicker('show');
+
+                if (e.target.getAttribute('disableme') == 'false') {
+                    element.datepicker('show');
+                } 
+
             });
 
         }

@@ -71,7 +71,7 @@
 						placeholder=""
 						required 
 						ng-class="{'invalid' : request_form.job_code.$invalid}"
-						>
+						> 
 					</div>
 
 					<label for="new-job" class="radio-inline">
@@ -86,6 +86,8 @@
 						value="New Job"
 						ng-required="form.jobType !== 'Existing Job' || form.jobType !== 'Editorial Amends'"> New Job
 					</label>
+
+			
 
 					<label for="existing-job" class="radio-inline">
 						<div class="radio-icon" ng-class="{'active' : request_form.job_type.$valid}">
@@ -107,17 +109,17 @@
 					<div class="col-sm-6 col-sm-offset-6 no-gutter">
 						
 						<label for="editorial-amends" class="radio-inline">
-						<div class="radio-icon" ng-class="{'active' : request_form.job_type.$valid}">
-							<div class="checked-radio-icon" ng-class="{'active': form.jobType == 'Editorial Amends'}"></div>
-						</div>
-						<input 
-						type="radio" 
-						id="editorial-amends" 
-						name="job_type"
-						ng-model="form.jobType"
-						value="Editorial Amends"
-						ng-required="form.jobType !== 'New Job' || form.jobType !=='Existing Job'"> Editorial Amends
-					</label>
+							<div class="radio-icon" ng-class="{'active' : request_form.job_type.$valid}">
+								<div class="checked-radio-icon" ng-class="{'active': form.jobType == 'Editorial Amends'}"></div>
+							</div>
+							<input 
+							type="radio" 
+							id="editorial-amends" 
+							name="job_type"
+							ng-model="form.jobType"
+							value="Editorial Amends"
+							ng-required="form.jobType !== 'New Job' || form.jobType !=='Existing Job'"> Editorial Amends
+						</label>
 					</div>	
 				</div>
 
@@ -386,7 +388,8 @@
 	    				id="task-desc"
 	    				name="task_desc"
 	    				ng-model="form.taskDesc"  
-	    				placeholder="e.g Create a design theme"></textarea>
+	    				placeholder="e.g Create a design theme"
+	    				ng-required="form.jobType !== 'Editorial Amends'"></textarea>
 					</div>
 					
 				</div>
@@ -579,9 +582,22 @@
 
 				<h3 class="title sub-title" id="deliveryDateTitle">Delivery Date</h3>
 
-				<div class="form-group" ng-hide="form.jobType === 'Editorial Amends'">
+				<div class="form-group">
+					<div class="col-sm-3">
+						<label class="checkbox-inline">
+							<div class="radio-icon" ng-class="{'active' : request_form.delivery_selection.$valid}">
+								<div class="checked-radio-icon" ng-class="{'active': form.deliverySelection == 'Normal'}"></div>
+							</div>
+							<input 
+							type="radio" 
+							id="normal-delivery"
+		    				name="delivery_selection"
+		    				ng-model="form.deliverySelection"  
+							value="Normal"> Normal 
+						</label>
+					</div>
 					<label for="first-draft-by" class="col-sm-2 control-label">First draft by</label>
-					<div class="col-sm-4">
+					<div class="col-sm-3">
 						<div class="input-group">
 							<input 
 							type="text" 
@@ -591,18 +607,20 @@
 		    				ng-model="form.firstDraftBy"  
 							placeholder="DD/MM/YYYY"
 							date-picker
-							readonly>
-							<span class="input-group-addon glyphicon glyphicon-calendar"></span>
+							readonly
+							ng-disabled="disablePicker || form.jobType === 'Editorial Amends'">
+							<span class="input-group-addon glyphicon glyphicon-calendar" disableme="{{disablePicker}}"></span>
 						</div>
 					</div>	
 
-					<label for="first-draft-by-time" class="col-sm-2 control-label">Time</label>
-					<div class="col-sm-4">
+					<label for="first-draft-by-time" class="col-sm-1 control-label">Time</label>
+					<div class="col-sm-3">
 						<select 
 						class="form-control"
 						id="first-draft-by-time"
 	    				name="first-draft-by_time"
 	    				ng-model="form.firstDraftByTime"
+	    				ng-disabled="disablePicker || form.jobType === 'Editorial Amends'"
 						>
 						  <option>9AM GMT</option>
 						  <option>12PM GMT</option>
@@ -615,8 +633,8 @@
 				</div>
 
 				<div class="form-group">
-					<label for="final-delivery-date" class="col-sm-2 control-label">Final delivery date</label>
-					<div class="col-sm-4">
+					<label for="final-delivery-date" class="col-sm-2 col-sm-offset-3 control-label">Final delivery date</label>
+					<div class="col-sm-3">
 						<div class="input-group">
 							<input 
 							type="text" 
@@ -626,18 +644,20 @@
 		    				ng-model="form.finalDeliveryDate"  
 							placeholder="DD/MM/YYYY"
 							date-picker
-							readonly>
-							<span class="input-group-addon glyphicon glyphicon-calendar"></span>
+							readonly
+							ng-disabled="disablePicker">
+							<span class="input-group-addon glyphicon glyphicon-calendar" disableme="{{disablePicker}}"></span>
 						</div>
 					</div>
 
-					<label for="final-delivery-date-time" class="col-sm-2 control-label">Time</label>
-					<div class="col-sm-4">
+					<label for="final-delivery-date-time" class="col-sm-1 control-label">Time</label>
+					<div class="col-sm-3">
 						<select 
 						class="form-control"
 						id="final-delivery-date-time"
 	    				name="final_delivery_date_time"
-	    				ng-model="form.finalDeliveryDateTime">
+	    				ng-model="form.finalDeliveryDateTime"
+	    				ng-disabled="disablePicker">
 						  <option>9AM GMT</option>
 						  <option>12PM GMT</option>
 						  <option>EOB GMT</option>
@@ -649,17 +669,47 @@
 				</div>
 
 				<div class="form-group">
-					<div class="col-md-12">
+					<div class="col-sm-3 form-inline">
 						<label class="checkbox-inline">
-							<div class="checkbox-icon" ng-class="{'active' : request_form.asap.$valid}">
-								<div class="checked-checkbox-icon" ng-class="{'active': form.asap}"></div>
+							<div class="radio-icon" ng-class="{'active' : request_form.delivery_selection.$valid}">
+								<div class="checked-radio-icon" ng-class="{'active': form.deliverySelection == '24 Hours'}"></div>
 							</div>
 							<input 
-							type="checkbox" 
+							type="radio" 
+							id="twenty-four"
+		    				name="delivery_selection"
+		    				ng-model="form.deliverySelection"  
+							value="24 Hours"> 24 hours 
+						</label>
+					</div>
+
+					<div class="col-sm-9">
+						<input 
+							type="text" 
+							class="form-control pull-right" 
+							id="twenty-four-date" 
+							name="twenty_four_date" 
+							ng-model="form.twentyFourDate" 
+							placeholder="DD/MM/YYYY"
+							style="width:200px"
+							readonly>
+					</div>
+
+
+				</div>
+
+				<div class="form-group">
+					<div class="col-md-12">
+						<label class="checkbox-inline">
+							<div class="radio-icon" ng-class="{'active' : request_form.delivery_selection.$valid}">
+								<div class="checked-radio-icon" ng-class="{'active': form.deliverySelection == 'ASAP'}"></div>
+							</div>
+							<input 
+							type="radio" 
 							id="asap"
-		    				name="asap"
-		    				ng-model="form.asap"  
-							ng-true-value="'ASAP'"> ASAP (Please speak to Mark or Sandra before selecting)
+		    				name="delivery_selection"
+		    				ng-model="form.deliverySelection"  
+							value="ASAP"> ASAP (Please speak to Mark or Sandra before selecting)
 						</label>
 					</div>
 				</div>
@@ -700,7 +750,7 @@
 					name="tech_spec"
     				ng-model="form.techSpec" 
 					ng-true-value="'Technical Specification'"
-					ng-required="!form.creativeBrief && form.jobType !== 'Editorial Amends'"> Technical Specification
+					ng-required="!form.creativeBrief && form.jobType !== 'Editorial Amends'"> Delivery Format
 				</label>
 
 				<div ng-show="form.creativeBrief === 'Creative Brief'">
@@ -712,16 +762,17 @@
 				<div class="form-group">
 					<div class="col-md-12">
 						<label class="checkbox-inline">
-							<div class="checkbox-icon" ng-class="{'active' : request_form.mockup.$valid}">
-								<div class="checked-checkbox-icon" ng-class="{'active': form.mockup}"></div>
+							<div class="checkbox-icon" ng-class="{'active' : request_form.picth_mockup.$valid}">
+								<div class="checked-checkbox-icon" ng-class="{'active': form.pitchMockup}"></div>
 							</div>
 							<input 
 							type="checkbox" 
-							id="mockup"
-		    				name="mockup"
-		    				ng-model="form.mockup"
-		    				ng-true-value="'Mockup'" 
-							> Mockup
+							id="pitch-mockup"
+		    				name="picth_mockup"
+		    				ng-model="form.pitchMockup"
+		    				ng-true-value="'Pitch Mockup'"
+		    				ng-required="!typeOfWork()" 
+							> Pitch Mockup
 						</label>
 
 						<label class="checkbox-inline">
@@ -734,6 +785,7 @@
 		    				name="creative_design_con"
 		    				ng-model="form.creativeDesignCon" 
 		    				ng-true-value="'Creative/Design Concept'"
+		    				ng-required="!typeOfWork()"
 							> Creative/Design Concept
 						</label>
 
@@ -746,7 +798,8 @@
 							id="video"
 		    				name="video"
 		    				ng-model="form.video" 
-							ng-true-value="'Video'"> Video
+							ng-true-value="'Video'"
+							ng-required="!typeOfWork()"> Video
 						</label>
 
 						<label class="checkbox-inline">
@@ -758,7 +811,8 @@
 							id="digital-app-des"
 		    				name="digital_app_des"
 		    				ng-model="form.digitalAppDes" 
-							ng-true-value="'Digital Application Design'"> Digital Application Design
+							ng-true-value="'Digital Application Design'"
+							ng-required="!typeOfWork()"> Digital Application Design
 						</label>
 
 						<label class="checkbox-inline">
@@ -770,7 +824,8 @@
 							id="logo"
 		    				name="logo"
 		    				ng-model="form.logo"
-							ng-true-value="'Logo'"> Logo
+							ng-true-value="'Logo'"
+							ng-required="!typeOfWork()"> Logo
 						</label>
 					</div>
 				</div>
@@ -786,7 +841,8 @@
 							id="figure-redaws"
 		    				name="figure_redaws"
 		    				ng-model="form.figureRedraws" 
-							ng-true-value="'Figure Redraws'"> Figure Redraws
+							ng-true-value="'Figure Redraws'"
+							ng-required="!typeOfWork()"> Figure Redraws
 						</label>
 
 						<label class="checkbox-inline">
@@ -798,7 +854,8 @@
 							id="layout"
 		    				name="layout"
 		    				ng-model="form.layout" 
-							ng-true-value="'Layout'"> Layout
+							ng-true-value="'Layout'"
+							ng-required="!typeOfWork()"> Layout
 						</label>
 
 						<label class="checkbox-inline">
@@ -810,7 +867,8 @@
 							id="medical-illustrations"
 		    				name="medical_illustrations"
 		    				ng-model="form.medicalIllustrations" 
-							ng-true-value="'Medical Illustrations'"> Medical Illustrations
+							ng-true-value="'Medical Illustrations'"
+							ng-required="!typeOfWork()"> Medical Illustrations
 						</label>
 
 						<label class="checkbox-inline">
@@ -822,7 +880,8 @@
 							id="medical-presentations"
 		    				name="medical_presentations"
 		    				ng-model="form.medicalPresentations" 
-							ng-true-value="'Medical Presentations'"> Medical Presentations
+							ng-true-value="'Medical Presentations'"
+							ng-required="!typeOfWork()"> Medical Presentations
 						</label>
 
 						<label class="checkbox-inline">
@@ -834,7 +893,8 @@
 							id="infographics"
 		    				name="infographics"
 		    				ng-model="form.infographics" 
-							ng-true-value="'Infographics'"> Infographics
+							ng-true-value="'Infographics'"
+							ng-required="!typeOfWork()"> Infographics
 						</label>
 
 						<label class="checkbox-inline">
@@ -846,7 +906,8 @@
 							id="ibook"
 		    				name="ibook"
 		    				ng-model="form.ibook" 
-							ng-true-value="'iBook'"> iBook
+							ng-true-value="'iBook'"
+							ng-required="!typeOfWork()"> iBook
 						</label>
 
 						<input 
@@ -855,7 +916,8 @@
 						class="form-control otherType" 
 						name="presented_other"
 						id="presented-other"
-						ng-model="form.presentedOther">
+						ng-model="form.presentedOther"
+						ng-required="!typeOfWork()">
 					</div>
 				</div>
 
@@ -901,7 +963,7 @@
 		    				name="where_used_dig_app"
 		    				ng-model="form.whereUsedDigApp" 
 							ng-true-value="'Digital Application'"
-							> Digital Application
+							> Digital Application (App/Website)
 						</label>
 
 						<label class="checkbox-inline">
@@ -915,6 +977,19 @@
 		    				ng-model="form.whereUsedPrint"
 							ng-true-value="'Print'"
 							> Print
+						</label>
+
+						<label class="checkbox-inline">
+							<div class="checkbox-icon" ng-class="{'active' : request_form.where_used_other.$valid}">
+								<div class="checked-checkbox-icon" ng-class="{'active': form.whereUsedOther}"></div>
+							</div>
+							<input 
+							type="checkbox" 
+							id="where-used-other"
+		    				name="where_used_other"
+		    				ng-model="form.whereUsedOther"
+							ng-true-value="'Other'"
+							> Other
 						</label>
 					</div>
 				</div>
@@ -950,7 +1025,7 @@
 							ng-true-value="'Unbranded'"> Unbranded
 						</label>
 
-						<!-- <label class="checkbox-inline">
+						<label class="checkbox-inline">
 							<div class="checkbox-icon" ng-class="{'active' : request_form.soft_branded.$valid}">
 								<div class="checked-checkbox-icon" ng-class="{'active': form.softBranded}"></div>
 							</div>
@@ -961,7 +1036,19 @@
 		    				ng-model="form.softBranded" 
 							ng-true-value="'Soft Branded'"> Soft Branded
 						</label>
- -->
+
+						<label class="checkbox-inline">
+							<div class="checkbox-icon" ng-class="{'active' : request_form.branded_unknown.$valid}">
+								<div class="checked-checkbox-icon" ng-class="{'active': form.brandedUnknown}"></div>
+							</div>
+							<input 
+							type="checkbox" 
+							id="branded-unknown"
+		    				name="branded_unknown"
+		    				ng-model="form.brandedUnknown" 
+							ng-true-value="'Other'"> Unknown
+						</label>
+
 						<!-- <label class="checkbox-inline">
 							<div class="checkbox-icon" ng-class="{'active' : request_form.branded_other.$valid}">
 								<div class="checked-checkbox-icon" ng-class="{'active': form.brandedOther}"></div>
