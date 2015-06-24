@@ -690,7 +690,7 @@
 							id="twenty-four-date" 
 							name="twenty_four_date" 
 							ng-model="form.twentyFourDate" 
-							placeholder="DD/MM/YYYY"
+							placeholder="DD/MM/YYYY  HH:MM"
 							style="width:200px"
 							readonly>
 					</div>
@@ -1183,7 +1183,7 @@
 						>
 					</div>
 
-					<div class="col-md-3">
+					<!-- <div class="col-md-3">
 						<label for="orientation">Orientation</label>
 						<select 
 						class="form-control" 
@@ -1201,6 +1201,19 @@
 								<button type="button" class="close" aria-label="Close" ng-click="extRemove('orientations',$index)"><span aria-hidden="true">&times;</span></button>
 							</li>
 						</ul>
+					</div> -->
+
+					<div class="col-md-3">
+						<label for="orientation">Orientation</label>
+						<select 
+						class="form-control" 
+						id="orientation"
+	    				name="orientation"
+	    				ng-model="selectedOrientation">
+						  <option>Landscape</option>
+						  <option>Portrait</option>
+						  <option>Not Specified</option>
+						</select>
 					</div>
 
 					<div class="col-md-3">

@@ -113,10 +113,12 @@ app.controller('FormCtrl',['$scope','$timeout','FileUploader',function($scope,$t
         var dateObj = new Date();
         var day = dateObj.getDate() + 1;
         var month = dateObj.getMonth() + 1;
+        var hours = dateObj.getHours();
+        var minutes = dateObj.getMinutes();
         if (month < 10) { month = '0' + month; }
         var year = dateObj.getFullYear();
 
-        return day +'/'+ month +'/'+ year;
+        return day +'/'+ month +'/'+ year +'  '+hours+':'+minutes;
     };
 
 
