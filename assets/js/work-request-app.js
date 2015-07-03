@@ -73,9 +73,9 @@ app.controller('FormCtrl',['$scope','$timeout','FileUploader',function($scope,$t
     };
 
     $scope.typeOfWork = function(){
-        return  $scope.form.jobType !== 'Editorial Amends' &&
+        return  $scope.form.jobType !== 'Editorial Amends' && 
                 $scope.form.creativeBrief === 'Creative Brief' &&
-                ($scope.form.pitchMockup || 
+                !($scope.form.pitchMockup || 
                 $scope.form.creativeDesignCon || 
                 $scope.form.video ||
                 $scope.form.digitalAppDes ||

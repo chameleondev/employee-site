@@ -38,6 +38,9 @@
 			<button class="btn btn-danger" ng-click="close()">Close</button>
 		</h1>
 
+
+
+
 	</div>
 </div>
 
@@ -74,55 +77,71 @@
 						> 
 					</div>
 
-					<label for="new-job" class="radio-inline">
-						<div class="radio-icon" ng-class="{'active' : request_form.job_type.$valid}">
-							<div class="checked-radio-icon" ng-class="{'active': form.jobType == 'New Job'}"></div>
+					<div class="col-sm-4">
+						<div class="row bottom20">
+							<label for="new-job" class="radio-inline">
+								<div class="radio-icon" ng-class="{'active' : request_form.job_type.$valid}">
+									<div class="checked-radio-icon" ng-class="{'active': form.jobType == 'New Job'}"></div>
+								</div>
+								<input 
+								type="radio"
+								id="new-job" 
+								name="job_type"
+								ng-model="form.jobType" 
+								value="New Job"
+								ng-required="form.jobType !== 'Existing Job' || form.jobType !== 'Editorial Amends'"> New Job
+							</label>
 						</div>
-						<input 
-						type="radio"
-						id="new-job" 
-						name="job_type"
-						ng-model="form.jobType" 
-						value="New Job"
-						ng-required="form.jobType !== 'Existing Job' || form.jobType !== 'Editorial Amends'"> New Job
-					</label>
+						<div class="row bottom20">
+							<label for="existing-job" class="radio-inline">
+								<div class="radio-icon" ng-class="{'active' : request_form.job_type.$valid}">
+									<div class="checked-radio-icon" ng-class="{'active': form.jobType == 'Existing Job'}"></div>
+								</div>
+								<input 
+								type="radio" 
+								id="existing-job" 
+								name="job_type"
+								ng-model="form.jobType"
+								value="Existing Job"
+								ng-required="form.jobType !== 'New Job' || form.jobType !=='Editorial Amends'"> Previously Submitted Job
+							</label>
+						</div>
+						<div class="row bottom20">
+							<label for="editorial-amends" class="radio-inline">
+								<div class="radio-icon" ng-class="{'active' : request_form.job_type.$valid}">
+									<div class="checked-radio-icon" ng-class="{'active': form.jobType == 'Editorial Amends'}"></div>
+								</div>
+								<input 
+								type="radio" 
+								id="editorial-amends" 
+								name="job_type"
+								ng-model="form.jobType"
+								value="Editorial Amends"
+								ng-required="form.jobType !== 'New Job' || form.jobType !=='Existing Job'"> Editorial Amends Only
+							</label>
+						</div>
+					</div>
+
+					<div class="col-sm-2" ng-show="form.jobType === 'Existing Job'">
+						<small>Lorem ipsum dolor sit amet, consectetur adipisicing elit. </small>
+					</div>
+
+					
 
 			
 
-					<label for="existing-job" class="radio-inline">
-						<div class="radio-icon" ng-class="{'active' : request_form.job_type.$valid}">
-							<div class="checked-radio-icon" ng-class="{'active': form.jobType == 'Existing Job'}"></div>
-						</div>
-						<input 
-						type="radio" 
-						id="existing-job" 
-						name="job_type"
-						ng-model="form.jobType"
-						value="Existing Job"
-						ng-required="form.jobType !== 'New Job' || form.jobType !=='Editorial Amends'"> Previously Submitted Job
-					</label>
+					
 
 					
 				</div>
 
-				<div class="form-group">
+				<!-- <div class="form-group">
 					<div class="col-sm-6 col-sm-offset-6 no-gutter">
 						
-						<label for="editorial-amends" class="radio-inline">
-							<div class="radio-icon" ng-class="{'active' : request_form.job_type.$valid}">
-								<div class="checked-radio-icon" ng-class="{'active': form.jobType == 'Editorial Amends'}"></div>
-							</div>
-							<input 
-							type="radio" 
-							id="editorial-amends" 
-							name="job_type"
-							ng-model="form.jobType"
-							value="Editorial Amends"
-							ng-required="form.jobType !== 'New Job' || form.jobType !=='Existing Job'"> Editorial Amends
-						</label>
+						
 					</div>	
 				</div>
-
+ -->
 				<div class="form-group">
 
 					<div class="col-md-6">
@@ -318,51 +337,68 @@
 			  	<h3 class="title sub-title" id="formTypeOfProject">Type Of Project</h3>
 
 			  	<div class="form-group">
-			  		<div class="col-md-12">
-
-			  			<label class="checkbox-inline">
-			  				<div class="checkbox-icon" ng-class="{'active' : request_form.des_proj.$valid}">
-								<div class="checked-checkbox-icon" ng-class="{'active': form.desProj}"></div>
+			  		
+			  			<div class="col-sm-4">
+				  			<label class="checkbox-inline">
+				  				<div class="checkbox-icon" ng-class="{'active' : request_form.des_proj.$valid}">
+									<div class="checked-checkbox-icon" ng-class="{'active': form.desProj}"></div>
+								</div>
+								<input 
+								type="checkbox" 
+								id="des-proj"
+			    				name="des_proj"
+			    				ng-model="form.desProj" 
+								ng-true-value="'Design Project'"
+								ng-required="!(form.typeProj || form.digProj) && form.jobType !== 'Editorial Amends'"
+								> Design Project
+							</label>
+							<div style="margin-top:10px">
+								<small class="input-smallprint">Conceptual development of design themes to be used in any type of materials, whether print or digital. Branding, infographics and icons. Presentation design. Includes medical illustrations.
+								</small>
 							</div>
-							<input 
-							type="checkbox" 
-							id="des-proj"
-		    				name="des_proj"
-		    				ng-model="form.desProj" 
-							ng-true-value="'Design Project'"
-							ng-required="!(form.typeProj || form.digProj) && form.jobType !== 'Editorial Amends'"
-							> Design Project
-						</label>
+						</div>
 
-				  		<label class="checkbox-inline">
-				  			<div class="checkbox-icon" ng-class="{'active' : request_form.type_proj.$valid}">
-								<div class="checked-checkbox-icon" ng-class="{'active': form.typeProj}"></div>
+						<div class="col-sm-4">
+					  		<label class="checkbox-inline">
+					  			<div class="checkbox-icon" ng-class="{'active' : request_form.type_proj.$valid}">
+									<div class="checked-checkbox-icon" ng-class="{'active': form.typeProj}"></div>
+								</div>
+								<input 
+								type="checkbox" 
+								id="type-proj"
+			    				name="type_proj"
+			    				ng-model="form.typeProj"  
+								ng-true-value="'Typesetting Project'"
+								ng-required="!(form.desProj || form.digProj) && form.jobType !== 'Editorial Amends'"
+								> Typesetting Project
+							</label>
+							<div style="margin-top:10px">
+									<small class="input-smallprint">Page composition of copy, pictures and figures based on the approved design theme and/or client branding. Includes figure redrawing. Mostly for outputs as PDFs or print materials.
+								</small>
 							</div>
-							<input 
-							type="checkbox" 
-							id="type-proj"
-		    				name="type_proj"
-		    				ng-model="form.typeProj"  
-							ng-true-value="'Typesetting Project'"
-							ng-required="!(form.desProj || form.digProj) && form.jobType !== 'Editorial Amends'"
-							> Typesetting Project
-						</label>
+						</div>
 
-						<label class="checkbox-inline">
-							<div class="checkbox-icon" ng-class="{'active' : request_form.dig_proj.$valid}">
-								<div class="checked-checkbox-icon" ng-class="{'active': form.digProj}"></div>
+						<div class="col-sm-4">
+							<label class="checkbox-inline">
+								<div class="checkbox-icon" ng-class="{'active' : request_form.dig_proj.$valid}">
+									<div class="checked-checkbox-icon" ng-class="{'active': form.digProj}"></div>
+								</div>
+								<input 
+								type="checkbox" 
+								id="dig-proj"
+			    				name="dig_proj"
+			    				ng-model="form.digProj"  
+								ng-true-value="'Digital Project'"
+								ng-required="!(form.typeProj || form.desProj) && form.jobType !== 'Editorial Amends'"
+								> Digital Project
+							</label>
+							<div style="margin-top:10px">
+								<small class="input-smallprint">User interface, user experience and screen design based on developed designed themes for digital applications (e.g websites, apps, HTML emails). Includes video production and editing.
+								</small>
 							</div>
-							<input 
-							type="checkbox" 
-							id="dig-proj"
-		    				name="dig_proj"
-		    				ng-model="form.digProj"  
-							ng-true-value="'Digital Project'"
-							ng-required="!(form.typeProj || form.desProj) && form.jobType !== 'Editorial Amends'"
-							> Digital Project
-						</label>
+						</div>
 
-			  		</div>
+			  		
 			  	</div>
 
 			  	</div> <!-- ng-hide if editorial amends -->
@@ -582,7 +618,98 @@
 
 				<h3 class="title sub-title" id="deliveryDateTitle">Delivery Date</h3>
 
-				<div class="form-group">
+				<div class="form-group normal-row">
+	<div class="col-sm-3">
+		<label class="checkbox-inline">
+			<div class="radio-icon" ng-class="{'active' : request_form.delivery_selection.$valid}">
+				<div class="checked-radio-icon" ng-class="{'active': form.deliverySelection == 'Normal'}"></div>
+			</div>
+			<input 
+			type="radio" 
+			id="normal-delivery"
+			name="delivery_selection"
+			ng-model="form.deliverySelection"  
+			value="Normal"> Normal 
+		</label>
+	</div>
+
+	<div class="col-sm-9">
+		<div class="row bottom20" ng-hide="form.jobType === 'Editorial Amends'">
+			<label for="first-draft-by" class="col-sm-3 control-label">First draft by</label>
+			<div class="col-sm-4">
+				<div class="input-group">
+					<input 
+					type="text" 
+					class="form-control date-selection" 
+					id="first-draft-by"
+    				name="first-draft-by"
+    				ng-model="form.firstDraftBy"  
+					placeholder="DD/MM/YYYY"
+					date-picker
+					readonly
+					ng-disabled="disablePicker">
+					<span class="input-group-addon glyphicon glyphicon-calendar" disableme="{{disablePicker}}"></span>
+				</div>
+			</div>	
+
+			<label for="first-draft-by-time" class="col-sm-2 control-label">Time</label>
+			<div class="col-sm-3">
+				<select 
+				class="form-control"
+				id="first-draft-by-time"
+				name="first-draft-by_time"
+				ng-model="form.firstDraftByTime"
+				ng-disabled="disablePicker"
+				>
+				  <option>9AM GMT</option>
+				  <option>12PM GMT</option>
+				  <option>EOB GMT</option>
+				  <option>9AM EST</option>
+				  <option>12PM EST</option>
+				  <option>EOB EST</option>
+				</select>
+			</div>
+		</div>
+		
+		<div class="row">
+			<label for="final-delivery-date" class="col-sm-3 control-label">Final delivery date</label>
+			<div class="col-sm-4">
+				<div class="input-group">
+					<input 
+					type="text" 
+					class="form-control date-selection" 
+					id="final-delivery-date"
+    				name="final_delivery_date"
+    				ng-model="form.finalDeliveryDate"  
+					placeholder="DD/MM/YYYY"
+					date-picker
+					readonly
+					ng-disabled="disablePicker">
+					<span class="input-group-addon glyphicon glyphicon-calendar" disableme="{{disablePicker}}"></span>
+				</div>
+			</div>
+
+			<label for="final-delivery-date-time" class="col-sm-2 control-label">Time</label>
+			<div class="col-sm-3">
+				<select 
+				class="form-control"
+				id="final-delivery-date-time"
+				name="final_delivery_date_time"
+				ng-model="form.finalDeliveryDateTime"
+				ng-disabled="disablePicker">
+				  <option>9AM GMT</option>
+				  <option>12PM GMT</option>
+				  <option>EOB GMT</option>
+				  <option>9AM EST</option>
+				  <option>12PM EST</option>
+				  <option>EOB EST</option>
+				</select>
+			</div>	
+		</div>
+	</div>
+</div>
+
+				<!-- <div class="form-group">
 					<div class="col-sm-3">
 						<label class="checkbox-inline">
 							<div class="radio-icon" ng-class="{'active' : request_form.delivery_selection.$valid}">
@@ -630,9 +757,9 @@
 						  <option>EOB EST</option>
 						</select>
 					</div>	
-				</div>
+				</div> -->
 
-				<div class="form-group">
+				<!-- <div class="form-group">
 					<label for="final-delivery-date" class="col-sm-2 col-sm-offset-3 control-label">Final delivery date</label>
 					<div class="col-sm-3">
 						<div class="input-group">
@@ -666,9 +793,9 @@
 						  <option>EOB EST</option>
 						</select>
 					</div>	
-				</div>
+				</div> -->
 
-				<div class="form-group">
+				<div class="form-group twenty-four-row">
 					<div class="col-sm-3 form-inline">
 						<label class="checkbox-inline">
 							<div class="radio-icon" ng-class="{'active' : request_form.delivery_selection.$valid}">
@@ -698,7 +825,7 @@
 
 				</div>
 
-				<div class="form-group">
+				<div class="form-group asap-row">
 					<div class="col-md-12">
 						<label class="checkbox-inline">
 							<div class="radio-icon" ng-class="{'active' : request_form.delivery_selection.$valid}">
@@ -728,7 +855,7 @@
 				<h3 class="title sub-title" id="typeOfBriefTitle">Type of brief</h3>
 
 				<label class="  checkbox-inline">
-					<div class="checkbox-icon" ng-class="{'active' : request_form.creative_brief.$valid || form.techSpec}">
+					<div class="checkbox-icon" ng-class="{'active' : request_form.creative_brief.$valid || form.deliveryFormat}">
 						<div class="checked-checkbox-icon" ng-class="{'active': form.creativeBrief}"></div>
 					</div>
 					<input 
@@ -737,20 +864,22 @@
 					name="creative_brief"
     				ng-model="form.creativeBrief" 
 					ng-true-value="'Creative Brief'" 
-					ng-required="!form.techSpec && form.jobType !== 'Editorial Amends'"> Creative Brief
+					ng-required="!form.deliveryFormat && form.jobType !== 'Editorial Amends'"> Creative Brief
 				</label>
 
-				<label class="checkbox-inline">
-					<div class="checkbox-icon" ng-class="{'active' : request_form.tech_spec.$valid || form.creativeBrief}">
-						<div class="checked-checkbox-icon" ng-class="{'active': form.techSpec}"></div>
+				<small ng-show="form.jobType === 'Existing Job'">Lorem ipsum dolor sit amet, consectetur adipisicing elit.</small>
+
+				<label class="checkbox-inline" ng-hide="form.jobType === 'Existing Job'">
+					<div class="checkbox-icon" ng-class="{'active' : request_form.delivery_format.$valid || form.creativeBrief}">
+						<div class="checked-checkbox-icon" ng-class="{'active': form.deliveryFormat}"></div>
 					</div>
 					<input 
 					type="checkbox" 
-					id="tech-spec"
-					name="tech_spec"
-    				ng-model="form.techSpec" 
-					ng-true-value="'Technical Specification'"
-					ng-required="!form.creativeBrief && form.jobType !== 'Editorial Amends'"> Delivery Format
+					id="delivery-format"
+					name="delivery_format"
+    				ng-model="form.deliveryFormat" 
+					ng-true-value="'Delivery Format'"
+					ng-required="!form.creativeBrief && form.jobType === 'New Job'"> Delivery Format
 				</label>
 
 				<div ng-show="form.creativeBrief === 'Creative Brief'">
@@ -771,7 +900,7 @@
 		    				name="picth_mockup"
 		    				ng-model="form.pitchMockup"
 		    				ng-true-value="'Pitch Mockup'"
-		    				ng-required="!typeOfWork()" 
+		    				ng-required="typeOfWork()" 
 							> Pitch Mockup
 						</label>
 
@@ -785,7 +914,7 @@
 		    				name="creative_design_con"
 		    				ng-model="form.creativeDesignCon" 
 		    				ng-true-value="'Creative/Design Concept'"
-		    				ng-required="!typeOfWork()"
+		    				ng-required="typeOfWork()"
 							> Creative/Design Concept
 						</label>
 
@@ -799,7 +928,7 @@
 		    				name="video"
 		    				ng-model="form.video" 
 							ng-true-value="'Video'"
-							ng-required="!typeOfWork()"> Video
+							ng-required="typeOfWork()"> Video
 						</label>
 
 						<label class="checkbox-inline">
@@ -812,7 +941,7 @@
 		    				name="digital_app_des"
 		    				ng-model="form.digitalAppDes" 
 							ng-true-value="'Digital Application Design'"
-							ng-required="!typeOfWork()"> Digital Application Design
+							ng-required="typeOfWork()"> Digital Application Design
 						</label>
 
 						<label class="checkbox-inline">
@@ -825,7 +954,7 @@
 		    				name="logo"
 		    				ng-model="form.logo"
 							ng-true-value="'Logo'"
-							ng-required="!typeOfWork()"> Logo
+							ng-required="typeOfWork()"> Logo
 						</label>
 					</div>
 				</div>
@@ -842,7 +971,7 @@
 		    				name="figure_redaws"
 		    				ng-model="form.figureRedraws" 
 							ng-true-value="'Figure Redraws'"
-							ng-required="!typeOfWork()"> Figure Redraws
+							ng-required="typeOfWork()"> Figure Redraws
 						</label>
 
 						<label class="checkbox-inline">
@@ -855,7 +984,7 @@
 		    				name="layout"
 		    				ng-model="form.layout" 
 							ng-true-value="'Layout'"
-							ng-required="!typeOfWork()"> Layout
+							ng-required="typeOfWork()"> Layout
 						</label>
 
 						<label class="checkbox-inline">
@@ -868,7 +997,7 @@
 		    				name="medical_illustrations"
 		    				ng-model="form.medicalIllustrations" 
 							ng-true-value="'Medical Illustrations'"
-							ng-required="!typeOfWork()"> Medical Illustrations
+							ng-required="typeOfWork()"> Medical Illustrations
 						</label>
 
 						<label class="checkbox-inline">
@@ -881,7 +1010,7 @@
 		    				name="medical_presentations"
 		    				ng-model="form.medicalPresentations" 
 							ng-true-value="'Medical Presentations'"
-							ng-required="!typeOfWork()"> Medical Presentations
+							ng-required="typeOfWork()"> Medical Presentations
 						</label>
 
 						<label class="checkbox-inline">
@@ -894,7 +1023,7 @@
 		    				name="infographics"
 		    				ng-model="form.infographics" 
 							ng-true-value="'Infographics'"
-							ng-required="!typeOfWork()"> Infographics
+							ng-required="typeOfWork()"> Infographics
 						</label>
 
 						<label class="checkbox-inline">
@@ -907,7 +1036,7 @@
 		    				name="ibook"
 		    				ng-model="form.ibook" 
 							ng-true-value="'iBook'"
-							ng-required="!typeOfWork()"> iBook
+							ng-required="typeOfWork()"> iBook
 						</label>
 
 						<input 
@@ -917,7 +1046,7 @@
 						name="presented_other"
 						id="presented-other"
 						ng-model="form.presentedOther"
-						ng-required="!typeOfWork()">
+						ng-required="typeOfWork()">
 					</div>
 				</div>
 
@@ -1098,7 +1227,7 @@
 	    				id="look-and-feel"
 	    				name="look_and_feel"
 	    				ng-model="form.lookAndFeel" 
-	    				placeholder="Enter here the description"></textarea>
+	    				placeholder="Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod"></textarea>
 					</div>
 					
 				</div>
@@ -1120,7 +1249,7 @@
 				
 				</div>
 
-				<div ng-show="form.techSpec === 'Technical Specification'">
+				<div ng-show="form.deliveryFormat === 'Delivery Format'">
 				
 				<hr>
 				
@@ -1245,7 +1374,7 @@
 
 				<h3 class="title sub-title" id="referenceMaterialsTitle">Reference Materials</h3>
 
-				<div class="form-group">
+				<!-- <div class="form-group">
 					<div class="col-md-12">
 						<label for="server-loc">Server Location</label>
 	    				<input 
@@ -1255,6 +1384,73 @@
 	    				name="server_loc"
 	    				ng-model="form.serverLoc"  
 	    				placeholder="e.g \\CHAFS1\CDSTransfer\Bayer">
+					</div>
+				</div> -->
+
+				<div class="form-group">
+					<div class="col-sm-12">
+						<label>Has this content been editorially reviewed?</label>
+					</div>
+					
+					<div class="col-sm-12">
+					
+					<label for="review-yes" class="radio-inline">
+						<div class="radio-icon" ng-class="{'active' : request_form.editorial_review.$valid}">
+							<div class="checked-radio-icon" ng-class="{'active': form.editorialReview == 'Yes'}"></div>
+						</div>
+						<input 
+						type="radio" 
+						id="review-yes" 
+						name="editorial_review" 
+						ng-model="form.editorialReview" 
+						value="Yes" 
+						ng-required="!form.editorialReview"> Yes
+					</label>
+					
+					<label for="review-no-concept" class="radio-inline">
+						<div class="radio-icon" ng-class="{'active' : request_form.editorial_review.$valid}">
+							<div class="checked-radio-icon" ng-class="{'active': form.editorialReview == 'No, not relevant (e.g design concept)'}"></div>
+						</div>
+						<input 
+						type="radio" 
+						id="review-no-concept" 
+						name="editorial_review" 
+						ng-model="form.editorialReview" 
+						value="No, not relevant (e.g design concept)" 
+						ng-required="!form.editorialReview"> No, not relevant (e.g design concept)
+					</label>
+
+					<label for="review-no" class="radio-inline">
+						<div class="radio-icon" ng-class="{'active' : request_form.editorial_review.$valid}">
+							<div class="checked-radio-icon" ng-class="{'active': form.editorialReview == 'No'}"></div>
+						</div>
+						<input 
+						type="radio" 
+						id="review-no" 
+						name="editorial_review" 
+						ng-model="form.editorialReview" 
+						value="No" 
+						ng-required="!form.editorialReview"> No
+					</label>
+					</div>
+
+					<div ng-show="form.editorialReview === 'No'" class="col-sm-12">
+						<div class="bg-danger" style="padding: 10px;margin-top: 15px;">
+							<small>I acknowledge that sending unedited copy may incur additional time and costs.</small>
+	
+							<label class="checkbox-inline">
+								<div class="checkbox-icon" style="left: 0px;top: -10px;" ng-class="{'active' : request_form.agreement.$valid}">
+									<div class="checked-checkbox-icon" ng-class="{'active': form.agreement}"></div>
+								</div>
+								<input 
+								type="checkbox" 
+								id="agreement"
+			    				name="agreement"
+			    				ng-required="form.editorialReview === 'No'"
+			    				ng-model="form.agreement" 
+								ng-true-value="'Soft Branded'">
+							</label>
+						</div>
 					</div>
 				</div>
 

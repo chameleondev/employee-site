@@ -4,7 +4,7 @@ module.exports = {
 	
 	send : function(req,res){
 
-		var mandrill = require('node-mandrill')('JtgzSVSSdHsYMMWmwY0IEQ');
+		// var mandrill = require('node-mandrill')('JtgzSVSSdHsYMMWmwY0IEQ');
 		
 		var msg = '<b>Job Code</b>: '+req.param('jobCode')+'<br/>';
 
@@ -93,6 +93,7 @@ module.exports = {
 		// }
 
 		if (req.param('selectedDimension')) msg+= '<b>Dimension:</b> '+req.param('selectedDimension')+'<br/>';
+		if (req.param('orientation')) msg+= '<b>Orientation:</b> '+req.param('orientation')+'<br/>';
 
 
 
@@ -107,8 +108,29 @@ module.exports = {
 		if(req.param('pages')) msg+= '<b>Pages:</b> '+req.param('pages')+'<br/>';
 		if(req.param('firstDraftBy') || req.param('firstDraftByTime')) msg+= '<b>First draft by:</b> '+req.param('firstDraftBy').toString()+' '+ req.param('firstDraftByTime')+'<br/>';
 		if(req.param('finalDeliveryDate') || req.param('finalDeliveryDateTime')) msg+= '<b>Final delivery date:</b> '+req.param('finalDeliveryDate').toString()+' '+ req.param('finalDeliveryDateTime')+'<br/>';
-		if(req.param('asap')) msg+= 'ASAP <br />';
-		if(req.param('serverLoc')) msg+= '<b>Server location:</b> '+req.param('serverLoc')+' <br />';
+		if(req.param('deliverySelection')) msg+= '<b>Delivery Selection:</b> '+req.param('deliverySelection');
+		if(req.param('twentyFourDate')) msg+= '<b>24 Hour time:</b> '+req.param('twentyFourDate');
+		// if(req.param('serverLoc')) msg+= '<b>Server location:</b> '+req.param('serverLoc')+' <br />';
+
+
+		// var userObject = {
+		// 	jobInformation : [
+		// 		{name : 'Job Code', val : req.param('jobCode')},
+		// 		{name : 'Job Type', val : req.param('jobType')},
+		// 		{name : 'Submitted by', val : req.param('formUser')},
+		// 		{name : 'Office', val : req.param('office')},
+		// 		{name : 'Email', val : req.param('email')},
+		// 		{name : 'Client', val : req.param('client')},
+		// 		{name : 'Product', val : req.param('product')},
+		// 		{name : 'Email', val : req.param('email')},
+		// 		{name : 'Project Title', val : req.param('projectTitle')},
+		// 		{name : 'Account Lead', val : req.param('accountPersonFname')},
+		// 		{name : 'Budget', val : req.param('budget')},
+		// 		{name : 'Design Project', val : req.param('accountPersonFname')},
+		// 		{name : 'Typsetting Project', val : req.param('accountPersonFname')},
+		// 		{name : 'Digital Project', val : req.param('accountPersonFname')}
+		// 	]
+		// };
 
 		var recipients = [{
 				name: 'Sandra Herrera',
@@ -173,30 +195,105 @@ module.exports = {
 
 
 
-		mandrill('/messages/send', {
+		// mandrill('/messages/send', {
+		// 	message: {
+		// 		to: recipients,
+		// 		from_name: 'Request Form',
+		// 		from_email: 'admin@chameleon-web.com',
+		// 		html: msg,
+		// 		subject: 'New job No: '+ req.param('jobCode'),
+		// 		text: "text fallback goes here-- in case some recipients (let\'s say the Chipettes)  can\'t receive HTML emails",
+		// 		attachments : req.param('encodedUploads')
+		// 	}
+		// }, function(error, response){
+		// 	//uh oh, there was an error
+		// 	if (error) {
+		// 		console.log( JSON.stringify(error) );
+		// 		res.send(error);
+		// 		return;
+		// 	}
+
+		// 	//everything's good, lets see what mandrill said
+		// 	else{
+		// 		// console.log(req.param('encodedUploads'));
+		// 		res.send(response);
+		// 		return;
+		// 	}
+		// });
+
+		var mandrill = require('mandrill-api/mandrill');
+		var mandrill_client = new mandrill.Mandrill('JtgzSVSSdHsYMMWmwY0IEQ');
+
+		// send email template
+		// mandrill('/messages/send-template', {
+		// 	template_name : 'work-request-form-reciept',
+		// 	template_content : [],
+		// 	message: {
+		// 		to: [{
+		// 			email : 'dillon.lee@chameleon-uk.com',
+		// 			name : 'Dillon Lee'
+		// 		}],
+		// 		from_name: 'Request Form',
+		// 		from_email: 'admin@chameleon-web.com',
+		// 		merge_language : 'handlebars',
+		// 		global_merge_vars : [{
+		// 			name: "title",
+  //           		content: "Test title"
+		// 		}],
+		// 		// html: msg,
+		// 		subject: 'New job No: '+ req.param('jobCode'),
+		// 		text: "text fallback goes here-- in case some recipients (let\'s say the Chipettes)  can\'t receive HTML emails",
+		// 		attachments : req.param('encodedUploads')
+		// 	}
+		// }, function(error, response){
+		// 	//uh oh, there was an error
+		// 	if (error) {
+		// 		console.log( JSON.stringify(error) );
+		// 		res.send(error);
+		// 		return;
+		// 	}
+
+		// 	//everything's good, lets see what mandrill said
+		// 	else{
+		// 		// console.log(req.param('encodedUploads'));
+		// 		res.send(response);
+		// 		return;
+		// 	}
+		// });
+
+
+		mandrill_client.messages.sendTemplate({
+			template_name : 'work-request-form-reciept',
+			template_content : [],
 			message: {
-				to: recipients,
+				to: [{
+					email : 'dillon.lee@chameleon-uk.com',
+					name : 'Dillon Lee'
+				}],
 				from_name: 'Request Form',
 				from_email: 'admin@chameleon-web.com',
-				html: msg,
+				merge_language : 'handlebars',
+				global_merge_vars : [{
+					name: "Title",
+            		content: "Test title"
+				}],
+				// html: msg,
 				subject: 'New job No: '+ req.param('jobCode'),
 				text: "text fallback goes here-- in case some recipients (let\'s say the Chipettes)  can\'t receive HTML emails",
 				attachments : req.param('encodedUploads')
 			}
-		}, function(error, response){
-			//uh oh, there was an error
-			if (error) {
-				console.log( JSON.stringify(error) );
-				res.send(error);
-				return;
-			}
-
-			//everything's good, lets see what mandrill said
-			else{
-				// console.log(req.param('encodedUploads'));
-				res.send(response);
-				return;
-			}
+			
+		}, function(result) {
+		    console.log(result);
+		    res.send(result);
+			return;
+		}, function(e) {
+		    // Mandrill returns the error as an object with name and message keys
+		    console.log('A mandrill error occurred: ' + e.name + ' - ' + e.message);
+		    // A mandrill error occurred: Unknown_Subaccount - No subaccount exists with the id 'customer-123'
+		    console.log( JSON.stringify(e) );
+			res.send(e);
+			return;
 		});
 
 	}

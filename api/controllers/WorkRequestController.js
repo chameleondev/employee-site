@@ -131,7 +131,7 @@ module.exports = {
 			scientificBackground : req.param('scientificBackground'),
 			extensions : req.param('extensions'),
 			selectedDimension : req.param('selectedDimension'),
-			orientations : req.param('orientations'),
+			orientation : req.param('orientation'),
 			pages : req.param('pages'),
 			firstDraftBy : req.param('firstDraftBy'),
 			firstDraftByTime : req.param('firstDraftByTime'),
@@ -139,11 +139,13 @@ module.exports = {
 			finalDeliveryDateTime : req.param('finalDeliveryDateTime'),
 			asap : req.param('asap'),
 			uploadPaths : req.param('uploadPaths'),
-			serverLoc : req.param('serverLoc'),
+			// serverLoc : req.param('serverLoc'),
 			medicalIllustrations : req.param('medicalIllustrations'),
 			medicalPresentations : req.param('medicalPresentations'),
 			infographics : req.param('infographics'),
-			ibook : req.param('ibook')
+			ibook : req.param('ibook'),
+			deliverySelection : req.param('deliverySelection')
+
 		};
 
 
