@@ -1,0 +1,234 @@
+<div class="form-section">
+
+				<h2 class="title section-title" id="formSection4">
+					<span class="title-icon title4-icon"></span>
+					Delivery
+				</h2>
+
+				<h3 class="title sub-title" id="deliveryDateTitle">Delivery Date</h3>
+
+				<div class="form-group normal-row">
+	<div class="col-sm-3">
+		<label class="checkbox-inline">
+			<div class="radio-icon" ng-class="{'active' : request_form.delivery_selection.$valid}">
+				<div class="checked-radio-icon" ng-class="{'active': form.deliverySelection == 'Normal'}"></div>
+			</div>
+			<input 
+			type="radio" 
+			id="normal-delivery"
+			name="delivery_selection"
+			ng-model="form.deliverySelection"  
+			value="Normal"> Normal 
+		</label>
+	</div>
+
+	<div class="col-sm-9">
+		<div class="row bottom20" ng-hide="form.jobType === 'Editorial Amends'">
+			<label for="first-draft-by" class="col-sm-3 control-label">First draft by</label>
+			<div class="col-sm-4">
+				<div class="input-group">
+					<input 
+					type="text" 
+					class="form-control date-selection" 
+					id="first-draft-by"
+    				name="first-draft-by"
+    				ng-model="form.firstDraftBy"  
+					placeholder="DD/MM/YYYY"
+					date-picker
+					readonly
+					ng-disabled="disablePicker">
+					<span class="input-group-addon glyphicon glyphicon-calendar" disableme="{{disablePicker}}"></span>
+				</div>
+			</div>	
+
+			<label for="first-draft-by-time" class="col-sm-2 control-label">Time</label>
+			<div class="col-sm-3">
+				<select 
+				class="form-control"
+				id="first-draft-by-time"
+				name="first-draft-by_time"
+				ng-model="form.firstDraftByTime"
+				ng-disabled="disablePicker"
+				>
+				  <option>9AM GMT</option>
+				  <option>12PM GMT</option>
+				  <option>EOB GMT</option>
+				  <option>9AM EST</option>
+				  <option>12PM EST</option>
+				  <option>EOB EST</option>
+				</select>
+			</div>
+		</div>
+		
+		<div class="row">
+			<label for="final-delivery-date" class="col-sm-3 control-label">Final delivery date</label>
+			<div class="col-sm-4">
+				<div class="input-group">
+					<input 
+					type="text" 
+					class="form-control date-selection" 
+					id="final-delivery-date"
+    				name="final_delivery_date"
+    				ng-model="form.finalDeliveryDate"  
+					placeholder="DD/MM/YYYY"
+					date-picker
+					readonly
+					ng-disabled="disablePicker">
+					<span class="input-group-addon glyphicon glyphicon-calendar" disableme="{{disablePicker}}"></span>
+				</div>
+			</div>
+
+			<label for="final-delivery-date-time" class="col-sm-2 control-label">Time</label>
+			<div class="col-sm-3">
+				<select 
+				class="form-control"
+				id="final-delivery-date-time"
+				name="final_delivery_date_time"
+				ng-model="form.finalDeliveryDateTime"
+				ng-disabled="disablePicker">
+				  <option>9AM GMT</option>
+				  <option>12PM GMT</option>
+				  <option>EOB GMT</option>
+				  <option>9AM EST</option>
+				  <option>12PM EST</option>
+				  <option>EOB EST</option>
+				</select>
+			</div>	
+		</div>
+	</div>
+</div>
+
+				<!-- <div class="form-group">
+					<div class="col-sm-3">
+						<label class="checkbox-inline">
+							<div class="radio-icon" ng-class="{'active' : request_form.delivery_selection.$valid}">
+								<div class="checked-radio-icon" ng-class="{'active': form.deliverySelection == 'Normal'}"></div>
+							</div>
+							<input 
+							type="radio" 
+							id="normal-delivery"
+		    				name="delivery_selection"
+		    				ng-model="form.deliverySelection"  
+							value="Normal"> Normal 
+						</label>
+					</div>
+					<label for="first-draft-by" class="col-sm-2 control-label">First draft by</label>
+					<div class="col-sm-3">
+						<div class="input-group">
+							<input 
+							type="text" 
+							class="form-control date-selection" 
+							id="first-draft-by"
+		    				name="first-draft-by"
+		    				ng-model="form.firstDraftBy"  
+							placeholder="DD/MM/YYYY"
+							date-picker
+							readonly
+							ng-disabled="disablePicker || form.jobType === 'Editorial Amends'">
+							<span class="input-group-addon glyphicon glyphicon-calendar" disableme="{{disablePicker}}"></span>
+						</div>
+					</div>	
+
+					<label for="first-draft-by-time" class="col-sm-1 control-label">Time</label>
+					<div class="col-sm-3">
+						<select 
+						class="form-control"
+						id="first-draft-by-time"
+	    				name="first-draft-by_time"
+	    				ng-model="form.firstDraftByTime"
+	    				ng-disabled="disablePicker || form.jobType === 'Editorial Amends'"
+						>
+						  <option>9AM GMT</option>
+						  <option>12PM GMT</option>
+						  <option>EOB GMT</option>
+						  <option>9AM EST</option>
+						  <option>12PM EST</option>
+						  <option>EOB EST</option>
+						</select>
+					</div>	
+				</div> -->
+
+				<!-- <div class="form-group">
+					<label for="final-delivery-date" class="col-sm-2 col-sm-offset-3 control-label">Final delivery date</label>
+					<div class="col-sm-3">
+						<div class="input-group">
+							<input 
+							type="text" 
+							class="form-control date-selection" 
+							id="final-delivery-date"
+		    				name="final_delivery_date"
+		    				ng-model="form.finalDeliveryDate"  
+							placeholder="DD/MM/YYYY"
+							date-picker
+							readonly
+							ng-disabled="disablePicker">
+							<span class="input-group-addon glyphicon glyphicon-calendar" disableme="{{disablePicker}}"></span>
+						</div>
+					</div>
+
+					<label for="final-delivery-date-time" class="col-sm-1 control-label">Time</label>
+					<div class="col-sm-3">
+						<select 
+						class="form-control"
+						id="final-delivery-date-time"
+	    				name="final_delivery_date_time"
+	    				ng-model="form.finalDeliveryDateTime"
+	    				ng-disabled="disablePicker">
+						  <option>9AM GMT</option>
+						  <option>12PM GMT</option>
+						  <option>EOB GMT</option>
+						  <option>9AM EST</option>
+						  <option>12PM EST</option>
+						  <option>EOB EST</option>
+						</select>
+					</div>	
+				</div> -->
+
+				<div class="form-group twenty-four-row">
+					<div class="col-sm-3 form-inline">
+						<label class="checkbox-inline">
+							<div class="radio-icon" ng-class="{'active' : request_form.delivery_selection.$valid}">
+								<div class="checked-radio-icon" ng-class="{'active': form.deliverySelection == '24 Hours'}"></div>
+							</div>
+							<input 
+							type="radio" 
+							id="twenty-four"
+		    				name="delivery_selection"
+		    				ng-model="form.deliverySelection"  
+							value="24 Hours"> 24 hours 
+						</label>
+					</div>
+
+					<div class="col-sm-9">
+						<input 
+							type="text" 
+							class="form-control pull-right" 
+							id="twenty-four-date" 
+							name="twenty_four_date" 
+							ng-model="form.twentyFourDate" 
+							placeholder="DD/MM/YYYY  HH:MM"
+							style="width:200px"
+							readonly>
+					</div>
+
+
+				</div>
+
+				<div class="form-group asap-row">
+					<div class="col-md-12">
+						<label class="checkbox-inline">
+							<div class="radio-icon" ng-class="{'active' : request_form.delivery_selection.$valid}">
+								<div class="checked-radio-icon" ng-class="{'active': form.deliverySelection == 'ASAP'}"></div>
+							</div>
+							<input 
+							type="radio" 
+							id="asap"
+		    				name="delivery_selection"
+		    				ng-model="form.deliverySelection"  
+							value="ASAP"> ASAP (Please speak to Mark or Sandra before selecting)
+						</label>
+					</div>
+				</div>
+
+				
+			</div>	<!-- form-section -->

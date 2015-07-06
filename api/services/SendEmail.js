@@ -113,24 +113,96 @@ module.exports = {
 		// if(req.param('serverLoc')) msg+= '<b>Server location:</b> '+req.param('serverLoc')+' <br />';
 
 
-		// var userObject = {
-		// 	jobInformation : [
-		// 		{name : 'Job Code', val : req.param('jobCode')},
-		// 		{name : 'Job Type', val : req.param('jobType')},
-		// 		{name : 'Submitted by', val : req.param('formUser')},
-		// 		{name : 'Office', val : req.param('office')},
-		// 		{name : 'Email', val : req.param('email')},
-		// 		{name : 'Client', val : req.param('client')},
-		// 		{name : 'Product', val : req.param('product')},
-		// 		{name : 'Email', val : req.param('email')},
-		// 		{name : 'Project Title', val : req.param('projectTitle')},
-		// 		{name : 'Account Lead', val : req.param('accountPersonFname')},
-		// 		{name : 'Budget', val : req.param('budget')},
-		// 		{name : 'Design Project', val : req.param('accountPersonFname')},
-		// 		{name : 'Typsetting Project', val : req.param('accountPersonFname')},
-		// 		{name : 'Digital Project', val : req.param('accountPersonFname')}
-		// 	]
-		// };
+		var formatRow = function(arr){
+			var html = '';
+
+			for (var i = 0; i < arr.length; i++) {
+				if (i%2 === 0) {
+					html+='<tr> \n'
+				}
+
+				html+='<td width="100" valign="top">'+arr[i].name+'</td> \n'
+				html+='<td width="200" valign="top" style="color:#f5ae16">'+arr[i].val+'</td> \n'
+
+				if (i%2 !== 0) {
+					html+='</tr>\n'
+				}
+			};
+
+			return html;
+		};
+
+
+		var userObject = {
+			jobInformation : [
+				{name : 'Job Code', val : req.param('jobCode')},
+				{name : 'Job Type', val : req.param('jobType')},
+				{name : 'Submitted by', val : req.param('formUser')},
+				{name : 'Office', val : req.param('office')},
+				{name : 'Email', val : req.param('email')},
+				{name : 'Client', val : req.param('client')},
+				{name : 'Product', val : req.param('product')},
+				{name : 'Email', val : req.param('email')},
+				{name : 'Project Title', val : req.param('projectTitle')},
+				{name : 'Account Lead', val : req.param('accountPersonFname')},
+				{name : 'Budget', val : req.param('budget')},
+				{name : 'Design Project', val : req.param('desProj')},
+				{name : 'Typsetting Project', val : req.param('typeProj')},
+				{name : 'Digital Project', val : req.param('digProj')}
+			],
+			task : [
+				{name : 'Task Specific Description', val : req.param('taskDesc')},
+				{name : 'Any Other Creative Deliverables', val : req.param('explainPiece')},
+				{name : 'Studio Hours', val : req.param('studioHours')},
+				{name : 'Designer Hours', val : req.param('desHours')},
+				{name : 'Senior Designer Hours', val : req.param('sdesHours')},
+				{name : 'Digital Designer Hours', val : req.param('digDes')},
+				{name : 'Design Director Hours', val : req.param('desDir')},
+				{name : 'Creative Director Hours', val : req.param('cdHours')},
+				{name : 'Group Director', val : req.param('gdHours')},
+				{name : 'Need An Estimate', val : req.param('needEstHours')}
+			],
+			delivery :[
+				{name :'Delivery Type', val : req.param('deliverySelection')},
+				{name :'First Draft By Date', val : req.param('firstDraftBy')},
+				{name :'First Draft By Time', val : req.param('firstDraftByTime')},
+				{name :'Final Delivery Date', val : req.param('finalDeliveryDate')},
+				{name :'Final Delivery Time', val : req.param('finalDeliveryDateTime')}
+			],
+			instructions : [
+				{name : 'Pitch Mockup', val : req.param('pitchMockup')},
+				{name : 'Creative/Design Concept', val : req.param('creativeDesignCon')},
+				{name : 'Video', val : req.param('video')},
+				{name : 'Digital Application Design', val : req.param('digitalAppDes')},
+				{name : 'Logo', val : req.param('logo')},
+				{name : 'Figure Redraws', val : req.param('figureRedraws')},
+				{name : 'Layout', val : req.param('layout')},
+				{name : 'Medical Illustrations', val : req.param('medicalIllustrations')},
+				{name : 'Medical Presentations', val : req.param('medicalPresentations')},
+				{name : 'Infographics', val : req.param('infographics')},
+				{name : 'iBook', val : req.param('ibook')},
+				{name : 'PPT', val : req.param('whereUsedPpt')},
+				{name : 'Word', val : req.param('whereUsedWord')},
+				{name : 'Digital Application', val : req.param('whereUsedDigApp')},
+				{name : 'Print', val : req.param('whereUsedPrint')},
+				{name : 'Other', val : req.param('whereusedOther')},
+				{name : 'Branded', val : req.param('branded')},
+				{name : 'Unbranded', val : req.param('unbranded')},
+				{name : 'Soft Branded', val : req.param('softBranded')},
+				{name : 'Unknown', val : req.param('brandedUnknown')},
+				{name : 'Other', val : req.param('brandedOther')},
+				{name : 'Logos To Be Included', val : req.param('logosIncluded')},
+				{name : 'Visual Style, Look And Feel', val : req.param('lookAndFeel')},
+				{name : 'Scientific Background', val : req.param('scientificBackground')},
+				{name : 'Type of File', val : req.param('extensions')},
+				{name : 'Dimensions', val : req.param('selectedDimension')},
+				{name : 'Orientation', val : req.param('selectedOrientation')},
+				{name : 'Pages', val : req.param('pages')}
+			],
+			attachments : [
+				{name : 'Has THis Content Been Editorially Reviewed', val : req.param('editorialReview')}
+			]
+		};
 
 		var recipients = [{
 				name: 'Sandra Herrera',
@@ -260,6 +332,8 @@ module.exports = {
 		// 		return;
 		// 	}
 		// });
+		
+		var jobInfoContent = formatRow(userObject.jobInformation);
 
 
 		mandrill_client.messages.sendTemplate({
@@ -274,8 +348,20 @@ module.exports = {
 				from_email: 'admin@chameleon-web.com',
 				merge_language : 'handlebars',
 				global_merge_vars : [{
-					name: "Title",
-            		content: "Test title"
+					name: "JobInformation",
+            		content: jobInfoContent
+				},{
+					name: "Task",
+            		content: userObject.task
+				},{
+					name: "Delivery",
+            		content: userObject.delivery
+				},{
+					name: "Instructions",
+            		content: userObject.instructions
+				},{
+					name: "Attachments",
+            		content: userObject.attachments
 				}],
 				// html: msg,
 				subject: 'New job No: '+ req.param('jobCode'),

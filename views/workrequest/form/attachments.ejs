@@ -1,0 +1,125 @@
+<div class="form-section">
+
+	<h2 class="title section-title" id="formSection5">
+		<span class="title-icon title5-icon"></span>
+		Attachments
+	</h2>
+
+	<h3 class="title sub-title" id="referenceMaterialsTitle">Reference Materials</h3>
+
+	<!-- <div class="form-group">
+		<div class="col-md-12">
+			<label for="server-loc">Server Location</label>
+			<input 
+			type="text" 
+			class="form-control"
+			id="server-loc"
+			name="server_loc"
+			ng-model="form.serverLoc"  
+			placeholder="e.g \\CHAFS1\CDSTransfer\Bayer">
+		</div>
+	</div> -->
+
+	<div class="form-group">
+		<div class="col-sm-12">
+			<label>Has this content been editorially reviewed?</label>
+		</div>
+		
+		<div class="col-sm-12">
+		
+		<label for="review-yes" class="radio-inline">
+			<div class="radio-icon" ng-class="{'active' : request_form.editorial_review.$valid}">
+				<div class="checked-radio-icon" ng-class="{'active': form.editorialReview == 'Yes'}"></div>
+			</div>
+			<input 
+			type="radio" 
+			id="review-yes" 
+			name="editorial_review" 
+			ng-model="form.editorialReview" 
+			value="Yes" 
+			ng-required="!form.editorialReview"> Yes
+		</label>
+		
+		<label for="review-no-concept" class="radio-inline">
+			<div class="radio-icon" ng-class="{'active' : request_form.editorial_review.$valid}">
+				<div class="checked-radio-icon" ng-class="{'active': form.editorialReview == 'No, not relevant (e.g design concept)'}"></div>
+			</div>
+			<input 
+			type="radio" 
+			id="review-no-concept" 
+			name="editorial_review" 
+			ng-model="form.editorialReview" 
+			value="No, not relevant (e.g design concept)" 
+			ng-required="!form.editorialReview"> No, not relevant (e.g design concept)
+		</label>
+
+		<label for="review-no" class="radio-inline">
+			<div class="radio-icon" ng-class="{'active' : request_form.editorial_review.$valid}">
+				<div class="checked-radio-icon" ng-class="{'active': form.editorialReview == 'No'}"></div>
+			</div>
+			<input 
+			type="radio" 
+			id="review-no" 
+			name="editorial_review" 
+			ng-model="form.editorialReview" 
+			value="No" 
+			ng-required="!form.editorialReview"> No
+		</label>
+		</div>
+
+		<div ng-show="form.editorialReview === 'No'" class="col-sm-12">
+			<div class="bg-danger" style="padding: 10px;margin-top: 15px;">
+				<small>I acknowledge that sending unedited copy may incur additional time and costs.</small>
+
+				<label class="checkbox-inline">
+					<div class="checkbox-icon" style="left: 0px;top: -10px;" ng-class="{'active' : request_form.agreement.$valid}">
+						<div class="checked-checkbox-icon" ng-class="{'active': form.agreement}"></div>
+					</div>
+					<input 
+					type="checkbox" 
+					id="agreement"
+    				name="agreement"
+    				ng-required="form.editorialReview === 'No'"
+    				ng-model="form.agreement" 
+					ng-true-value="'Soft Branded'">
+				</label>
+			</div>
+		</div>
+	</div>
+
+	<div class="form-group">
+		<div class="col-md-12 file-upload-section">
+			<label>Reference Materials / Annotated Files</label>
+			
+			<div>
+				<label for="file-uploads" class="btn btn-default"> Choose Files
+					<input type="file" id="file-uploads" name="file_uploads" ng-model="form.fileUploads" multiple nv-file-select uploader="uploader"/>
+				</label>
+			</div><br>
+			
+			<div class="drop-zone" uploader="uploader" nv-file-over ng-class="{'bg-danger' : totalFileSize()>25}">
+				<h3>Drop files here <i class="glyphicon glyphicon-upload"></i></h3>
+
+				<p class="pull-left">Total size: {{totalFileSize() | number:2}}mb </p>
+				<p ng-show="totalFileSize()>15" class="text-danger pull-right">File size must not exceed 15mb</p>
+
+				  <!-- <ul>
+		            <li ng-repeat="item in uploader.queue">
+		                Name: {{item.file.name}} 
+		                <button ng-click="item.remove()">Delete</button>
+		            </li>
+		        </ul> -->
+
+		        <table class="table">
+				  <tr ng-repeat="item in uploader.queue">
+				  	<td><i class="glyphicon glyphicon-file"></i></td>
+				  	<td>Name: {{item.file.name}} </td>
+				  	<td><button ng-click="removeItem($index,item)" class="btn btn-danger">Delete</button></td>
+				  </tr>
+				</table>
+			</div>
+			
+		</div>
+	</div>
+	
+</div> <!-- form-section -->

@@ -1,0 +1,201 @@
+<div class="form-section instructions" ng-hide="form.jobType === 'Editorial Amends'">
+
+				<h2 class="title section-title" id="formSection2">
+					<span class="title-icon title2-icon"></span>
+					Task
+				</h2>
+
+				<div class="form-group">
+
+					<div class="col-md-12">
+						<label id="taskDescTitle">Task Specific Description</label>
+	    				<textarea 
+	    				rows="5" 
+	    				class="form-control" 
+	    				id="task-desc"
+	    				name="task_desc"
+	    				ng-model="form.taskDesc"  
+	    				placeholder="e.g Create a design theme"
+	    				ng-required="form.jobType !== 'Editorial Amends'"></textarea>
+					</div>
+					
+				</div>
+
+				<div class="form-group">
+
+					<div class="col-md-12">
+						<label id="taskDescTitle" style="margin-right:10px;">Are there any other creative deliverables for this project</label>
+
+						<label class="checkbox-inline">
+							<div class="checkbox-icon" ng-class="{'active' : request_form.multiple_pieces.$valid}">
+								<div class="checked-checkbox-icon" ng-class="{'active': form.multiplePieces}"></div>
+							</div>
+							<input 
+							type="checkbox" 
+							id="multiple-pieces"
+							name="multiple_pieces"
+		    				ng-model="form.multiplePieces" 
+							ng-true-value="'Multiple pieces'" 
+							> Yes
+						</label>
+
+
+	    				<!-- <label for="yes-multiple" class="radio-inline">
+							<div class="radio-icon" ng-class="{'active' : request_form.multiple_pieces.$valid}">
+								<div class="checked-radio-icon" ng-class="{'active': form.multiplePieces == 'Multiple pieces'}"></div>
+							</div>
+							<input 
+							type="radio"
+							id="yes-multiple" 
+							name="multiple_pieces"
+							ng-model="form.multiplePieces" 
+							value="Multiple pieces "
+							ng-required="!(form.multiplePieces === 'Single piece')"> Yes
+						</label>
+
+						<label for="no-multiple" class="radio-inline">
+							<div class="radio-icon" ng-class="{'active' : request_form.multiple_pieces.$valid}">
+								<div class="checked-radio-icon" ng-class="{'active': form.multiplePieces == 'Single piece'}"></div>
+							</div>
+							<input 
+							type="radio" 
+							id="no-multiple" 
+							name="multiple_pieces"
+							ng-model="form.multiplePieces"
+							value="Single piece"
+							ng-required="!(form.multiplePieces === 'Multiple pieces')"> No
+						</label> -->
+					</div>
+					
+				</div>
+
+				<div class="form-group" ng-show="form.multiplePieces === 'Multiple pieces'">
+
+					<div class="col-md-12">
+						<label id="explain-piece">Please Explain</label>
+	    				<textarea 
+	    				rows="5" 
+	    				class="form-control" 
+	    				id="explain-piece"
+	    				name="explain_piece"
+	    				ng-model="form.explainPiece"  
+	    				placeholder=""></textarea>
+					</div>
+					
+				</div>
+
+				<hr>
+
+				<h3 class="title sub-title" id="hoursForTaskTitle">Hours For This Task Only (<span>Not entire project</span>)</h3>
+
+				<div class="form-group">
+					<label for="studio-hours" class="col-sm-1 control-label">Studio</label>
+					<div class="col-sm-1">
+						<input 
+						type="text" 
+						class="form-control" 
+						id="studio-hours"
+	    				name="studio_hours"
+	    				ng-model="form.studioHours" 
+						placeholder=""
+						ng-class="{'active' : request_form.need_est_hours.$invalid}">
+					</div>
+
+					<label for="des-hours" class="col-sm-1 control-label">Des</label>
+					<div class="col-sm-1">
+						<input 
+						type="text" 
+						class="form-control" 
+						id="des-hours"
+	    				name="des_hours"
+	    				ng-model="form.desHours"  
+						placeholder=""
+						ng-class="{'active' : request_form.need_est_hours.$invalid}">
+					</div>
+
+					<label for="sdes-hours" class="col-sm-1 control-label">sDes</label>
+					<div class="col-sm-1">
+						<input 
+						type="text" 
+						class="form-control" 
+						id="sdes-hours"
+	    				name="sdes_hours"
+	    				ng-model="form.sdesHours" 
+						placeholder=""
+						ng-class="{'active' : request_form.need_est_hours.$invalid}">
+					</div>
+
+					<label for="dig-des" class="col-sm-1 control-label">Digital Des</label>
+					<div class="col-sm-1">
+						<input 
+						type="text" 
+						class="form-control" 
+						id="dig-des"
+	    				name="dig_des"
+	    				ng-model="form.digDes" 
+						placeholder=""
+						ng-class="{'active' : request_form.need_est_hours.$invalid}">
+					</div>
+
+				</div>
+
+				<div class="form-group">
+					
+					<label for="des-dir" class="col-sm-1 control-label">Design Dir</label>
+					<div class="col-sm-1">
+						<input 
+						type="text" 
+						class="form-control" 
+						id="des-dir"
+	    				name="des_dir"
+	    				ng-model="form.desDir" 
+						placeholder=""
+						ng-class="{'active' : request_form.need_est_hours.$invalid}">
+					</div>
+
+					<label for="cd-hours" class="col-sm-1 control-label">CD</label>
+					<div class="col-sm-1">
+						<input 
+						type="text" 
+						class="form-control" 
+						id="cd-hours"
+	    				name="cd_hours"
+	    				ng-model="form.cdHours" 
+						placeholder=""
+						ng-class="{'active' : request_form.need_est_hours.$invalid}">
+					</div>
+
+					<label for="gd-hours" class="col-sm-1 control-label">GD</label>
+					<div class="col-sm-1">
+						<input 
+						type="text" 
+						class="form-control" 
+						id="gd-hours"
+	    				name="gd_hours"
+	    				ng-model="form.gdHours" 
+						placeholder=""
+						ng-class="{'active' : request_form.need_est_hours.$invalid}">
+					</div>
+
+				</div>
+
+				<div class="form-group">
+					<div class="col-md-12">
+						<label class="checkbox-inline">
+							<div class="checkbox-icon" ng-class="{'active' : request_form.need_est_hours.$valid}">
+								<div class="checked-checkbox-icon" ng-class="{'active': form.needEstHours}"></div>
+							</div>
+							<input 
+							type="checkbox" 
+							id="need-est-hours"
+		    				name="need_est_hours"
+		    				ng-model="form.needEstHours" 
+							ng-true-value="'Need an estimate'"
+							ng-required="((form.desHours + form.sdesHours + form.studioHours + form.cdHours + form.gdHours + form.digDes + form.desDir) < 0.5) || !form.desHours && !form.sdesHours && !form.studioHours && !form.cdHours && !form.gdHours && !form.digDes && !form.desDir && form.jobType !== 'Editorial Amends'"> Need an Estimate
+						</label>
+					</div>
+				</div>
+
+
+				
+			</div>	<!-- form-section -->

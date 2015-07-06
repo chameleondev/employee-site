@@ -1,0 +1,517 @@
+<div class="form-section" ng-hide="form.jobType === 'Editorial Amends'">
+
+				<h2 class="title section-title" id="formSection3">
+					<span class="title-icon title3-icon"></span>
+					Instructions
+				</h2>
+
+				<h3 class="title sub-title" id="typeOfBriefTitle">Type of brief</h3>
+
+				<label class="  checkbox-inline">
+					<div class="checkbox-icon" ng-class="{'active' : request_form.creative_brief.$valid || form.deliveryFormat}">
+						<div class="checked-checkbox-icon" ng-class="{'active': form.creativeBrief}"></div>
+					</div>
+					<input 
+					type="checkbox" 
+					id="creative-brief"
+					name="creative_brief"
+    				ng-model="form.creativeBrief" 
+					ng-true-value="'Creative Brief'" 
+					ng-required="!form.deliveryFormat && form.jobType !== 'Editorial Amends'"> Creative Brief
+				</label>
+
+				<small ng-show="form.jobType === 'Existing Job'">Lorem ipsum dolor sit amet, consectetur adipisicing elit.</small>
+
+				<label class="checkbox-inline" ng-hide="form.jobType === 'Existing Job'">
+					<div class="checkbox-icon" ng-class="{'active' : request_form.delivery_format.$valid || form.creativeBrief}">
+						<div class="checked-checkbox-icon" ng-class="{'active': form.deliveryFormat}"></div>
+					</div>
+					<input 
+					type="checkbox" 
+					id="delivery-format"
+					name="delivery_format"
+    				ng-model="form.deliveryFormat" 
+					ng-true-value="'Delivery Format'"
+					ng-required="form.jobType !== 'Existing Job' && form.jobType !== 'Editorial Amends'"> Delivery Format
+				</label>
+
+				<div ng-show="form.creativeBrief === 'Creative Brief'">
+
+				<hr>
+
+				<h3 class="title sub-title" id="typeOfWorkTitle">Type Of Work</h3>
+
+				<div class="form-group">
+					<div class="col-md-12">
+						<label class="checkbox-inline">
+							<div class="checkbox-icon" ng-class="{'active' : request_form.picth_mockup.$valid}">
+								<div class="checked-checkbox-icon" ng-class="{'active': form.pitchMockup}"></div>
+							</div>
+							<input 
+							type="checkbox" 
+							id="pitch-mockup"
+		    				name="picth_mockup"
+		    				ng-model="form.pitchMockup"
+		    				ng-true-value="'Pitch Mockup'"
+		    				ng-required="typeOfWork()" 
+							> Pitch Mockup
+						</label>
+
+						<label class="checkbox-inline">
+							<div class="checkbox-icon" ng-class="{'active' : request_form.creative_design_con.$valid}">
+								<div class="checked-checkbox-icon" ng-class="{'active': form.creativeDesignCon}"></div>
+							</div>
+							<input 
+							type="checkbox" 
+							id="creative-design-con"
+		    				name="creative_design_con"
+		    				ng-model="form.creativeDesignCon" 
+		    				ng-true-value="'Creative/Design Concept'"
+		    				ng-required="typeOfWork()"
+							> Creative/Design Concept
+						</label>
+
+						<label class="checkbox-inline">
+							<div class="checkbox-icon" ng-class="{'active' : request_form.video.$valid}">
+								<div class="checked-checkbox-icon" ng-class="{'active': form.video}"></div>
+							</div>
+							<input 
+							type="checkbox" 
+							id="video"
+		    				name="video"
+		    				ng-model="form.video" 
+							ng-true-value="'Video'"
+							ng-required="typeOfWork()"> Video
+						</label>
+
+						<label class="checkbox-inline">
+							<div class="checkbox-icon" ng-class="{'active' : request_form.digital_app_des.$valid}">
+								<div class="checked-checkbox-icon" ng-class="{'active': form.digitalAppDes}"></div>
+							</div>
+							<input 
+							type="checkbox" 
+							id="digital-app-des"
+		    				name="digital_app_des"
+		    				ng-model="form.digitalAppDes" 
+							ng-true-value="'Digital Application Design'"
+							ng-required="typeOfWork()"> Digital Application Design
+						</label>
+
+						<label class="checkbox-inline">
+							<div class="checkbox-icon" ng-class="{'active' : request_form.logo.$valid}">
+								<div class="checked-checkbox-icon" ng-class="{'active': form.logo}"></div>
+							</div>
+							<input 
+							type="checkbox" 
+							id="logo"
+		    				name="logo"
+		    				ng-model="form.logo"
+							ng-true-value="'Logo'"
+							ng-required="typeOfWork()"> Logo
+						</label>
+					</div>
+				</div>
+
+				<div class="form-group form-inline">
+					<div class="col-md-12">
+						<label class="checkbox-inline">
+							<div class="checkbox-icon" ng-class="{'active' : request_form.figure_redaws.$valid}">
+								<div class="checked-checkbox-icon" ng-class="{'active': form.figureRedraws}"></div>
+							</div>
+							<input 
+							type="checkbox" 
+							id="figure-redaws"
+		    				name="figure_redaws"
+		    				ng-model="form.figureRedraws" 
+							ng-true-value="'Figure Redraws'"
+							ng-required="typeOfWork()"> Figure Redraws
+						</label>
+
+						<label class="checkbox-inline">
+							<div class="checkbox-icon" ng-class="{'active' : request_form.layout.$valid}">
+								<div class="checked-checkbox-icon" ng-class="{'active': form.layout}"></div>
+							</div>
+							<input 
+							type="checkbox" 
+							id="layout"
+		    				name="layout"
+		    				ng-model="form.layout" 
+							ng-true-value="'Layout'"
+							ng-required="typeOfWork()"> Layout
+						</label>
+
+						<label class="checkbox-inline">
+							<div class="checkbox-icon" ng-class="{'active' : request_form.medical_illustrations.$valid}">
+								<div class="checked-checkbox-icon" ng-class="{'active': form.medicalIllustrations}"></div>
+							</div>
+							<input 
+							type="checkbox" 
+							id="medical-illustrations"
+		    				name="medical_illustrations"
+		    				ng-model="form.medicalIllustrations" 
+							ng-true-value="'Medical Illustrations'"
+							ng-required="typeOfWork()"> Medical Illustrations
+						</label>
+
+						<label class="checkbox-inline">
+							<div class="checkbox-icon" ng-class="{'active' : request_form.medical_presentations.$valid}">
+								<div class="checked-checkbox-icon" ng-class="{'active': form.medicalPresentations}"></div>
+							</div>
+							<input 
+							type="checkbox" 
+							id="medical-presentations"
+		    				name="medical_presentations"
+		    				ng-model="form.medicalPresentations" 
+							ng-true-value="'Medical Presentations'"
+							ng-required="typeOfWork()"> Medical Presentations
+						</label>
+
+						<label class="checkbox-inline">
+							<div class="checkbox-icon" ng-class="{'active' : request_form.infographics.$valid}">
+								<div class="checked-checkbox-icon" ng-class="{'active': form.infographics}"></div>
+							</div>
+							<input 
+							type="checkbox" 
+							id="infographics"
+		    				name="infographics"
+		    				ng-model="form.infographics" 
+							ng-true-value="'Infographics'"
+							ng-required="typeOfWork()"> Infographics
+						</label>
+
+						<label class="checkbox-inline">
+							<div class="checkbox-icon" ng-class="{'active' : request_form.ibook.$valid}">
+								<div class="checked-checkbox-icon" ng-class="{'active': form.ibook}"></div>
+							</div>
+							<input 
+							type="checkbox" 
+							id="ibook"
+		    				name="ibook"
+		    				ng-model="form.ibook" 
+							ng-true-value="'iBook'"
+							ng-required="typeOfWork()"> iBook
+						</label>
+
+						<input 
+						type="text" 
+						placeholder="Other"
+						class="form-control otherType" 
+						name="presented_other"
+						id="presented-other"
+						ng-model="form.presentedOther"
+						ng-required="typeOfWork()">
+					</div>
+				</div>
+
+				<hr>
+
+				<h3 class="title sub-title" id="whereUsedTitle">Where will it be used</h3>
+
+				<div class="form-group">
+					<div class="col-md-12">
+						<label class="checkbox-inline">
+							<div class="checkbox-icon" ng-class="{'active' : request_form.where_used_ppt.$valid}">
+								<div class="checked-checkbox-icon" ng-class="{'active': form.whereUsedPpt}"></div>
+							</div>
+							<input 
+							type="checkbox" 
+							id="where-used-ppt"
+		    				name="where_used_ppt"
+		    				ng-model="form.whereUsedPpt"
+		    				ng-true-value="'PPT'" 
+							> PPT
+						</label>
+
+						<label class="checkbox-inline">
+							<div class="checkbox-icon" ng-class="{'active' : request_form.where_used_word.$valid}">
+								<div class="checked-checkbox-icon" ng-class="{'active': form.whereUsedWord}"></div>
+							</div>
+							<input 
+							type="checkbox" 
+							id="where-used-word"
+		    				name="where_used_word"
+		    				ng-model="form.whereUsedWord" 
+		    				ng-true-value="'Word'"
+							> Word
+						</label>
+
+						<label class="checkbox-inline">
+							<div class="checkbox-icon" ng-class="{'active' : request_form.where_used_dig_app.$valid}">
+								<div class="checked-checkbox-icon" ng-class="{'active': form.whereUsedDigApp}"></div>
+							</div>
+							<input 
+							type="checkbox" 
+							id="where-used-dig-app"
+		    				name="where_used_dig_app"
+		    				ng-model="form.whereUsedDigApp" 
+							ng-true-value="'Digital Application'"
+							> Digital Application (App/Website)
+						</label>
+
+						<label class="checkbox-inline">
+							<div class="checkbox-icon" ng-class="{'active' : request_form.where_used_print.$valid}">
+								<div class="checked-checkbox-icon" ng-class="{'active': form.whereUsedPrint}"></div>
+							</div>
+							<input 
+							type="checkbox" 
+							id="where-used-print"
+		    				name="where_used_print"
+		    				ng-model="form.whereUsedPrint"
+							ng-true-value="'Print'"
+							> Print
+						</label>
+
+						<label class="checkbox-inline">
+							<div class="checkbox-icon" ng-class="{'active' : request_form.where_used_other.$valid}">
+								<div class="checked-checkbox-icon" ng-class="{'active': form.whereUsedOther}"></div>
+							</div>
+							<input 
+							type="checkbox" 
+							id="where-used-other"
+		    				name="where_used_other"
+		    				ng-model="form.whereUsedOther"
+							ng-true-value="'Other'"
+							> Other
+						</label>
+					</div>
+				</div>
+
+
+				<hr>
+
+				<h3 class="title sub-title" id="brandingTitle">Branding</h3>
+
+				<div class="form-group">
+					<div class="col-md-12 form-inline">
+						<label class="checkbox-inline">
+							<div class="checkbox-icon" ng-class="{'active' : request_form.branded.$valid}">
+								<div class="checked-checkbox-icon" ng-class="{'active': form.branded}"></div>
+							</div>
+							<input 
+							type="checkbox" 
+							id="branded"
+		    				name="branded"
+		    				ng-model="form.branded"
+							ng-true-value="'Branded'"> Branded
+						</label>
+
+						<label class="checkbox-inline">
+							<div class="checkbox-icon" ng-class="{'active' : request_form.unbranded.$valid}">
+								<div class="checked-checkbox-icon" ng-class="{'active': form.unbranded}"></div>
+							</div>
+							<input 
+							type="checkbox" 
+							id="unbranded"
+		    				name="unbranded"
+		    				ng-model="form.unbranded"
+							ng-true-value="'Unbranded'"> Unbranded
+						</label>
+
+						<label class="checkbox-inline">
+							<div class="checkbox-icon" ng-class="{'active' : request_form.soft_branded.$valid}">
+								<div class="checked-checkbox-icon" ng-class="{'active': form.softBranded}"></div>
+							</div>
+							<input 
+							type="checkbox" 
+							id="soft-branded"
+		    				name="soft_branded"
+		    				ng-model="form.softBranded" 
+							ng-true-value="'Soft Branded'"> Soft Branded
+						</label>
+
+						<label class="checkbox-inline">
+							<div class="checkbox-icon" ng-class="{'active' : request_form.branded_unknown.$valid}">
+								<div class="checked-checkbox-icon" ng-class="{'active': form.brandedUnknown}"></div>
+							</div>
+							<input 
+							type="checkbox" 
+							id="branded-unknown"
+		    				name="branded_unknown"
+		    				ng-model="form.brandedUnknown" 
+							ng-true-value="'Other'"> Unknown
+						</label>
+
+						<!-- <label class="checkbox-inline">
+							<div class="checkbox-icon" ng-class="{'active' : request_form.branded_other.$valid}">
+								<div class="checked-checkbox-icon" ng-class="{'active': form.brandedOther}"></div>
+							</div>
+							<input 
+							type="checkbox" 
+							id="branded-other"
+		    				name="branded_other"
+		    				ng-model="form.brandedOther" 
+							ng-true-value="'Other'"> Other
+						</label> -->
+
+						<input 
+						type="text" 
+						placeholder="Other"
+						class="form-control otherType" 
+						name="branded_other"
+						id="branded-other"
+						ng-model="form.brandedOther">
+
+					</div>
+				</div>
+
+				<div class="form-group">
+
+					
+					<div class="col-md-12">
+						<label for="logos-included" class=" control-label">Logos to be included</label>
+						<input 
+						type="text" 
+						class="form-control" 
+						id="logos-included"
+	    				name="logos_included"
+	    				ng-model="form.logosIncluded" 
+						placeholder="Enter the names of the logos">
+					</div>
+				
+				</div>
+
+				<div class="form-group">
+
+					<div class="col-md-12">
+						<label for="look-and-feel">Visual style, look and feel, branding specifications</label>
+	    				<textarea 
+	    				rows="5" 
+	    				class="form-control" 
+	    				id="look-and-feel"
+	    				name="look_and_feel"
+	    				ng-model="form.lookAndFeel" 
+	    				placeholder="Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod"></textarea>
+					</div>
+					
+				</div>
+
+				<div class="form-group">
+
+					<div class="col-md-12">
+						<label for="scientific-background">Scientific background</label>
+	    				<textarea 
+	    				rows="5" 
+	    				class="form-control" 
+	    				id="scientific-background"
+	    				name="scientific_background"
+	    				ng-model="form.scientificBackground" 
+	    				placeholder="Enter here the description"></textarea>
+					</div>
+					
+				</div>
+				
+				</div>
+
+				<div ng-show="form.deliveryFormat === 'Delivery Format'">
+				
+				<hr>
+				
+				<h3 class="title sub-title" id="deliveryFormatTitle">Delivery Format</h3>
+
+				<div class="form-group">
+					
+					<div class="col-md-3">
+						<label for="extension">Type of File</label>
+						<select 
+						class="form-control" 
+						ng-change="extAdd('extensions','selectedExtension')"
+						id="extension"
+	    				name="extension"
+	    				ng-model="selectedExtension">
+						  <option>Image for PPT (.jpg, .png)</option>
+						  <option>Vector File (.eps, .ai)</option>
+						  <option>PDF</option>
+						  <option>Hi-res image for print</option>
+						</select>
+						<ul class="delivery-list">
+							<li ng-repeat="ext in form.extensions track by $index">
+								{{ext}}
+								<button type="button" class="close" aria-label="Close" ng-click="extRemove('extensions',$index)"><span aria-hidden="true">&times;</span></button>
+							</li>
+						</ul>
+					</div>
+
+					<div class="col-md-3">
+						<label for="selected-dimension">Dimensions</label>
+						<select 
+						class="form-control" 
+						id="selected-dimension"
+	    				name="selected_dimension"
+	    				ng-change="dimensionCheck()"
+	    				ng-model="form.selectedDimension">
+						  <option>A5 (UK)</option>
+						  <option>A4 (UK)</option>
+						  <option>A3 (UK)</option>
+						  <option>A2 (UK)</option>
+						  <option>A1 (UK)</option>
+						  <option>US Letter</option>
+						  <option>US Tabloid</option>
+						  <option>Mobile</option>
+						  <option>Tablet</option>
+						  <!-- <option>Desktop</option> -->
+						  <option>Other</option>
+						</select>
+						<!-- <ul class="delivery-list">
+							<li ng-repeat="dimension in form.dimensions track by $index">
+								{{dimension}}
+								<button type="button" class="close" aria-label="Close" ng-click="extRemove('dimensions',$index)"><span aria-hidden="true">&times;</span></button>
+							</li>
+						</ul> -->
+						<input 
+						type="text"
+						class="form-control other-dimension"
+						ng-model="form.otherDimension"
+						ng-show="form.selectedDimension === 'Other'"
+						>
+					</div>
+
+					<!-- <div class="col-md-3">
+						<label for="orientation">Orientation</label>
+						<select 
+						class="form-control" 
+						ng-change="extAdd('orientations','selectedOrientation')"
+						id="orientation"
+	    				name="orientation"
+	    				ng-model="selectedOrientation">
+						  <option>Landscape</option>
+						  <option>Portrait</option>
+						  <option>Not Specified</option>
+						</select>
+						<ul class="delivery-list">
+							<li ng-repeat="orientation in form.orientations track by $index">
+								{{orientation}}
+								<button type="button" class="close" aria-label="Close" ng-click="extRemove('orientations',$index)"><span aria-hidden="true">&times;</span></button>
+							</li>
+						</ul>
+					</div> -->
+
+					<div class="col-md-3">
+						<label for="orientation">Orientation</label>
+						<select 
+						class="form-control" 
+						id="orientation"
+	    				name="orientation"
+	    				ng-model="selectedOrientation">
+						  <option>Landscape</option>
+						  <option>Portrait</option>
+						  <option>Not Specified</option>
+						</select>
+					</div>
+
+					<div class="col-md-3">
+						<label for="pages">Pages</label>
+						<input 
+						type="text" 
+						class="form-control" 
+						id="pages"
+	    				name="pages"
+	    				ng-model="form.pages" 
+						>
+					</div>
+					
+					
+				</div>
+
+				</div>
+
+			</div>	<!-- form-section -->
