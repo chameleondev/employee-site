@@ -50,7 +50,7 @@ module.exports = {
 			encoded
 		;
 
-
+		console.log(req.file('file_uploads'));
 
 		req.file('file_uploads').upload({
 			// ...any other options here...
@@ -145,7 +145,6 @@ module.exports = {
 			infographics : req.param('infographics'),
 			ibook : req.param('ibook'),
 			deliverySelection : req.param('deliverySelection')
-
 		};
 
 

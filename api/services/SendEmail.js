@@ -118,14 +118,35 @@ module.exports = {
 
 			for (var i = 0; i < arr.length; i++) {
 				if (i%2 === 0) {
-					html+='<tr> \n'
+					html+='<tr>\n';
 				}
 
-				html+='<td width="100" valign="top">'+arr[i].name+'</td> \n'
-				html+='<td width="200" valign="top" style="color:#f5ae16">'+arr[i].val+'</td> \n'
+				html+='<td width="100" valign="top">'+arr[i].name+'</td>\n';
+
+				html+='<td width="200" valign="top" style="color:#f5ae16">';
+
+					
+
+					if (arr[i].val && arr[i].val.constructor === Array) {
+
+						for (var n = 0; n < arr[i].val.length; n++) {
+
+							if ((arr[i].val[n] !== 'undefined') && (arr[i].val[n] !== 'false') && (arr[i].val[n] !== undefined)) {
+								html+=arr[i].val[n]+'<br>';
+							}	
+							
+						};
+
+					} else {
+						if ((arr[i].val !== 'false') && (arr[i].val !== 'undefined') && (arr[i].val !== undefined)) {
+							html+=arr[i].val;
+						}		
+					}
+
+				html+='<br><br></td>\n';
 
 				if (i%2 !== 0) {
-					html+='</tr>\n'
+					html+='</tr>\n';
 				}
 			};
 
@@ -142,13 +163,12 @@ module.exports = {
 				{name : 'Email', val : req.param('email')},
 				{name : 'Client', val : req.param('client')},
 				{name : 'Product', val : req.param('product')},
-				{name : 'Email', val : req.param('email')},
 				{name : 'Project Title', val : req.param('projectTitle')},
 				{name : 'Account Lead', val : req.param('accountPersonFname')},
 				{name : 'Budget', val : req.param('budget')},
-				{name : 'Design Project', val : req.param('desProj')},
-				{name : 'Typsetting Project', val : req.param('typeProj')},
-				{name : 'Digital Project', val : req.param('digProj')}
+				{name : 'Type Of Project', val :[req.param('desProj'),
+												req.param('typeProj'),
+												req.param('digProj')]}
 			],
 			task : [
 				{name : 'Task Specific Description', val : req.param('taskDesc')},
@@ -167,30 +187,38 @@ module.exports = {
 				{name :'First Draft By Date', val : req.param('firstDraftBy')},
 				{name :'First Draft By Time', val : req.param('firstDraftByTime')},
 				{name :'Final Delivery Date', val : req.param('finalDeliveryDate')},
-				{name :'Final Delivery Time', val : req.param('finalDeliveryDateTime')}
+				{name :'Final Delivery Time', val : req.param('finalDeliveryDateTime')},
+				{name :'24 hour', val : req.param('twentyFourDate')}
 			],
 			instructions : [
-				{name : 'Pitch Mockup', val : req.param('pitchMockup')},
-				{name : 'Creative/Design Concept', val : req.param('creativeDesignCon')},
-				{name : 'Video', val : req.param('video')},
-				{name : 'Digital Application Design', val : req.param('digitalAppDes')},
-				{name : 'Logo', val : req.param('logo')},
-				{name : 'Figure Redraws', val : req.param('figureRedraws')},
-				{name : 'Layout', val : req.param('layout')},
-				{name : 'Medical Illustrations', val : req.param('medicalIllustrations')},
-				{name : 'Medical Presentations', val : req.param('medicalPresentations')},
-				{name : 'Infographics', val : req.param('infographics')},
-				{name : 'iBook', val : req.param('ibook')},
-				{name : 'PPT', val : req.param('whereUsedPpt')},
-				{name : 'Word', val : req.param('whereUsedWord')},
-				{name : 'Digital Application', val : req.param('whereUsedDigApp')},
-				{name : 'Print', val : req.param('whereUsedPrint')},
-				{name : 'Other', val : req.param('whereusedOther')},
-				{name : 'Branded', val : req.param('branded')},
-				{name : 'Unbranded', val : req.param('unbranded')},
-				{name : 'Soft Branded', val : req.param('softBranded')},
-				{name : 'Unknown', val : req.param('brandedUnknown')},
-				{name : 'Other', val : req.param('brandedOther')},
+				{name : 'Type of Work', val : [
+												req.param('pitchMockup'),
+												req.param('creativeDesignCon'),
+												req.param('video'),
+												req.param('digitalAppDes'),
+												req.param('logo'),
+												req.param('figureRedraws'),
+												req.param('layout'),
+												req.param('medicalIllustrations'),
+												req.param('medicalPresentations'),
+												req.param('infographics'),
+												req.param('ibook'),
+												req.param('presentedOther')
+				]},
+				{name : 'Where Will It Be Used', val : [
+												req.param('whereUsedPpt'),
+												req.param('whereUsedWord'),
+												req.param('whereUsedDigApp'),
+												req.param('whereUsedPrint'),
+												req.param('whereusedOther')
+				]},
+				{name : 'Branded', val : [
+												req.param('branded'),
+												req.param('unbranded'),
+												req.param('softBranded'),
+												req.param('brandedUnknown'),
+												req.param('brandedOther')
+				]},
 				{name : 'Logos To Be Included', val : req.param('logosIncluded')},
 				{name : 'Visual Style, Look And Feel', val : req.param('lookAndFeel')},
 				{name : 'Scientific Background', val : req.param('scientificBackground')},
@@ -200,7 +228,8 @@ module.exports = {
 				{name : 'Pages', val : req.param('pages')}
 			],
 			attachments : [
-				{name : 'Has THis Content Been Editorially Reviewed', val : req.param('editorialReview')}
+				{name : 'Has THis Content Been Editorially Reviewed', val : req.param('editorialReview')},
+				{name : 'Agreement', val : req.param('agreement')}
 			]
 		};
 
@@ -334,6 +363,24 @@ module.exports = {
 		// });
 		
 		var jobInfoContent = formatRow(userObject.jobInformation);
+		var taskContent = formatRow(userObject.task);
+		var deliveryContent = formatRow(userObject.delivery);
+		var instructionsContent = formatRow(userObject.instructions);
+		var attachmentsContent = formatRow(userObject.attachments);
+
+		switch (userObject.delivery[0].val){
+			case 'Normal':
+			var statusImg = 'normal';
+			break;
+
+			case '24 Hours':
+			var statusImg = '24hours';
+			break;
+
+			case 'ASAP':
+			var statusImg = 'asap';
+			break;
+		}
 
 
 		mandrill_client.messages.sendTemplate({
@@ -352,16 +399,19 @@ module.exports = {
             		content: jobInfoContent
 				},{
 					name: "Task",
-            		content: userObject.task
+            		content: taskContent
 				},{
 					name: "Delivery",
-            		content: userObject.delivery
+            		content: deliveryContent
 				},{
 					name: "Instructions",
-            		content: userObject.instructions
+            		content: instructionsContent
 				},{
 					name: "Attachments",
-            		content: userObject.attachments
+            		content: attachmentsContent
+				},{
+					name: "StatusImg",
+            		content: statusImg
 				}],
 				// html: msg,
 				subject: 'New job No: '+ req.param('jobCode'),
