@@ -37,57 +37,6 @@
   </head>
 
   <body <%= res.locals.bodyAttrs %>>
-
-      <nav class="navbar navbar-default">
-        <div class="container">
-          <!-- Brand and toggle get grouped for better mobile display -->
-          <div class="navbar-header">
-            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
-              <span class="sr-only">Toggle navigation</span>
-              <span class="icon-bar"></span>
-              <span class="icon-bar"></span>
-              <span class="icon-bar"></span>
-            </button>
-            
-          </div>
-
-          <!-- Collect the nav links, forms, and other content for toggling -->
-          <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-            <ul class="nav navbar-nav navbar-left">
-              <li class="<% if (title === 'Work Request Form') { %>active<% } %>"><a href="/WorkRequest/form">Work Request form</a></li>
-              <li class="<% if (title === 'Work Request List') { %>active<% } %>"><a href="/WorkRequest/list">List of jobs</a></li>
-
-              <% if(session.authenticated){ %>
-                <li><a href="/user/show/<%= session.User.id %>"><%= session.User.name %></a></li>
-              <% } %>
-              <% if(session.authenticated && session.User.admin){ %>
-                <li><a href="/user">User Administration</a></li>
-              <% } %>
-
-            </ul>
-
-            <div class="nav navbar-nav navbar-right">
-              <% if(session.authenticated){ %>
-                  <a href="/session/destroy" class="btn btn-default navbar-btn navbar-right">sign-out</a>
-                <% } %>
-              </div>
-
-              <% if(!session.authenticated){ %>
-              <form action="/session/create" class="navbar-form navbar-right">
-                <div class="form-group">
-                  <input type="text" placeholder="Email" name="email" class="form-control">
-                </div>
-                <div class="form-group">
-                  <input type="password" placeholder="Password" name="password" class="form-control">
-                </div>
-                <button type="submit" class="btn btn-success">Sign in</button>
-                <input type="hidden" name="_csrf" value="<= _csrf %>">
-              </form>
-          <% } %>
-            </div>
-          </div><!-- /.navbar-collapse -->
-        </div><!-- /.container-fluid -->
-      </nav>
     
     
     <div class="main-body container <%= res.locals.class %>" ng-cloak>

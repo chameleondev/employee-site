@@ -1,24 +1,82 @@
 <h1>Work Request List</h1>
 
-<input type="search" ng-model="requestFilter" placeholder="Search">
+<form method="POST" action="/WorkRequest/list">
+  <input type="search" placeholder="Search" name="search">
+  <input type="submit" class="btn btn-lg btn-primary btn-block" value="Search">
+  <input type="hidden" name="_csrf" value="<%= _csrf %>">
+</form>
+  <% if(search) { %>
+    <h1><%= search %></h1>
+  <% } %>
+
+  <h1>
+    Jobs Found : <%= totalJobs %><br>
+    Number of pages : <%= totalPages %><br>
+    Current page : <%= currentPage  %>
+  </h1>
 
 
-<div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
 
-  <div class="panel panel-default" ng-repeat="request in requests | filter:requestFilter track by $index">
-    <div class="panel-heading" role="tab" id="{{request.id}}">
+
+  <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+
+  <% for(var i = 0;jobs.length > i; i++){ %>
+  <div class="panel panel-default">
+    <div class="panel-heading" role="tab" id="heading<%= jobs[i].id %>">
       <h4 class="panel-title">
-        <a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#body{{request.id}}" aria-expanded="false" aria-controls="body{{request.id}}">
-          <b>Job Code</b> : {{request.jobCode}}  <b>Submtted by</b> : {{request.formUser}}
+        <a role="button" data-toggle="collapse" data-parent="#accordion" href="#<%= jobs[i].id %>" aria-expanded="true" aria-controls="<%= jobs[i].id %>">
+        <b>Job Code</b> : <%= jobs[i].jobCode %>
+
+        <% if(session.authenticated && session.User.admin){ %>
+          <input listed-job type="button" class="btn btn-danger pull-right" id="<%= jobs[i].id %>" value="Delete">
+        <% } %>
         </a>
       </h4>
     </div>
-    <div id="body{{request.id}}" class="panel-collapse collapse" role="tabpanel" aria-labelledby="{{request.id}}">
+    <div id="<%= jobs[i].id %>" class="panel-collapse collapse" role="tabpanel" aria-labelledby="heading<%= jobs[i].id %>">
       <div class="panel-body">
-        Job Type : {{request.jobType}}
+          
+        <dl class="dl-horizontal">
+          <dt><%= jobs[i].jobCode %></dt>
+          <dd><%= jobs[i].jobCode %></dd>
+        </dl>
+
       </div>
     </div>
   </div>
-
+  <% } %> 
 
 </div>
+
+
+  <% if(totalPages > 1){ %>
+
+
+    <a href="/WorkRequest/list/<% if (search) { %>?search=<%= search %><% }; %>">
+      <button>First <<</button>
+    </a>
+
+    <% if (currentPage != 1) { %>
+        <a href="/WorkRequest/list/?skip=<%= skip-20 %><% if (search) { %>&search=<%= search %><% }; %>">
+        <button>Pevious <</button>
+      </a>
+    <% }; %>
+    
+
+    <% if(totalPages != currentPage) { %>
+
+      <a href="/WorkRequest/list/?skip=<%= skip + 20 %><% if (search) { %>&search=<%= search %><% }; %>">
+        <button>next ></button>
+      </a>
+
+    <%  }; %>
+    
+    <a href="/WorkRequest/list/?skip=<%= (totalPages - 1) * 20 %><% if (search) { %>&search=<%= search %><% }; %>">
+      <button>Last >></button>
+    </a>
+
+  <% } %>
+
+
+
+  
