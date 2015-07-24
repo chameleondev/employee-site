@@ -7,7 +7,7 @@
 
 				<h3 class="title sub-title" id="typeOfBriefTitle">Type of brief</h3>
 
-				<label class="  checkbox-inline">
+				<label class="  checkbox-inline" tooltip data-toggle="tooltip" data-placement="top" title="Lorem ipsum dolor sit amet, consectetur adipisicing elit.">
 					<div class="checkbox-icon" ng-class="{'active' : request_form.creative_brief.$valid || form.deliveryFormat}">
 						<div class="checked-checkbox-icon" ng-class="{'active': form.creativeBrief}"></div>
 					</div>
@@ -17,13 +17,11 @@
 					name="creative_brief"
     				ng-model="form.creativeBrief" 
 					ng-true-value="'Creative Brief'" 
-					ng-required="!form.deliveryFormat && form.jobType !== 'Editorial Amends'"> Creative Brief
+					ng-required="!form.deliveryFormat && form.jobType !== 'Editorial Amends' && form.jobType !== 'Existing Job'"> Creative Brief
 				</label>
 
-				<small ng-show="form.jobType === 'Existing Job'">Lorem ipsum dolor sit amet, consectetur adipisicing elit.</small>
-
 				<label class="checkbox-inline" ng-hide="form.jobType === 'Existing Job'">
-					<div class="checkbox-icon" ng-class="{'active' : request_form.delivery_format.$valid || form.creativeBrief}">
+					<div class="checkbox-icon" ng-class="{'active' : request_form.delivery_format.$valid}">
 						<div class="checked-checkbox-icon" ng-class="{'active': form.deliveryFormat}"></div>
 					</div>
 					<input 
@@ -32,14 +30,14 @@
 					name="delivery_format"
     				ng-model="form.deliveryFormat" 
 					ng-true-value="'Delivery Format'"
-					ng-required="form.jobType !== 'Existing Job' && form.jobType !== 'Editorial Amends'"> Delivery Format
+					ng-required="form.jobType !== 'Existing Job' && form.jobType !== 'Editorial Amends' && !form.creativeBrief"> Delivery Format
 				</label>
 
 				<div ng-show="form.creativeBrief === 'Creative Brief'">
 
 				<hr>
 
-				<h3 class="title sub-title" id="typeOfWorkTitle">Type Of Work</h3>
+				<h3 class="title sub-title" id="typeOfWorkTitle">Desired Creative Output</h3>
 
 				<div class="form-group">
 					<div class="col-md-12">

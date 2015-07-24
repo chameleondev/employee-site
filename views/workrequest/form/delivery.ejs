@@ -6,10 +6,11 @@
 				</h2>
 
 				<h3 class="title sub-title" id="deliveryDateTitle">Delivery Date</h3>
-
+				<p>Please select from the following delivery date options below. If you are unsure of the
+delivery window of your request, please select ‘Normal’ by default.</p>
 				<div class="form-group normal-row">
 	<div class="col-sm-3">
-		<label class="checkbox-inline">
+		<label class="checkbox-inline" tooltip data-toggle="tooltip" data-placement="top" title="This is the recommended selection to ensure you get the best solution for your project request.">
 			<div class="radio-icon" ng-class="{'active' : request_form.delivery_selection.$valid}">
 				<div class="checked-radio-icon" ng-class="{'active': form.deliverySelection == 'Normal'}"></div>
 			</div>
@@ -36,7 +37,8 @@
 					placeholder="DD/MM/YYYY"
 					date-picker
 					readonly
-					ng-disabled="disablePicker">
+					ng-disabled="disablePicker"
+					ng-class="{'enable' : form.deliverySelection === 'Normal'}">
 					<span class="input-group-addon glyphicon glyphicon-calendar" disableme="{{disablePicker}}"></span>
 				</div>
 			</div>	
@@ -73,7 +75,8 @@
 					placeholder="DD/MM/YYYY"
 					date-picker
 					readonly
-					ng-disabled="disablePicker">
+					ng-disabled="disablePicker"
+					ng-class="{'enable' : form.deliverySelection === 'Normal'}">
 					<span class="input-group-addon glyphicon glyphicon-calendar" disableme="{{disablePicker}}"></span>
 				</div>
 			</div>
@@ -186,7 +189,7 @@
 
 				<div class="form-group twenty-four-row">
 					<div class="col-sm-3 form-inline">
-						<label class="checkbox-inline">
+						<label class="checkbox-inline" tooltip data-toggle="tooltip" data-placement="top" title="Choose this option if the project requires quick turnaround in a 24 hour window. Please note: the delivery date is automatically generated 24 hours from the time of submission and can’t be edited.">
 							<div class="radio-icon" ng-class="{'active' : request_form.delivery_selection.$valid}">
 								<div class="checked-radio-icon" ng-class="{'active': form.deliverySelection == '24 Hours'}"></div>
 							</div>
@@ -216,7 +219,7 @@
 
 				<div class="form-group asap-row">
 					<div class="col-md-12">
-						<label class="checkbox-inline">
+						<label class="checkbox-inline" tooltip data-toggle="tooltip" data-placement="top" title="Choose this option if you have discussed your request with Mark or Sandra. Any projects submitted with this delivery option without prior discussion may result in delays. Please note: this option will prioritise your request above other previously submitted requests and may affect their delivery date.">
 							<div class="radio-icon" ng-class="{'active' : request_form.delivery_selection.$valid}">
 								<div class="checked-radio-icon" ng-class="{'active': form.deliverySelection == 'ASAP'}"></div>
 							</div>

@@ -21,7 +21,6 @@ module.exports = {
 		res.locals.bodyAttrs = "data-spy=scroll data-target=nav.sidebar ng-controller=FormCtrl uploader=uploader nv-file-drop";
 		res.locals.class = 'work-request-form';
 
-
 		return res.view();
 	},
 
@@ -161,6 +160,8 @@ module.exports = {
 			SendEmail.send(req,res);
 
 		});
+
+
 		
 
 	}

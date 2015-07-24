@@ -4,115 +4,11 @@ module.exports = {
 	
 	send : function(req,res){
 
-		// var mandrill = require('node-mandrill')('JtgzSVSSdHsYMMWmwY0IEQ');
+		// mandrill details
+		var mandrill = require('mandrill-api/mandrill');
+		var mandrill_client = new mandrill.Mandrill('JtgzSVSSdHsYMMWmwY0IEQ');
 		
-		var msg = '<b>Job Code</b>: '+req.param('jobCode')+'<br/>';
-
-		if(req.param('jobType')) msg+= '<b>Job Type:</b> '+req.param('jobType')+'<br/>';
-		if(req.param('client')) msg+= '<b>Client:</b> '+req.param('client')+'<br/>';
-		if(req.param('product')) msg+= '<b>Product:</b> '+req.param('product')+'<br/>';
-		if(req.param('projectTitle')) msg+= '<b>Project Title:</b> '+req.param('projectTitle')+'<br/>';
-		if(req.param('accountPersonFname')) msg+= '<b>Account Person:</b> '+req.param('accountPersonFname')+'<br/>';
-		if(req.param('formUser')) msg+= '<b>Form Submitted by:</b> '+req.param('formUser')+'<br/>';
-		if(req.param('office')) msg+= '<b>Office:</b> '+req.param('office')+'<br/>';
-		// if(req.param('generalDesc')) msg+= '<b>General Description:</b> '+req.param('generalDesc')+'<br/>';
-		if(req.param('budget')) msg+= '<b>Budget:</b> '+req.param('budget')+'<br/>';
-
-		msg+= '<b>Type Of Project:</b> ';
-		if(req.param('desProj') ==='Design Project') msg+= req.param('desProj')+' | ';
-		if(req.param('digProj') ==='Digital Project') msg+= req.param('digProj')+' | ';
-		if(req.param('typeProj') ==='Typesetting Project') msg+= req.param('typeProj')+' | ';
-		msg+='<br/>';
-
-		if(req.param('taskDesc')) msg+= '<b>Task Description:</b> '+req.param('taskDesc')+'<br/>';
-		if(req.param('multiplePieces') ==='Multiple Pieces') msg+= '<b>Pieces:</b> '+req.param('multiplePieces')+'<br/>';
-		if(req.param('explainPiece')) msg+= '<b>Other deliverables associated with this job:</b> '+req.param('explainPiece')+'<br/>';
-
-		msg+= '<b>Hours For Task:</b> ';
-		if(req.param('needEstHours')==='Need an estimate') {
-			msg+= req.param('needEstHours')+'<br/>';
-		} else {
-			if(req.param('desHours')) msg+='Des : '+req.param('desHours')+' | ';
-			if(req.param('sdesHours')) msg+='sDes : '+req.param('sdesHours')+' | ';
-			if(req.param('studioHours')) msg+='Studio : '+req.param('studioHours')+' | ';
-			if(req.param('cdHours')) msg+='CD : '+req.param('cdHours')+' | ';
-			if(req.param('gdHours')) msg+='GD : '+req.param('gdHours')+' | ';
-			if(req.param('digDes')) msg+='Digital Des : '+req.param('digDes')+' | ';
-			if(req.param('desDir')) msg+='Design Dir : '+req.param('desDir')+' | ';
-			msg+='<br/>';
-		}
-		
-
-		msg+= '<b>Type Of Work:</b> ';
-		if(req.param('mockup')==='Mockup') msg+= req.param('mockup')+' | ';
-		if(req.param('creativeDesignCon')==='Creative/Design Concept') msg+= req.param('creativeDesignCon')+' | ';
-		if(req.param('creativeTheme')) msg+= req.param('creativeTheme')+' | ';
-		if(req.param('video')==='Video') msg+= req.param('video')+' | ';
-		if(req.param('digitalAppDes')==='Digital Application Design') msg+= req.param('digitalAppDes')+' | ';
-		if(req.param('logo')==='Logo') msg+= req.param('logo')+' | ';
-		if(req.param('figureRedraws')==='Figure Redraws') msg+= req.param('figureRedraws')+' | ';
-		if(req.param('layout')==='Layout') msg+= req.param('layout')+' | ';
-		if(req.param('medicalIllustrations')==='Medical Illustrations') msg+= req.param('medicalIllustrations')+' | ';
-		if(req.param('medicalPresentations')==='Medical Presentations') msg+= req.param('medicalPresentations')+' | ';
-		if(req.param('infographics')==='Infographics') msg+= req.param('infographics')+' | ';
-		if(req.param('ibook')==='iBook') msg+= req.param('ibook')+' | ';
-		if(req.param('presentedOther')) msg+= 'Other : ' + req.param('presentedOther')+' | ';
-		msg+='<br/>';
-
-		msg+= '<b>Where Will It Be Used:</b> ';
-		if(req.param('whereUsedPpt') === 'PPT') msg+= req.param('whereUsedPpt')+' | ';
-		if(req.param('whereUsedWord') === 'Word') msg+= req.param('whereUsedWord')+' | ';
-		if(req.param('whereUsedDigApp') === 'Digital Application') msg+= req.param('whereUsedDigApp')+' | ';
-		if(req.param('whereUsedPrint') === 'Print') msg+= req.param('whereUsedPrint')+' | ';
-		msg+='<br/>';
-
-		msg+= '<b>Branding:</b> ';
-		if(req.param('branded')==='Branded') msg+= req.param('branded')+' | ';
-		if(req.param('unbranded')==='Unbranded') msg+= req.param('unbranded')+' | ';
-		if(req.param('brandedOther')) msg+= req.param('brandedOther')+' | ';
-		msg+='<br/>';
-
-		if(req.param('logosIncluded')) msg+= '<b>Logos To Be Included:</b> '+req.param('logosIncluded')+'<br/>';
-		if(req.param('lookAndFeel')) msg+= '<b>Visual style,look and feel, branding specifications:</b> '+req.param('lookAndFeel')+'<br/>';
-		if(req.param('scientificBackground')) msg+= '<b>Scientific Background:</b> '+req.param('scientificBackground')+'<br/>';
-
-		if (req.param('extensions')) {
-			msg+= '<b>File Format:</b> ';
-			for (var i = 0; i < req.param('extensions').length; i++) {
-				msg+= req.param('extensions')[i]+' | ';
-			}
-			msg+='<br/>';
-		}
-
-		// if (req.param('dimensions')) {
-		// 	msg+= '<b>Dimensions:</b> ';
-		// 	for (var i = 0; i < req.param('dimensions').length; i++) {
-		// 		msg+= req.param('dimensions')[i]+' | ';
-		// 	}
-		// 	msg+='<br/>';
-		// }
-
-		if (req.param('selectedDimension')) msg+= '<b>Dimension:</b> '+req.param('selectedDimension')+'<br/>';
-		if (req.param('orientation')) msg+= '<b>Orientation:</b> '+req.param('orientation')+'<br/>';
-
-
-
-		if (req.param('orientations')) {
-			msg+= '<b>Orientations:</b> ';
-			for (var i = 0; i < req.param('orientations').length; i++) {
-				msg+= req.param('orientations')[i]+' | ';
-			}
-			msg+='<br/>';
-		}
-
-		if(req.param('pages')) msg+= '<b>Pages:</b> '+req.param('pages')+'<br/>';
-		if(req.param('firstDraftBy') || req.param('firstDraftByTime')) msg+= '<b>First draft by:</b> '+req.param('firstDraftBy').toString()+' '+ req.param('firstDraftByTime')+'<br/>';
-		if(req.param('finalDeliveryDate') || req.param('finalDeliveryDateTime')) msg+= '<b>Final delivery date:</b> '+req.param('finalDeliveryDate').toString()+' '+ req.param('finalDeliveryDateTime')+'<br/>';
-		if(req.param('deliverySelection')) msg+= '<b>Delivery Selection:</b> '+req.param('deliverySelection');
-		if(req.param('twentyFourDate')) msg+= '<b>24 Hour time:</b> '+req.param('twentyFourDate');
-		// if(req.param('serverLoc')) msg+= '<b>Server location:</b> '+req.param('serverLoc')+' <br />';
-
-
+		// format html for email
 		var formatRow = function(arr){
 			var html = '';
 
@@ -121,9 +17,9 @@ module.exports = {
 					html+='<tr>\n';
 				}
 
-				html+='<td width="100" valign="top">'+arr[i].name+'</td>\n';
+				html+='<td width="150" valign="top" style="color:#f5ae16;padding-bottom:10px">'+arr[i].name+'</td>\n';
 
-				html+='<td width="200" valign="top" style="color:#f5ae16">';
+				html+='<td width="250" valign="top" style="padding-bottom:10px">';
 
 					
 
@@ -143,7 +39,7 @@ module.exports = {
 						}		
 					}
 
-				html+='<br><br></td>\n';
+				html+='</td>\n';
 
 				if (i%2 !== 0) {
 					html+='</tr>\n';
@@ -153,7 +49,7 @@ module.exports = {
 			return html;
 		};
 
-
+		// object that holds all the request parameters, grouped into sections
 		var userObject = {
 			jobInformation : [
 				{name : 'Job Code', val : req.param('jobCode')},
@@ -233,6 +129,8 @@ module.exports = {
 			]
 		};
 
+
+		// create the recipients array
 		var recipients = [{
 				name: 'Sandra Herrera',
 				email: 'sandra.herrera@chameleon-uk.com'
@@ -291,83 +189,15 @@ module.exports = {
 				type: 'cc'
 			});
 		}
-
-
-
-
-
-		// mandrill('/messages/send', {
-		// 	message: {
-		// 		to: recipients,
-		// 		from_name: 'Request Form',
-		// 		from_email: 'admin@chameleon-web.com',
-		// 		html: msg,
-		// 		subject: 'New job No: '+ req.param('jobCode'),
-		// 		text: "text fallback goes here-- in case some recipients (let\'s say the Chipettes)  can\'t receive HTML emails",
-		// 		attachments : req.param('encodedUploads')
-		// 	}
-		// }, function(error, response){
-		// 	//uh oh, there was an error
-		// 	if (error) {
-		// 		console.log( JSON.stringify(error) );
-		// 		res.send(error);
-		// 		return;
-		// 	}
-
-		// 	//everything's good, lets see what mandrill said
-		// 	else{
-		// 		// console.log(req.param('encodedUploads'));
-		// 		res.send(response);
-		// 		return;
-		// 	}
-		// });
-
-		var mandrill = require('mandrill-api/mandrill');
-		var mandrill_client = new mandrill.Mandrill('JtgzSVSSdHsYMMWmwY0IEQ');
-
-		// send email template
-		// mandrill('/messages/send-template', {
-		// 	template_name : 'work-request-form-reciept',
-		// 	template_content : [],
-		// 	message: {
-		// 		to: [{
-		// 			email : 'dillon.lee@chameleon-uk.com',
-		// 			name : 'Dillon Lee'
-		// 		}],
-		// 		from_name: 'Request Form',
-		// 		from_email: 'admin@chameleon-web.com',
-		// 		merge_language : 'handlebars',
-		// 		global_merge_vars : [{
-		// 			name: "title",
-  //           		content: "Test title"
-		// 		}],
-		// 		// html: msg,
-		// 		subject: 'New job No: '+ req.param('jobCode'),
-		// 		text: "text fallback goes here-- in case some recipients (let\'s say the Chipettes)  can\'t receive HTML emails",
-		// 		attachments : req.param('encodedUploads')
-		// 	}
-		// }, function(error, response){
-		// 	//uh oh, there was an error
-		// 	if (error) {
-		// 		console.log( JSON.stringify(error) );
-		// 		res.send(error);
-		// 		return;
-		// 	}
-
-		// 	//everything's good, lets see what mandrill said
-		// 	else{
-		// 		// console.log(req.param('encodedUploads'));
-		// 		res.send(response);
-		// 		return;
-		// 	}
-		// });
 		
+		// format the content with formatRow function
 		var jobInfoContent = formatRow(userObject.jobInformation);
 		var taskContent = formatRow(userObject.task);
 		var deliveryContent = formatRow(userObject.delivery);
 		var instructionsContent = formatRow(userObject.instructions);
 		var attachmentsContent = formatRow(userObject.attachments);
 
+		// value for flag
 		switch (userObject.delivery[0].val){
 			case 'Normal':
 			var statusImg = 'normal';
@@ -382,14 +212,38 @@ module.exports = {
 			break;
 		}
 
+		// to indicate the type of job 
+		var jobIndicators = [];
 
+		if ((req.param('desProj') !== 'false') && (req.param('desProj') !== 'undefined') && (req.param('desProj') !== undefined)) {
+			jobIndicators.push('desProj');
+		}
+
+		if ((req.param('typeProj') !== 'false') && (req.param('typeProj') !== 'undefined') && (req.param('typeProj') !== undefined)) {
+			jobIndicators.push('typeProj');
+		}
+
+
+		if ((req.param('digProj') !== 'false') && (req.param('digProj') !== 'undefined') && (req.param('digProj') !== undefined)) {
+			jobIndicators.push('digProj');
+		}
+
+
+		// send email using template in mandrill
 		mandrill_client.messages.sendTemplate({
 			template_name : 'work-request-form-reciept',
 			template_content : [],
 			message: {
 				to: [{
-					email : 'dillon.lee@chameleon-uk.com',
-					name : 'Dillon Lee'
+					name : 'Dillon Lee',
+					email : 'dillon.lee@chameleon-uk.com'
+				},{
+					name: 'Michaela Hyndman',
+					email: 'michaela.hyndman@chameleon-uk.com'
+				},{
+					name: req.param('formUser'),
+					email: req.param('email'),
+					type: 'cc'
 				}],
 				from_name: 'Request Form',
 				from_email: 'admin@chameleon-web.com',
@@ -412,10 +266,13 @@ module.exports = {
 				},{
 					name: "StatusImg",
             		content: statusImg
+				},{
+					name: "JobIndicators",
+            		content: jobIndicators
 				}],
 				// html: msg,
 				subject: 'New job No: '+ req.param('jobCode'),
-				text: "text fallback goes here-- in case some recipients (let\'s say the Chipettes)  can\'t receive HTML emails",
+				text: "A new job has been submitted, job no:"+ req.param('jobCode') + "/n In order to see the content please view in HTML",
 				attachments : req.param('encodedUploads')
 			}
 			
