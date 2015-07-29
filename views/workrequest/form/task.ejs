@@ -5,6 +5,71 @@
 					Task
 				</h2>
 
+				<p>
+					Please brief each deliverable sepately.
+				</p>
+
+				<h3 class="sub-title" id="formTypeOfProject" >
+			  	 <span class="title" tooltip data-toggle="tooltip" data-placement="top" title="Select the category your project falls under.">Type Of Task</span>
+			  	</h3>
+
+
+
+			  	<div class="form-group">
+			  		
+			  			<div class="col-sm-4">
+				  			<label class="checkbox-inline" tooltip data-toggle="tooltip" data-placement="top" title="Conceptual development of design themes to be used in any type of materials, whether print or digital. Branding, infographics and icons. Presentation design. Includes medical illustrations.">
+				  				<div class="checkbox-icon" ng-class="{'active' : request_form.des_proj.$valid}">
+									<div class="checked-checkbox-icon" ng-class="{'active': form.desProj}"></div>
+								</div>
+								<input 
+								type="checkbox" 
+								id="des-proj"
+			    				name="des_proj"
+			    				ng-model="form.desProj" 
+								ng-true-value="'Design Task'"
+								ng-required="!(form.typeProj || form.digProj) && form.jobType !== 'Editorial Amends'"
+								> Design Task
+							</label>
+						</div>
+
+						<div class="col-sm-4">
+					  		<label class="checkbox-inline" tooltip data-toggle="tooltip" data-placement="top" title="Page composition of copy, pictures and figures based on the approved design theme and/or client branding. Includes figure redrawing. Mostly for outputs as PDFs or print materials.">
+					  			<div class="checkbox-icon" ng-class="{'active' : request_form.type_proj.$valid}">
+									<div class="checked-checkbox-icon" ng-class="{'active': form.typeProj}"></div>
+								</div>
+								<input 
+								type="checkbox" 
+								id="type-proj"
+			    				name="type_proj"
+			    				ng-model="form.typeProj"  
+								ng-true-value="'Typesetting Task'"
+								ng-required="!(form.desProj || form.digProj) && form.jobType !== 'Editorial Amends'"
+								> Typesetting Task
+							</label>
+						</div>
+
+						<div class="col-sm-4">
+							<label class="checkbox-inline" tooltip data-toggle="tooltip" data-placement="top" title="User interface, user experience and screen design based on developed designed themes for digital applications (e.g websites, apps, HTML emails). Includes video production and editing.">
+								<div class="checkbox-icon" ng-class="{'active' : request_form.dig_proj.$valid}">
+									<div class="checked-checkbox-icon" ng-class="{'active': form.digProj}"></div>
+								</div>
+								<input 
+								type="checkbox" 
+								id="dig-proj"
+			    				name="dig_proj"
+			    				ng-model="form.digProj"  
+								ng-true-value="'Digital Task'"
+								ng-required="!(form.typeProj || form.desProj) && form.jobType !== 'Editorial Amends'"
+								> Digital Task
+							</label>
+						</div>
+
+			  		
+			  	</div>
+
+			  	<hr>
+
 				<div class="form-group">
 
 					<div class="col-md-12">
@@ -87,6 +152,27 @@
 				<hr>
 
 				<h3 class="title sub-title" id="hoursForTaskTitle">Breakdown of hours allocated to CDS</h3>
+				
+				<div class="form-group">
+					<div class="col-sm-12 bottom10">
+					<label for="entire-project-hours" class="radio-inline">
+						<div class="radio-icon" ng-class="{'active' : request_form.hours_selection.$valid}">
+							<div class="checked-radio-icon" ng-class="{'active': form.hoursSelection == 'Hours for entire project'}"></div>
+						</div>
+						<input type="radio" id="entire-project-hours" name="hours_selection" ng-model="form.hoursSelection" value="Hours for entire project" ng-required="form.hoursSelection !== 'Hours for task'"> Hours for Entire Project
+					</label>
+				
+				
+					<label for="specific-task-hours" class="radio-inline">
+						<div class="radio-icon" ng-class="{'active' : request_form.hours_selection.$valid}">
+							<div class="checked-radio-icon" ng-class="{'active': form.hoursSelection == 'Hours for task'}"></div>
+						</div>
+						<input type="radio" id="specific-task-hours" name="hours_selection" ng-model="form.hoursSelection" value="Hours for task" ng-required="form.hoursSelection !== 'Hours for entire project'"> Hours for this Specific Task
+					</label>
+				
+					</div>
+				</div>
+				
 
 				<div class="form-group">
 					<label for="studio-hours" class="col-sm-1 control-label">Studio</label>
@@ -196,6 +282,4 @@
 					</div>
 				</div>
 
-
-				
 			</div>	<!-- form-section -->

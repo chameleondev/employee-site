@@ -6,8 +6,22 @@
 				</h2>
 
 				<h3 class="title sub-title" id="typeOfBriefTitle">Type of brief</h3>
+				
 
-				<label class="  checkbox-inline" tooltip data-toggle="tooltip" data-placement="top" title="Lorem ipsum dolor sit amet, consectetur adipisicing elit.">
+				<label class="checkbox-inline" tooltip data-toggle="tooltip" data-placement="top" title="Lorem ipsum dolor sit amet, consectetur adipisicing elit." ng-show="form.jobType === 'Existing Job'">
+					<div class="checkbox-icon" ng-class="{'active' : request_form.creative_brief.$valid || form.deliveryFormat}">
+						<div class="checked-checkbox-icon" ng-class="{'active': form.creativeBrief}"></div>
+					</div>
+					<input 
+					type="checkbox" 
+					id="creative-brief"
+					name="creative_brief"
+    				ng-model="form.creativeBrief" 
+					ng-true-value="'Creative Brief'" 
+					ng-required="!form.deliveryFormat && form.jobType !== 'Editorial Amends' && form.jobType !== 'Existing Job'"> Creative Brief
+				</label>
+
+				<label class="checkbox-inline" ng-hide="form.jobType === 'Existing Job'">
 					<div class="checkbox-icon" ng-class="{'active' : request_form.creative_brief.$valid || form.deliveryFormat}">
 						<div class="checked-checkbox-icon" ng-class="{'active': form.creativeBrief}"></div>
 					</div>

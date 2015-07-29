@@ -164,6 +164,7 @@ module.exports = {
 			needEstHours : req.param('needEstHours'),
 			desHours : req.param('desHours'),
 			sdesHours : req.param('sdesHours'),
+			studioHours : req.param('studioHours'),
 			cdHours : req.param('cdHours'),
 			gdHours : req.param('gdHours'),
 			digDes : req.param('digDes'),

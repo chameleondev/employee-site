@@ -2,7 +2,7 @@
 
 	<h2 class="title section-title" id="formSection1">
 		<span class="title-icon title1-icon"></span>
-		Job Information
+		Project Information
 	</h2>
 
 	<div class="form-group">
@@ -266,68 +266,6 @@
   	
   	</div>
 
-  	<hr>
-
-  	
-
-
-
-  	<h3 class="sub-title" id="formTypeOfProject" >
-  	 <span class="title" tooltip data-toggle="tooltip" data-placement="top" title="Select the category your project falls under.">Type Of Project</span>
-  	</h3>
-
-  	<div class="form-group">
-  		
-  			<div class="col-sm-4">
-	  			<label class="checkbox-inline" tooltip data-toggle="tooltip" data-placement="top" title="Conceptual development of design themes to be used in any type of materials, whether print or digital. Branding, infographics and icons. Presentation design. Includes medical illustrations.">
-	  				<div class="checkbox-icon" ng-class="{'active' : request_form.des_proj.$valid}">
-						<div class="checked-checkbox-icon" ng-class="{'active': form.desProj}"></div>
-					</div>
-					<input 
-					type="checkbox" 
-					id="des-proj"
-    				name="des_proj"
-    				ng-model="form.desProj" 
-					ng-true-value="'Design Project'"
-					ng-required="!(form.typeProj || form.digProj) && form.jobType !== 'Editorial Amends'"
-					> Design Project
-				</label>
-			</div>
-
-			<div class="col-sm-4">
-		  		<label class="checkbox-inline" tooltip data-toggle="tooltip" data-placement="top" title="Page composition of copy, pictures and figures based on the approved design theme and/or client branding. Includes figure redrawing. Mostly for outputs as PDFs or print materials.">
-		  			<div class="checkbox-icon" ng-class="{'active' : request_form.type_proj.$valid}">
-						<div class="checked-checkbox-icon" ng-class="{'active': form.typeProj}"></div>
-					</div>
-					<input 
-					type="checkbox" 
-					id="type-proj"
-    				name="type_proj"
-    				ng-model="form.typeProj"  
-					ng-true-value="'Typesetting Project'"
-					ng-required="!(form.desProj || form.digProj) && form.jobType !== 'Editorial Amends'"
-					> Typesetting Project
-				</label>
-			</div>
-
-			<div class="col-sm-4">
-				<label class="checkbox-inline" tooltip data-toggle="tooltip" data-placement="top" title="User interface, user experience and screen design based on developed designed themes for digital applications (e.g websites, apps, HTML emails). Includes video production and editing.">
-					<div class="checkbox-icon" ng-class="{'active' : request_form.dig_proj.$valid}">
-						<div class="checked-checkbox-icon" ng-class="{'active': form.digProj}"></div>
-					</div>
-					<input 
-					type="checkbox" 
-					id="dig-proj"
-    				name="dig_proj"
-    				ng-model="form.digProj"  
-					ng-true-value="'Digital Project'"
-					ng-required="!(form.typeProj || form.desProj) && form.jobType !== 'Editorial Amends'"
-					> Digital Project
-				</label>
-			</div>
-
-  		
-  	</div>
 
   	</div> <!-- ng-hide if editorial amends -->
 	
