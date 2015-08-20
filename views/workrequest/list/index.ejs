@@ -38,7 +38,7 @@
 
           <div class="row">
               
-              <h1 class="col-md-12">Job Information</h1>
+              <h1 class="col-md-12 sub-title">Project Information</h1>
 
               <div class="col-md-6">
                 <dl class="dl-horizontal">
@@ -86,15 +86,15 @@
 
           <div class="row">
               
-              <h1 class="col-md-12">Task</h1>
+              <h1 class="col-md-12 sub-title">Task</h1>
 
               <div class="col-md-6">
                 <dl class="dl-horizontal">
                   <dt>Task Specific Description</dt>
                   <dd><%= jobs[i].taskDesc ? jobs[i].taskDesc : "" %></dd>
 
-                  <dt>Studio Hours</dt>
-                  <dd><%= jobs[i].studioHours ? jobs[i].studioHours : "" %></dd>
+                  <dt>Hours allocated to</dt>
+                  <dd><%= jobs[i].hoursSelection ? jobs[i].hoursSelection : "" %></dd>
 
                   <dt>Senior Designer Hours</dt>
                   <dd><%= jobs[i].sdesHours ? jobs[i].sdesHours : "" %></dd>
@@ -103,7 +103,14 @@
                   <dd><%= jobs[i].desDir ? jobs[i].desDir : "" %></dd>
 
                   <dt>Group Director Hours</dt>
-                  <dd><%= jobs[i].gdHours ? jobs[i].gdHours : "" %></dd>        
+                  <dd><%= jobs[i].gdHours ? jobs[i].gdHours : "" %></dd>  
+
+                  <dt>Type of Task</dt>
+                  <dd>
+                    <%= jobs[i].desProj ? jobs[i].desProj + " | " : "" %>
+                    <%= jobs[i].typeProj ? jobs[i].typeProj + " | " : "" %>
+                    <%= jobs[i].digProj ? jobs[i].digProj  : "" %>
+                  </dd>       
                 </dl>
               </div>
 
@@ -111,6 +118,9 @@
                 <dl class="dl-horizontal">
                   <dt>Any Other Creative Deliverables</dt>
                   <dd><%= jobs[i].explainPiece ? jobs[i].explainPiece : "" %></dd>
+
+                  <dt>Studio Hours</dt>
+                  <dd><%= jobs[i].studioHours ? jobs[i].studioHours : "" %></dd>
 
                   <dt>Designer Hours</dt>
                   <dd><%= jobs[i].desHours ? jobs[i].desHours : "" %></dd>
@@ -132,7 +142,7 @@
 
           <div class="row">
             
-              <h1 class="col-md-12">Delivery</h1>
+              <h1 class="col-md-12 sub-title">Delivery</h1>
 
               <div class="col-md-6">
                 <dl class="dl-horizontal">
@@ -167,24 +177,46 @@
 
           <div class="row">
             
-              <h1 class="col-md-12">Instructions</h1>
+              <h1 class="col-md-12 sub-title">Instructions</h1>
 
               <div class="col-md-6">
                 <dl class="dl-horizontal">
-                  <dt>Type of work</dt>
-                  <dd><%= jobs[i].deliverySelection ? jobs[i].deliverySelection : "" %></dd>
 
                   <dt>Branded</dt> <!-- arr -->
                   <dd><%= jobs[i].firstDraftBy %></dd>
+
+                  <dt>Branding</dt>
+                  <dd>
+                    <%= jobs[i].branded ? jobs[i].branded + " | " : "" %>
+                    <%= jobs[i].unbranded ? jobs[i].unbranded + " | " : "" %>
+                    <%= jobs[i].softBranded ? jobs[i].softBranded + " | " : "" %>
+                    <%= jobs[i].brandedUnknown ? jobs[i].brandedUnknown + " | " : "" %>
+                    <%= jobs[i].brandedOther ? jobs[i].brandedOther + " | " : "" %>
+                  </dd>
 
                   <dt>Visual Style, Look and feel</dt>
                   <dd><%= jobs[i].lookAndFeel ? jobs[i].lookAndFeel : "" %></dd>
 
                   <dt>Type of file</dt> <!-- arr -->
-                  <dd><%= jobs[i].twentyFourDate %></dd>
+                  <dd><%= jobs[i].twentyFourDate ? jobs[i].twentyFourDate : "" %></dd>
 
                   <dt>Orientation</dt>
                   <dd><%= jobs[i].selectedOrientation ? jobs[i].selectedOrientation : "" %></dd>
+
+                  <dt>Desired Creative Output</dt>
+                  <dd>
+                    <%= jobs[i].pitchMockup ? jobs[i].pitchMockup + " | " : "" %>
+                    <%= jobs[i].creativeDesignCon ? jobs[i].creativeDesignCon + " | " : "" %>
+                    <%= jobs[i].video ? jobs[i].video + " | " : "" %>
+                    <%= jobs[i].digitalAppDes ? jobs[i].digitalAppDes + " | " : "" %>
+                    <%= jobs[i].logo ? jobs[i].logo + " | " : "" %>
+                    <%= jobs[i].layout ? jobs[i].layout + " | " : "" %>
+                    <%= jobs[i].medicalIllustrations ? jobs[i].medicalIllustrations + " | " : "" %>
+                    <%= jobs[i].medical_presentations ? jobs[i].medical_presentations + " | " : "" %>
+                    <%= jobs[i].infographics ? jobs[i].infographics + " | " : "" %>
+                    <%= jobs[i].ibook ? jobs[i].ibook + " | " : "" %>
+                    <%= jobs[i].presentedOther ? jobs[i].presentedOther + " | " : "" %>
+                  </dd>
   
                 </dl>
               </div>
@@ -192,7 +224,13 @@
               <div class="col-md-6">
                 <dl class="dl-horizontal">
                   <dt>Where Will It Be Used</dt> <!-- arr -->
-                  <dd><%= jobs[i].twentyFourDate %></dd>
+                  <dd>
+                    <%= jobs[i].whereUsedPpt ? jobs[i].whereUsedPpt + " | " : "" %>
+                    <%= jobs[i].whereUsedWord ? jobs[i].whereUsedWord + " | " : "" %>
+                    <%= jobs[i].whereUsedDigApp ? jobs[i].whereUsedDigApp + " | " : "" %>
+                    <%= jobs[i].whereUsedPrint ? jobs[i].whereUsedPrint + " | " : "" %>
+                    <%= jobs[i].whereUsedOther ? jobs[i].whereUsedOther : "" %>
+                  </dd>
 
                   <dt>Logos To Be Included</dt>
                   <dd><%= jobs[i].logosIncluded ? jobs[i].logosIncluded : "" %></dd>
@@ -213,12 +251,15 @@
 
           <div class="row">
             
-              <h1 class="col-md-12">Attachments</h1>
+              <h1 class="col-md-12 sub-title">Attachments</h1>
 
               <div class="col-md-6">
                 <dl class="dl-horizontal">
                   <dt>Has This Content Been Editorially Reviewed</dt>
                   <dd><%= jobs[i].edtorialReview ? jobs[i].edtorialReview : "" %></dd>
+
+                  <dt>Uploads</dt>
+                 
                 </dl>
               </div>
 

@@ -27,7 +27,7 @@
 		
 			
 				<div class="col-sm-12 bottom10">
-				<label for="new-job" class="radio-inline" tooltip data-toggle="tooltip" data-placement="top" title="Select this option if you have a new project request for a specific job. Please submit separate forms for each project request, even if the job number is the same one. Should you have multiple projects for the same job number please submit multiple new project request forms.">
+				<label for="new-job" class="radio-inline" tooltip data-toggle="tooltip" data-placement="top" title="Submit a seperate form for each request, including projects with multiple parts even if the job number is the same.">
 					<div class="radio-icon" ng-class="{'active' : request_form.job_type.$valid}">
 						<div class="checked-radio-icon" ng-class="{'active': form.jobType == 'New Job'}"></div>
 					</div>
@@ -37,11 +37,11 @@
 					name="job_type"
 					ng-model="form.jobType" 
 					value="New Job"
-					ng-required="form.jobType !== 'Existing Job' || form.jobType !== 'Editorial Amends'"> New Project Request
+					ng-required="form.jobType !== 'Existing Job' || form.jobType !== 'Editorial Amends'"> New Project
 				</label>
 			
 			
-				<label for="existing-job" class="radio-inline" tooltip data-toggle="tooltip" data-placement="top" title="Select this option if you are providing a change of brief, or a change of brief with editorial changes for a previously submitted project. If you only have editorial changes please select the ‘Editorial Amendment Request’ instead.">
+				<label for="existing-job" class="radio-inline" tooltip data-toggle="tooltip" data-placement="top" title="Select this option if you are providing a change of brief for a previously submitted project.">
 					<div class="radio-icon" ng-class="{'active' : request_form.job_type.$valid}">
 						<div class="checked-radio-icon" ng-class="{'active': form.jobType == 'Existing Job'}"></div>
 					</div>
@@ -51,7 +51,7 @@
 					name="job_type"
 					ng-model="form.jobType"
 					value="Existing Job"
-					ng-required="form.jobType !== 'New Job' || form.jobType !=='Editorial Amends'"> Existing Project Alteration Request
+					ng-required="form.jobType !== 'New Job' || form.jobType !=='Editorial Amends'"> Existing Project
 				</label>
 			
 			
@@ -65,7 +65,7 @@
 					name="job_type"
 					ng-model="form.jobType"
 					value="Editorial Amends"
-					ng-required="form.jobType !== 'New Job' || form.jobType !=='Existing Job'"> Editorial Amendment Submission
+					ng-required="form.jobType !== 'New Job' || form.jobType !=='Existing Job'"> Editorial Changes Only
 				</label>
 				</div>
 			

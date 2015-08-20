@@ -138,6 +138,9 @@ module.exports = {
 				name: 'Michaela Hyndman',
 				email: 'michaela.hyndman@chameleon-uk.com'
 			},{
+				name: 'Mark Stevens',
+				email: 'mark.stevens@chameleon-uk.com'
+			},{
 				name: 'Dillon Lee',
 				email: 'dillon.lee@chameleon-uk.com',
 				type: 'bcc'
@@ -162,13 +165,6 @@ module.exports = {
 			recipients.push({
 				name: 'Janet Nelson',
 				email: 'janet.nelson@chameleon-uk.com'
-			});
-		}
-
-		if (req.param('desProj') === 'Design Project' || req.param('digProj') === 'Digital Project') {
-			recipients.push({
-				name: 'Mark Stevens',
-				email: 'mark.stevens@chameleon-uk.com'
 			});
 		}
 

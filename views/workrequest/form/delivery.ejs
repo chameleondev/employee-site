@@ -10,7 +10,7 @@
 delivery window of your request, please select ‘Normal’ by default.</p>
 				<div class="form-group normal-row">
 	<div class="col-sm-3">
-		<label class="checkbox-inline" tooltip data-toggle="tooltip" data-placement="top" title="This is the recommended selection to ensure you get the best solution for your project request.">
+		<label class="checkbox-inline" tooltip data-toggle="tooltip" data-placement="top" title="This is the recommended selection to ensure optimal execution of your project request">
 			<div class="radio-icon" ng-class="{'active' : request_form.delivery_selection.$valid}">
 				<div class="checked-radio-icon" ng-class="{'active': form.deliverySelection == 'Normal'}"></div>
 			</div>
@@ -19,7 +19,7 @@ delivery window of your request, please select ‘Normal’ by default.</p>
 			id="normal-delivery"
 			name="delivery_selection"
 			ng-model="form.deliverySelection"  
-			value="Normal"> Normal 
+			value="Normal"> Standard 
 		</label>
 	</div>
 
@@ -189,7 +189,7 @@ delivery window of your request, please select ‘Normal’ by default.</p>
 
 				<div class="form-group twenty-four-row">
 					<div class="col-sm-3 form-inline">
-						<label class="checkbox-inline" tooltip data-toggle="tooltip" data-placement="top" title="Choose this option if the project requires quick turnaround in a 24 hour window. Please note: the delivery date is automatically generated 24 hours from the time of submission and can’t be edited.">
+						<label class="checkbox-inline" tooltip data-toggle="tooltip" data-placement="top" title="Select this option only if the project requires a quick turnaround. The delivery date will automatically generate 24 hours  from the time of submission. You will be notified if the project request cannot be executed within 24 hours.">
 							<div class="radio-icon" ng-class="{'active' : request_form.delivery_selection.$valid}">
 								<div class="checked-radio-icon" ng-class="{'active': form.deliverySelection == '24 Hours'}"></div>
 							</div>
@@ -231,6 +231,24 @@ delivery window of your request, please select ‘Normal’ by default.</p>
 							value="ASAP"> ASAP (Please speak to Mark or Sandra before selecting)
 						</label>
 					</div>
+				</div>
+
+				<div class="form-group" ng-show="form.deliverySelection === 'ASAP'">
+					<div class="col-md-12">
+						<label for="spoken" class="checkbox-inline">
+							<div class="checkbox-icon" ng-class="{'active' : request_form.spoken.$valid}">
+								<div class="checked-checkbox-icon" ng-class="{'active': form.spoken}"></div>
+							</div>
+							<input 
+							type="checkbox" 
+							id="spoken"
+							name="spoken"
+		    				ng-model="form.spoken" 
+							ng-true-value="'I have got approval'" 
+							ng-required="form.deliverySelection === 'ASAP'"> I have spoken to Mark or Sandra
+						</label>
+					</div>
+					
 				</div>
 
 				
