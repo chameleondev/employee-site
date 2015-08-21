@@ -122,13 +122,14 @@ module.exports = {
 
 					// If the user is also an admin redirect to the user list (e.g /views/user/index.ejs)
 					// This is used in conjunction with config/policies.js file
-					if(req.session.User.admin){
-						res.redirect('/user');
-						return;
-					}
+					// if(req.session.User.admin){
+					// 	res.redirect('/user');
+					// 	return;
+					// }
 
 					//redirect to their profile page (e.g. views/user/show.ejs)
-					res.redirect('/user/show/'+ user.id);
+					// res.redirect('/user/show/'+ user.id);
+					res.redirect('/WorkRequest/list');
 
 				});
 				

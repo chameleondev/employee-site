@@ -2,6 +2,11 @@ angular.module('WorkRequestForm')
 
 .controller('listCtrl', ['$scope','$http', function($scope,$http){
 
+	$scope.deleteJob = function(jobID,jobCode){
+		$scope.deletingID = jobID;
+		$scope.deletingCode = jobCode;
+		$scope.openPopup = true;
+	};
 	
 
 }]);
@@ -15,18 +20,24 @@ angular.module('WorkRequestForm')
 
 			// console.log(ele.attr('id'));
 
+
 			ele.on('click',function(){
+			
 				$http({
 					type : 'DELETE',
-					url : '/WorkRequest/destroy/'+ele.attr('id'),
-					data : ele.attr('id') 
+					url : '/WorkRequest/destroy/'+ele.attr('delete'),
+					data : ele.attr('delete') 
 				})
 				.success(function(data){
-					scope.deletedJob = data;
+					console.log("Deleting job" +ele.attr('delete') );
+					location.pathname = "/WorkRequest/list";
 				})
 				.error(function(err){
-					console.log(ele.attr('id') + ' could not be deleted')
+					console.log(ele.attr('delete') + ' could not be deleted')
 				});
+
+
+				
 			});
 
 			

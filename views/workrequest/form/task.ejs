@@ -166,7 +166,7 @@
 						<div class="radio-icon" ng-class="{'active' : request_form.hours_selection.$valid}">
 							<div class="checked-radio-icon" ng-class="{'active': form.hoursSelection == 'Hours for entire project'}"></div>
 						</div>
-						<input type="radio" id="entire-project-hours" name="hours_selection" ng-model="form.hoursSelection" value="Hours for entire project" ng-required="form.hoursSelection !== 'Hours for task'"> Hours for Entire Project
+						<input type="radio" id="entire-project-hours" name="hours_selection" ng-model="form.hoursSelection" value="Hours for entire project" ng-required="form.hoursSelection !== 'Hours for task' && form.jobType !== 'Editorial Amends'"> Hours for Entire Project
 					</label>
 				
 				
@@ -174,7 +174,7 @@
 						<div class="radio-icon" ng-class="{'active' : request_form.hours_selection.$valid}">
 							<div class="checked-radio-icon" ng-class="{'active': form.hoursSelection == 'Hours for task'}"></div>
 						</div>
-						<input type="radio" id="specific-task-hours" name="hours_selection" ng-model="form.hoursSelection" value="Hours for task" ng-required="form.hoursSelection !== 'Hours for entire project'"> Hours for this Specific Task
+						<input type="radio" id="specific-task-hours" name="hours_selection" ng-model="form.hoursSelection" value="Hours for task" ng-required="form.hoursSelection !== 'Hours for entire project' && form.jobType !== 'Editorial Amends'"> Hours for this Specific Task
 					</label>
 				
 					</div>

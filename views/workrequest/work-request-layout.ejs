@@ -58,10 +58,11 @@
               <li class="<% if (title === 'Work Request List') { %>active<% } %>"><a href="/WorkRequest/list">List of jobs</a></li>
 
               <% if(session.authenticated){ %>
-                <li><a href="/user/show/<%= session.User.id %>"><%= session.User.name %></a></li>
+                <!-- <li><a href="/user/show/<%= session.User.id %>"><%= session.User.name %></a></li> -->
+                <li><a href="#"><%= session.User.name %></a></li>
               <% } %>
               <% if(session.authenticated && session.User.admin){ %>
-                <li><a href="/user">User Administration</a></li>
+                <!-- <li><a href="/user">User Administration</a></li> -->
               <% } %>
 
             </ul>

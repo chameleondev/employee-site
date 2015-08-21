@@ -229,8 +229,8 @@ module.exports = {
 	destroy : function(req,res,next){
 
 		WorkRequest.findOne(req.param('id'), function foundRequest(err,job){
-			console.log(req);
-			console.log(job);
+			// console.log(req);
+			// console.log(job);
 
 			if(err) return next(err);
 			if(!job) return next('Request doesn\'t exist.');
